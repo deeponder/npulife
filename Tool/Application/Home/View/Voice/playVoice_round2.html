@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>[微唱大赛]{$theVoice['name']}--{$theVoice['song_name']}</title>
+	<script src="/Tool/Public/Voice/playVoice_round2/js/jquery-1.9.0.min.js"></script>
+	<script src="/Tool/Public/Voice/playVoice_round2/js/jquery-1.7.1.min.js"></script>
+
+	<script type="text/javascript" src="/Tool/Public/Voice/playVoice_round2/js/jqModal.js"></script>
+
+	<link rel="stylesheet" href="/Tool/Public/Voice/playVoice_round2/css/common.css" type="text/css" />
+
+	<script type="text/javascript" src="/Tool/Public/Voice/playVoice_round2/js/content_zoom.js"></script>
+	<!--  jqModal Styling -->
+	<link type="text/css" rel="stylesheet" media="all" href="/Tool/Public/Voice/playVoice_round2/css/jqModal.css" />
+	<link rel="stylesheet" href="/Tool/Public/Voice/playVoice_round2/css/stylesheets/style.css">
+
+	<style type="text/css">
+
+/*自适应圆角投影*/
+.round_shade_box{width:1px; height:1px; font-size:0; display:none; _background:white; _border:1px solid #cccccc;}
+.round_shade_top{margin:0 12px 0 10px; background:url(/Tool/Public/Voice/playVoice_round2/images/zxx_round_shade.png) repeat-x -20px -40px; _background:white; zoom:1;}
+.round_shade_topleft{width:11px; height:10px; background:url(/Tool/Public/Voice/playVoice_round2/images/zxx_round_shade.png) no-repeat 0 0; _background:none; float:left; margin-left:-11px; position:relative;}
+.round_shade_topright{width:12px; height:10px; background:url(/Tool/Public/Voice/playVoice_round2/images/zxx_round_shade.png) no-repeat -29px 0; _background:none; float:right; margin-right:-12px; position:relative;}
+.round_shade_centerleft{background:url(/Tool/Public/Voice/playVoice_round2/images/zxx_round_shade.png) no-repeat 0 -1580px; _background:none;}
+.round_shade_centerright{background:url(/Tool/Public/Voice/playVoice_round2/images/zxx_round_shade.png) no-repeat right -80px; _background:none;}
+.round_shade_center{font-size:14px; margin:0 12px 0 10px; padding:10px; background:white; letter-spacing:1px; line-height:1.5;}
+.round_shade_bottom{margin:0 12px 0 11px; background:url(/Tool/Public/Voice/playVoice_round2/images/zxx_round_shade.png) repeat-x -20px bottom; _background:white; zoom:1;}
+.round_shade_bottomleft{width:11px; height:10px; background:url(/Tool/Public/Voice/playVoice_round2/images/zxx_round_shade.png) no-repeat 0 -30px; _background:none; float:left; margin-left:-11px; position:relative;}
+.round_shade_bottomright{width:12px; height:10px; background:url(/Tool/Public/Voice/playVoice_round2/images/zxx_round_shade.png) no-repeat -29px -30px; _background:none; float:right; margin-right:-12px; position:relative;}
+.round_shade_top:after,.round_shade_bottom:after,.zxx_zoom_box:after{display:block; content:"."; height:0; clear:both; overflow:hidden; visibility:hidden;}
+.round_box_close{padding:2px 5px; font-size:12px; color:#ffffff; text-decoration:none; border:1px solid #cccccc; -moz-border-radius:4px; -webkit-border-radius:4px; background:#000000; opacity:0.8; filter:alpha(opacity=80); position:absolute; right:-5px; top:-5px;}
+.round_box_close:hover{opacity:0.95; filter:alpha(opacity=95);}
+
+</style>
+
+</head>
+<body >
+	<div class="top" style="background-image: url('/Tool/Public/Voice/playVoice_round2/medias/bg_pic/{$theVoice.song_name}.jpg');">
+		<div id="player" >
+			<a id="vpost" href="#pic_one">
+				<div class="cover" ></div>
+			</a>
+			<div class="ctrl">
+				<div class="tag"> <strong>Title</strong>
+
+				</div>
+				<div class="control">
+					<div class="left">
+						<div class="playback icon" id="yuan"></div>
+					</div>
+					<div class="volume right"></div>
+				</div>
+
+			</div>
+			<div class="progress">
+
+				<div class="right"></div>
+
+				<div class="slider">
+					<div class="loaded"></div>
+					<div class="pace"></div>
+				</div>
+
+				<div class="timer left">0:00</div>
+			</div>
+			<div class="tool">
+
+				<span class="share">
+					<img class="jqModal" id="shareimage" src="/Tool/Public/Voice/playVoice_round2/css/images/Share.png"></span>
+				
+				<span  class="jqModal"> <strong>分享</strong>
+				</span>
+
+				<span class="good">
+					<img id="goodimage" src="/Tool/Public/Voice/playVoice_round2/css/images/good.png" onClick="love({$theVoice['song_id']})"></span>
+
+				<span id="love_count">
+					<strong>{$theVoice['love_count']}</strong>
+				</span>
+				<script>
+				if({$is_good}==1){
+					var love_hand = document.getElementById("goodimage");
+					love_hand.src="/Tool/Public/Voice/playVoice_round2/css/images/after-love.png";
+				 }
+				</script>
+			</div>
+
+			<!--放置选手的自我S介绍-->
+			<div id="playlist" >{$theVoice['introduce']}</div>
+			<!------------- 
+  MODAL MARKUP (styled via jqModal.css)
+--------------->
+			<!--返回音乐列表-->
+			<div class="return_list">
+				<a href="http://wechat.npulife.com/Tool/index.php/Home/Voice/listVoice_round2.html">返回音乐列表</a>
+			</div>
+			<!--返回音乐列表结束-->
+
+			<!-- 要放大显示的div -->
+			<div id="pic_one" style="display:none;">
+				<img src="/Tool/Public/Voice/playVoice_round2/medias/photo/{$theVoice['name']}.jpg" />
+			</div>
+			<div id="zoom_flash_one" style="display:none;">
+				<object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="550" height="400">
+					<param name="movie" value="/Tool/Public/Voice/playVoice_round2/flash/as3_clock_2.swf" />
+					<param name="quality" value="high" />
+					<param name="wmode" value="opaque" />
+					<param name="swfversion" value="9.0.45.0" />
+				</object>
+			</div>
+			<!------------
+ MODAL SCRIPT
+-------------->
+
+			<!--分享提示!-->
+			<div class="jqmWindow" id="dialog">
+				<div class="jqmWindow">
+					<a href="#" class="jqmClose">关闭</a>
+					<hr>请点击右上角的栏目进行分享</div>
+			</div>
+
+			<!--处理分享提示的js-->
+			<script type="text/javascript">
+ $().ready(function() {
+     
+	$('.jqmWindow').jqm();
+			$('#vpost').fancyZoom({scaleImg: true, closeOnClick: true});
+			$('#zoom_word_1').fancyZoom({width:400, height:200});
+		$('#zoom_word_2').fancyZoom();
+		$('#zoom_flash').fancyZoom();
+    
+});
+ </script>
+
+			<!--</div>
+			-->
+			<footer>2013-2014 瓜大生活圈团队出品</footer>
+
+			<div class="tip">本版本当前仅支持微信播放</div>
+		</div>
+		<script src="/Tool/Public/Voice/playVoice_round2/js/jquery-ui-1.8.17.custom.min.js"></script>
+		<script src="/Tool/Public/Voice/playVoice_round2/js/script.js"></script>
+		<script>
+	(function($){
+	// Settings
+	
+	var repeat = localStorage.repeat || 0,
+		shuffle = localStorage.shuffle || 'false',
+		continous = true,
+		autoplay = true,
+		playlist = [
+		{
+title: '<?php echo $theVoice['song_name']?>',
+artist:'<?php echo $theVoice['name']?>',
+album: '亲,你想看到我吗',
+cover:'/Tool/Public/Voice/playVoice_round2/medias/photo/{$theVoice['name']}.jpg',
+// cover:'__PUBLIC__/default.png',
+mp3: '/Tool/Public/Voice/playVoice_round2/medias/music/{$theVoice['name']}.mp3'
+},
+];
+	// Load playlist
+	for (var i=0; i<playlist.length; i++){
+		var item = playlist[i];
+		//$('#playlist').append('<li>'+item.artist+' - '+item.title+'</li>');
+	}
+
+	var time = new Date(),
+		currentTrack = shuffle === 'true' ? time.getTime() % playlist.length : 0,
+		trigger = false,
+		audio, timeout, isPlaying, playCounts;
+
+	var play = function(){
+		audio.play();
+		$('.playback').addClass('playing');
+		timeout = setInterval(updateProgress, 500);
+		isPlaying = true;
+	}
+
+	var pause = function(){
+		audio.pause();
+		
+		$('.playback').removeClass('playing');
+		clearInterval(updateProgress);
+		isPlaying = false;
+	}
+
+	// Update progress
+	var setProgress = function(value){
+		var currentSec = parseInt(value%60) < 10 ? '0' + parseInt(value%60) : parseInt(value%60),
+			ratio = value / audio.duration * 100;
+
+		$('.timer').html(parseInt(value/60)+':'+currentSec);
+		$('.progress .pace').css('width', ratio + '%');
+		$('.progress .slider a').css('left', ratio + '%');
+	}
+
+	var updateProgress = function(){
+		setProgress(audio.currentTime);
+	}
+
+	// Progress slider
+	$('.progress .slider').slider({step: 0.1, slide: function(event, ui){
+		$(this).addClass('enable');
+		setProgress(audio.duration * ui.value / 100);
+		clearInterval(timeout);
+	}, stop: function(event, ui){
+		audio.currentTime = audio.duration * ui.value / 100;
+		$(this).removeClass('enable');
+		timeout = setInterval(updateProgress, 500);
+	}});
+
+	// Volume slider
+	var setVolume = function(value){
+		audio.volume = localStorage.volume = value;
+		$('.volume .pace').css('width', value * 100 + '%');
+		$('.volume .slider a').css('left', value * 100 + '%');
+	}
+
+	var volume = localStorage.volume || 0.5;
+	$('.volume .slider').slider({max: 1, min: 0, step: 0.01, value: volume, slide: function(event, ui){
+		setVolume(ui.value);
+		$(this).addClass('enable');
+		$('.mute').removeClass('enable');
+	}, stop: function(){
+		$(this).removeClass('enable');
+	}}).children('.pace').css('width', volume * 100 + '%');
+
+	$('.mute').click(function(){
+		if ($(this).hasClass('enable')){
+			setVolume($(this).data('volume'));
+			$(this).removeClass('enable');
+		} else {
+			$(this).data('volume', audio.volume).addClass('enable');
+			setVolume(0);
+		}
+	});
+
+	// Switch track
+	var switchTrack = function(i){
+		if (i < 0){
+			track = currentTrack = playlist.length - 1;
+		} else if (i >= playlist.length){
+			track = currentTrack = 0;
+		} else {
+			track = i;
+		}
+
+		$('audio').remove();
+		loadMusic(track);
+		if (isPlaying == true) play();
+	}
+
+	// Shuffle
+	var shufflePlay = function(){
+		var time = new Date(),
+			lastTrack = currentTrack;
+		currentTrack = time.getTime() % playlist.length;
+		if (lastTrack == currentTrack) ++currentTrack;
+		switchTrack(currentTrack);
+	}
+
+	// Fire when track ended
+	var ended = function(){
+		pause();
+		audio.currentTime = 0;
+		playCounts++;
+		if (continous == true) isPlaying = true;
+		if (repeat == 1){
+			play();
+		} else {
+			if (shuffle === 'true'){
+				shufflePlay();
+			} else {
+				if (repeat == 2){
+					switchTrack(++currentTrack);
+				} else {
+					if (currentTrack < playlist.length) switchTrack(++currentTrack);
+				}
+			}
+		}
+	}
+
+	var beforeLoad = function(){
+		var endVal = this.seekable && this.seekable.length ? this.seekable.end(0) : 0;
+		$('.progress .loaded').css('width', (100 / (this.duration || 1) * endVal) +'%');
+	}
+
+	// Fire when track loaded completely
+	var afterLoad = function(){
+		if (autoplay == true) play();
+	}
+
+	// Load track
+	var loadMusic = function(i){
+		var item = playlist[i],
+			newaudio = $('<audio>').html('<source src="'+item.mp3+'"><source src="'+item.ogg+'">').appendTo('#player');
+		
+		$('.cover').html('<img src="'+item.cover+'" alt="'+item.album+'">');
+		$('.tag').html('<strong>'+item.title+'</strong><span class="artist">'+item.artist);
+		$('#playlist li').removeClass('playing').eq(i).addClass('playing');
+		audio = newaudio[0];
+		audio.volume = $('.mute').hasClass('enable') ? 0 : volume;
+		audio.addEventListener('progress', beforeLoad, false);
+		audio.addEventListener('durationchange', beforeLoad, false);
+		audio.addEventListener('canplay', afterLoad, false);
+		audio.addEventListener('ended', ended, false);
+	}
+
+	loadMusic(currentTrack);
+	$('.playback').on('click', function(){
+		if ($(this).hasClass('playing')){
+			pause();
+		} else {
+			play();
+		}
+	});
+	$('.rewind').on('click', function(){
+		if (shuffle === 'true'){
+			shufflePlay();
+		} else {
+			switchTrack(--currentTrack);
+		}
+	});
+	$('.fastforward').on('click', function(){
+		if (shuffle === 'true'){
+			shufflePlay();
+		} else {
+			switchTrack(++currentTrack);
+		}
+	});
+	$('#playlist li').each(function(i){
+		var _i = i;
+		$(this).on('click', function(){
+			switchTrack(_i);
+		});
+	});
+
+	if (shuffle === 'true') $('.shuffle').addClass('enable');
+	if (repeat == 1){
+		$('.repeat').addClass('once');
+	} else if (repeat == 2){
+		$('.repeat').addClass('all');
+	}
+
+	$('.repeat').on('click', function(){
+		if ($(this).hasClass('once')){
+			repeat = localStorage.repeat = 2;
+			$(this).removeClass('once').addClass('all');
+		} else if ($(this).hasClass('all')){
+			repeat = localStorage.repeat = 0;
+			$(this).removeClass('all');
+		} else {
+			repeat = localStorage.repeat = 1;
+			$(this).addClass('once');
+		}
+	});
+
+	$('.shuffle').on('click', function(){
+		if ($(this).hasClass('enable')){
+			shuffle = localStorage.shuffle = 'false';
+			$(this).removeClass('enable');
+		} else {
+			shuffle = localStorage.shuffle = 'true';
+			$(this).addClass('enable');
+		}
+	});
+})(jQuery);
+
+
+function love(voiceid)
+{
+//document.getElementById("love_count").innerHTML = voiceid;
+$.ajax({
+type:"post",
+url:"{:U('love_count')}",
+dataType:'json',
+data:'voiceid='+voiceid,
+error:function()
+{
+alert("亲，点赞时间已过，请细细品味");
+},
+success:function(theVoice)
+{
+if(theVoice.is_good=='false')
+{
+
+}
+else{
+var love_hand = document.getElementById("goodimage");
+love_hand.src="/Tool/Public/Voice/playVoice_round2/css/images/after-love.png";
+//alert("点赞成功");
+document.getElementById("love_count").innerHTML = theVoice.tem_count;
+}
+}
+});
+}
+</script>
+	</div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content=" initial-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<title>我</title>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/personinfo/style.css">
+</head>
+<body>
+	<div class="content">
+		<ul class="inf-form">
+			<li>
+				<a href="#">
+					<span class="item-left first-item">头像</span>
+					<img class="item-right" src="{$pInfo['headPic']}">
+					<div class="clear"></div>	
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<span class="item-left">ID</span>
+					<span class="item-right">{$pInfo['uid']}</span>
+					<div class="clear"></div>	
+				</a>
+			</li>
+			<li>
+				<!-- 0代表姓名 -->
+				<a href="http://wechat.npulife.com/index.php/Home/Personinfo/edit?item=0">
+					<span class="item-left">姓名</span>
+					<span class="item-right">{$pInfo['truename']}</span>	
+					<div class="clear"></div>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<span class="item-left">昵称</span>
+					<span class="item-right">{$pInfo['nickname']}</span>	
+					<div class="clear"></div>
+				</a>
+			</li>
+			<li>
+				<!-- 1代表学号 -->
+				<a href="http://wechat.npulife.com/index.php/Home/Personinfo/edit?item=1">
+					<span class="item-left">学号</span>
+					<span class="item-right">{$pInfo['school_number']}</span>
+					<div class="clear"></div>	
+				</a>
+			
+			</li>
+			<li>
+				<a href="#">
+					<span class="item-left">积分</span>
+					<span class="item-right">{$pInfo['score']}</span>
+					<div class="clear"></div>	
+				</a>	
+			</li>
+		</ul>
+		<div class="feedback">
+			
+				<textarea id="feedback" name="feedback" autofocus></textarea>
+				
+				<a id="feedbackSubmit" href="#">反馈</a>
+			
+		</div>
+			<center>&copy2013-2015瓜大生活圈团队</center>
+	</div>
+	<script type="text/javascript" src="__PUBLIC__/personinfo/jquery-2.0.0.min.js"></script>
+	<script type="text/javascript">
+		var content;
+		var url = '__URL__/addAdvice'
+		$('#feedbackSubmit').click(function(){
+			$.getJSON(url,{content:$('#feedback').val()},function(result){
+				alert(result);
+				$('#feedback').val('');
+			});
+
+	});
+	</script>
+
+</body>
+</html>

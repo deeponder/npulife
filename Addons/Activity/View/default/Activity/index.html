@@ -1,0 +1,26 @@
+ <include file="./Addons/Activity/View/Public/jmobile_black_header.html" />
+ 
+	<div id="launch">
+      <input name="launch" type="button" value="发起活动" onClick="location.href='{:U('launch')}'"/>
+	</div>  
+    <div id="listr">
+      <input name="listr" type="button" value="我参与的活动" onClick="location.href='{:U('listr?flag=2')}'" />
+    </div>
+    <div id="latest_activity">
+      <p>
+        <p>最新活动(<b><span style="color:blue";>进行中</span> 	<span style=" color:gray";>已结束</span></b>)</p>
+      </p>
+      <ul>
+	<?php for($i=0;$i<5;$i++){ ?>
+	<a  style=" text-decoration: none; color: {$color[$i]};" href={:U('show?ID='.$latest[$i]['activity_ID'])} rel="external" >
+		<li><td ><span>{$latest[$i]['activity_theme']}</span></td></li>
+		</a> 
+		<p>发起人:{$latest[$i]['truename']}</p> 
+   <?php } ?>
+      </ul>
+    </div>
+		<li style="list-style: none; display: inline">
+          <a style="margin-left:50px;" href="{:U(\"listr?flag=1\")}" rel="external" >更多最新活动........</a>
+        </li>
+		
+ <include file="./Addons/Activity/View/Public/jmobile_black_footer.html" />

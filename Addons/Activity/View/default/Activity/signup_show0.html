@@ -1,0 +1,16 @@
+<include file="./Addons/Activity/View/Public/jmobile_black_header.html" />
+
+ <?php $count=count($signup_detail) ?>
+  <center><p text-align:left; font-weight:bold; position:static; padding:15px 15px"><b>活动主题:</b>
+  {$signup_detail[0]['activity_theme']}</p>
+  <p text-align:left; font-weight:bold; position:static; padding:15px 15px"><b>当前参与人数:</b>
+  <span style="color:red;">{$count}</span></p></center>
+  	 <div>
+	 <?php for($i=$count-1;$i>=0;$i--){ ?>
+		<li><p text-align:left; font-weight:bold; position:static; padding:15px 15px"><span style="color:blue;">{$signup_detail[$i]['school_number']}</span>---<b>{$signup_detail[$i]['truename']}</b>---<span style="color:red;">{$signup_detail[$i]['signup_date']}</span></p></li>
+	 <?php } ?>	
+		</div>
+  <input value="编辑本活动" disabled type='button'onClick="location.href='{:U('edit?ID='.$id)}'"  />
+  <input value="删除本活动" disabled type='button' />
+  
+<include file="./Addons/Activity/View/Public/jmobile_black_footer.html" />

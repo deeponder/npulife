@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<meta name="format-detection" content="telephone=no">
+<link href="__PUBLIC__/Yikun/css/jquery.mobile-1.4.5.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery.mobile-1.4.5.js"></script>
+
+</head>
+<body>
+
+	<div data-role="page" data-title="签到二维码" id="manage_erweima" data-dom-cache="false">
+		<div data-rolo="content" id= "content">
+			<br>
+			<br>
+			<fieldset class="ui-grid-d" style="padding:10px 20px">
+				<volist name="students" id="student" mod="5" >
+					<div class="ui-block-b"><img class="popphoto" src="__URL__/pictureShow?action=erweima&id={$student.openid}&actid={$student.actid}" style="width:50%" alt="Paris, France">
+						
+						<if condition="$isTourist eq 1">
+							<p><img src="{$student.headurl}" width="30%"><strong>{$student.name}</strong></p>
+						<else />
+							<p><strong>{$student.name}</strong></p>
+							<p>{$student.snumber}</p>
+						</if>
+					</div>
+					<eq name="mod" value="4">
+						<div class="ui-block-a">
+							<br>
+						</div>
+					</eq>
+				</volist>
+				
+			</fieldset>
+		</div>
+	</div>
+	
+</body>
+</html>

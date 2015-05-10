@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>个人信息</title>
+<style type="text/css">
+div#header {background-color:#fff;margin-left:20px; margin-bottom:10px; margin-top:10px;}
+div#ziti {background-color:#fff;width:40%;height:60%;
+margin-top :0 ;text-align="center";}
+div#footer {background-color:#39CCE6;cleVar:both;text-align:center;height:auto;font-size:30px;}
+div#change{margin-left:30%;margin-right:30%; margin-bottom:10px;}
+div#lab {margin-bottom:0;font-size:3em;background:#fff;margin-top:0;}
+div#con {margin-bottom:0;font-size:2.5em; margin-right:50%;margin-left:10%; margin-top:0.8em;} 
+ul {padding:0px; margin:0px;}
+li {list-style:none;}
+td { border-bottom :1px solid gray; margin:0; margin-top:0;}
+tr{height:10em;width:6em}
+</style>
+
+</head>
+
+<body>
+<table width=100% height=auto; cellspacing="0" cellpadding="0">
+<tr>
+<td >
+<div id="header">
+<img src="{$headPic}" width="146" height="146" />
+</div>
+</td>
+<td>
+<div id="change">
+<ul>
+<li>
+<div id="con">
+ID:{$user['uid']}
+</div>
+</li>
+<li>
+<a href="{:U('updateInfo')}"><input type="button" style='font-size:3em' value="修改资料"  style="width: 140px; height: 80px;" /></a>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<td width="33%" height="133"  >
+<div id="ziti">
+<div id="lab">
+姓名
+</div>
+</div>
+</td>
+<td width="67%" align="right">
+<ul>
+<li>
+<div id="con">{$user['truename']}</div>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td width="33%" >
+<div id="ziti">
+<div id="lab">
+学号/工号
+</div>
+</div>
+</td>
+<td width="67%" align="right">
+<ul>
+<li>
+<div id="con">{$user['school_number']}</div>
+</li>
+</ul>
+</td>
+</tr>
+<tr  frame=below >
+<td width="33%" >
+<div id="ziti">
+<div id="lab">
+积分
+</div>
+</div>
+</td>
+<td width="67%" align="right">
+<ul>
+<li>
+<div id="con">{$user['score']}</div>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td width="33%" >
+<div id="ziti">
+<div id="lab">
+QQ
+</div>
+</div>
+</td>
+<td width="67%" align="right">
+<ul>
+<li>
+<div id="con">{$user['qq']}</div>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td width="33%" >
+<div id="ziti">
+<div id="lab">
+生日
+</div>
+</div>
+</td>
+<td width="67%" align="right">
+<ul>
+<li>
+<div id="con">{$user['birthday']}</div>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td width="33%" >
+<div id="ziti">
+<div id="lab">
+感情状况
+</div>
+</div>
+</td>
+<td width="67%" align="right">
+<ul>
+<li>
+<div id="con">{$user['ganqing']}</div>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td width="33%" >
+<div id="ziti">
+<div id="lab">
+籍贯
+</div>
+</div>
+</td>
+<td width="67%" align="right">
+<ul>
+<li>
+<div id="con">{$user['jiguan']}</div>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td width="33%" >
+<div id="ziti">
+<div id="lab">
+星座
+</div>
+</div>
+</td>
+<td width="67%" align="right">
+<ul>
+<li>
+<div id="con">{$user['xingzuo']}</div>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td width="33%" >
+<div id="ziti">
+<div id="lab">
+电话
+</div>
+</div>
+</td>
+<td width="67%" align="right">
+<ul>
+<li>
+<div id="con">{$user['mobile']}</div>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td width="33%" >
+<div id="ziti">
+<div id="lab">
+爱好
+</div>
+</div>
+</td>
+<td width="67%" align="right">
+<ul>
+<li>
+<div id="con">{$user['aihao']}</div>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<div id = "footer"> 瓜大生活圈团队出品</div>
+</body>
+</html>

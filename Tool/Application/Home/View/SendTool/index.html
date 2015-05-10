@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>群发工具</title>
+</head>
+<body>
+<div>----------------每日导览---------------------------</div>
+<form method="post" action="/Tool/index.php/Home/SendTool/sendAll">
+	<p><lable for="id1">每日导览，ID，英文逗号隔开，不要空格，最后不要逗号</lable><br/>
+		<input type="text" size="20" id="id1" name="idList"/>
+	</p>
+	<button type="submit" name="submit" value="send">提交</button>
+</form>
+
+<div>----------------分组发图文--------------------------</div>
+<form method="post" action="/Tool/index.php/Home/SendTool/sendByGroup">
+	<p><lable for="id2">ID，英文逗号隔开，不要空格，最后不要逗号</lable><br/>
+		<input type="text" size="20" id="id2" name="idList"/>
+	</p>
+	<p><lable for="id3">1:翼鲲班  2:卓研班</lable><br/>
+		<input type="text" size="20" id="id3" name="group_id"/>
+	</p>
+	<button type="submit" name="submit" value="send">提交</button>
+</form>
+
+<div>---------------发多媒体文件--------------------------</div>
+<form method="post" action="/Tool/index.php/Home/SendTool/sendMedia">
+	<p><lable for="id4">文件类型：voice,image,video</lable><br/>
+		<input type="text" size="20" id="id4" name="filetype"/>
+	</p>
+	<p><lable for="id5">文件名</lable><br/>
+		<input type="text" size="20" id="id5" name="filename"/>
+	</p>
+	<button type="submit" name="submit" value="send">提交</button>
+</form>
+
+<div>---------------发音乐--------------------------</div>
+<form method="post" action="/Tool/index.php/Home/SendTool/sendMusic">
+	<p><lable for="id7">音乐名</lable><br/>
+		<input type="text" size="20" id="id7" name="music_title"/>
+	</p>
+	<p><lable for="id8">音乐描述</lable><br/>
+		<input type="text" size="20" id="id8" name="music_description"/>
+	</p>
+	<p><lable for="id9">音乐链接</lable><br/>
+		<input type="text" size="20" id="id9" name="music_url"/>
+	</p>
+	<p><lable for="id10">高质量音乐链接</lable><br/>
+		<input type="text" size="20" id="id10" name="music_hqurl"/>
+	</p>
+	<p><lable for="id10">缩略图MediaId</lable><br/>
+		<input type="text" size="20" id="id10" name="music_thumb_media_id"/>
+	</p>
+	<button type="submit" name="submit" value="send">提交</button>
+</form>
+
+
+</body>
+</html>

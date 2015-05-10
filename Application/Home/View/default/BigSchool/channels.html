@@ -1,0 +1,176 @@
+﻿
+<!DOCTYPE html>  
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta id="viewport" name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<link rel="apple-touch-icon-precomposed" href="http://s0.pstatp.com/image/toutiao_mobile/light_icon.png">
+<link rel="shortcut icon" href="http://s0.pstatp.com/image/toutiao_mobile/light_icon.png" type="image/x-icon">
+<meta name="format-detection" content="telephone=no">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta property="qc:admins" content="137036576341176375">
+<meta name="baidu-tc-cerfication" content="f02c83ae32e698b1003fc31a62124a0b">
+<script src="/Public/BigSchool/js/jquery-2.0.0.min.js"></script>
+<script src="/Public/BigSchool/js/common.js"></script>
+<link rel="stylesheet" type="text/css" href="/Public/BigSchool/css/wap.css" />
+
+<title>选择频道 - 校园门户</title>
+
+<style type="text/css">
+*{ -webkit-tap-highlight-color:rgba(0,0,0,0); -webkit-user-select:none; text-decoration:none }
+.list{ margin:20px 0 10px 0; padding: 0; position: relative;}
+.list li{ 
+	display: inline-block; 
+	width: 25%;
+	margin-bottom: 10px;
+	-webkit-transition:-webkit-transform 300ms ease-out;
+	-webkit-tranform: traslate3d(0,0,0);
+}
+.list li[data-placeholder]{
+	opacity: 0
+}
+.list li a{
+	background-color: #fff;
+	border: 1px solid #ddd;
+	margin: 0 8px; 
+	text-align: center;
+	font-size: 16px;
+	line-height: 2em;
+	display: block;
+}
+.list li.fixed a{
+	background-color: #f0f0f0;
+}
+.msg{
+	color: #666; 
+	font-size: 12px;
+	line-height: 2em;
+	padding:0 10px;
+	background-color: #f5f5f5
+}
+.msg.alert{ color: #f00}
+.tranparent{ opacity: 0}
+</style>
+
+</head>
+
+<body class="">
+	
+<header id="header" class="relative">
+    <div class="top_bar">
+        <div class="abs_l">
+           <!--<a class="btn back" href="/Home/BigSchool/index" ></a> -->
+            <a class="btn back" onclick="getlab()"></a> 
+        </div>
+        <div class="abs_m"> 
+	        频道管理
+        </div>
+    </div>
+</header>
+
+<form id="check" action="/Home/BigSchool/index"  method="post">
+<input type="hidden" id= "lab" name = "lab" >
+</form> 
+	
+<div class="con">
+	<div class="msg">点击删除频道</div>
+	<ul class="list" data-toggle="menu-selected"><li class="fixed" data-category="__all__"><a>推荐</a></li></ul>
+
+	<div class="msg tip" disabled-message="最多#n#个频道,请先删除一些" origin-message="点击添加以下频道"></div>
+	<ul class="list"  data-toggle="menu-unselected"></ul>
+</div>
+
+
+<script src="/Public/BigSchool/js/channels.js"></script>
+<script>
+//这里保存有完整需要的类别，删除笑话，百问百答、办事指南的如下
+//category    : ["tongzhi","huodong","xueshu","jingsai","jiuye","xigongda","sanhang","quan","yangongzhisheng","xiaohua","xuetang","renwu","yikun","jiaoliu","xuesheng","yingyu","shenghuo","zhinan","baida","gongda","youhui"],
+//categoryName: ['通知','活动','学术','竞赛','就业','西北工业大学','三航青年','瓜大生活圈','研工之声','笑话','学堂','人物','翼鲲','国际交流','学声嘹亮','英语','生活技巧','办事指南','百问百答','最美工大','优惠'],
+var lab=SortMenu.init({
+        category    : ["tongzhi","huodong","xueshu","jingsai","jiuye","xigongda","sanhang","quan","yangongzhisheng","xuetang","renwu","yikun","jiaoliu","xuesheng","yingyu","shenghuo","gongda","youhui"],
+        categoryName: ['通知','活动','学术','竞赛','就业','西北工业大学','三航青年','瓜大生活圈','研工之声','学堂','人物','翼鲲','国际交流','学声嘹亮','英语','生活技巧','最美工大','优惠'],
+        tmpl 		: "<li data-category='#category#'><a>#name#</a></li>",
+        maxCount    : 15,
+        defaultCount: 5,
+        container   : ".con",
+        message     : ".tip",
+        selected    : "[data-toggle=menu-selected]",
+        unselected  : "[data-toggle=menu-unselected]",
+        itemSelector: "li",
+        itemExclude : ".fixed"
+});//初始化
+
+//alert(lab);//得到用户选择的标签，每次点击都会更新，把这个存起来就行了
+
+
+ function getlab()//获取标签的值，进到这个页面，标签的js就会执行，因为要显示给用户，所以会执行
+ {
+ 	//alert(lab);
+ 	var myvalue=lab;
+ 	document.getElementById("lab").value = myvalue;
+ 	$('#check').submit();//提交表单
+ 	//return lab;
+ }
+
+
+/*
+$("[data-toggle=menu-selected]").dragsort({
+	dragSelector: "li"
+});
+*/
+
+</script>
+
+
+<!--  -->
+<script>
+var _gaq = _gaq || [];
+var test_channel = "", test_version = "";
+_gaq.push(['_setAccount', 'UA-28423340-7']);
+_gaq.push(['_addOrganic','baidu','word']);
+_gaq.push(['_setLocalRemoteServerMode']);
+_gaq.push(['_setDomainName', '.toutiao.com']);
+_gaq.push(['_trackPageview','/']);
+
+
+function gaqpush(ga_event, ga_label){
+	gaevent('event',ga_event,ga_label);
+};
+
+function gaevent(category, action, label){
+	if(test_channel.indexOf(action) >-1) label = label+test_version;
+	console.log("ga:"+category+","+action+","+label);
+	_gaq.push(['_trackEvent', category, action, label, 1]);
+};
+
+(function() {
+ var ga = document.createElement('script');
+ ga.type = 'text/javascript';
+ ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+ var s = document.getElementsByTagName('script')[0];
+ s.parentNode.insertBefore(ga, s);
+})();
+ 
+
+$("body").on('click', '[ga_event]', function(e){
+
+	 var $this =  $(this);
+	 var ga_category = $this.attr('ga_category') || 'event';
+	 var ga_event = $this.attr('ga_event');
+	 var ga_label = $this.attr('ga_label');
+	 gaevent(ga_category,ga_event,ga_label);
+	 var href = this.href, target = this.target;
+	
+	 if(href !== "#" && target !== "_blank") {
+	 	setTimeout(function(){ 
+	 		location.href = href 
+	 	},400);
+	 	return false
+	 }
+});
+</script>
+
+</body>
+</html>

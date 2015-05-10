@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<meta name="format-detection" content="telephone=no">
+
+<link href="__PUBLIC__/Yikun/css/component.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Yikun/css/jquery.mobile-1.4.5.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/Public/BigSchool/css/wap.css">
+<link rel="stylesheet" type="text/css" href="/Public/BigSchool/css/wap_flow.css">
+
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery.mobile-1.4.5.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/modernizr.custom.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/highchart/highcharts.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/highchart/highcharts.src.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/highchart/modules/drilldown.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/highchart/modules/data.js"></script>
+
+<title>YI KUN BNA</title>
+<script>
+		$( document ).on( "pagecreate", function() {
+			$( "body > [data-role='panel']" ).panel();
+			$( "body > [data-role='panel'] [data-role='listview']" ).listview();
+			//$("[data-change='change_text']").on("click",function(){
+			//	$("#header_text").text($(this).text());
+			//});
+			
+		});
+
+		$( document ).one( "pageshow", function() {
+			$( "body > [data-role='header']" ).toolbar();
+			$( "body > [data-role='header'] [data-role='navbar']" ).navbar();
+		});
+		
+		$( document ).on( "pagecontainerchange", function() {
+			// Each of the four pages in this demo has a data-title attribute
+			// which value is equal to the text of the nav button
+			// For example, on first page: <div data-role="page" data-title="Info">
+			var current = $( ".ui-page-active" ).jqmData( "title" );
+			// Change the heading
+			$( "[data-role='header'] h1" ).text( current );
+			// Remove active class from nav buttons
+			//$( "[data-role='navbar'] a.ui-btn-active" ).removeClass( "ui-btn-active" );
+			// Add active class to current nav button
+			//$( "[data-role='navbar'] a" ).each(function() {
+			//	if ( $( this ).text() === current ) {
+			//		$( this ).addClass( "ui-btn-active" );
+			//	}
+			//});
+		});
+</script>
+</head>
+<body>
+	
+	<div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme="a">
+			<h1 id="header_text">首页</h1>
+			<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+			<a href="#popupUserinfo" data-rel="popup" data-transition="pop" class=" ui-btn ui-alt-icon ui-corner-all ui-btn-inline ui-icon-info ui-btn-icon-notext" title="Learn more">Learn more</a>
+			<div data-role="popup" id="popupUserinfo" class="ui-content" data-theme="a" style="max-width:350px;">
+				<if condition="$popUserinfo eq 0">
+					<p>您目前是游客身份，如果您是翼鲲班成员，请点击<a  href='__URL__/center'>个人中心</a>进行账号绑定，以获得相应的权限！</p>
+				<else />
+					<p>欢迎登陆翼鲲班在线系统，请遵守翼鲲班的班级纪律，积极参加班级活动！</p>
+				</if>
+			</div>
+	 </div>
+	 
+	<div data-role="page" data-title="首页" id="front_index" data-dom-cache="false">
+		<div data-rolo="content" id= "content">
+			<div data-role="collapsibleset" data-theme="a"  >
+				<div data-role="collapsible" data-collapsed="false" data-inset="true" >
+					<h2>推荐文章</h2>
+					<volist name="articleList" id="article">
+					    <section hot-time="{$article["cTime"]}" class="middle_mode has_action">
+					        <a data-ajax="false" href="{$article["url"]}" class="article_link clearfix">
+					            <h3>{$article["title"]}</h3>  
+					            <div class="list_img_holder">
+					                <img style="opacity: 1;" src="{$article["picurl"]}" onerror="errorimg.call(this)" onload="loadimg.call(this)">
+					            </div>
+					            <div class="item_info">
+					                <span class="src space">{$article["category"]}</span>
+					                <span class="cmt">{$article["view_count"]}</span>
+					                <span class="time fr " title="{$article["friendlyDate"]}">{$article["friendlyDate"]}</span>
+					            </div>
+					        </a>
+					    </section>
+				    </volist>
+				</div>
+				<br>
+				<div data-role="collapsible">
+					<h2>热门活动</h2>
+					<ul data-role="listview" data-split-icon="gear" data-split-theme="b">
+						<if condition="($activityHot eq NULL)">
+							<li data-role="list-divider">暂无可报名的活动~</li>	
+						<else />
+							<li data-role="list-divider">翼鲲班活动火热进行中~</li>
+							<volist name="activityHot" id="activity">
+								<li><a href="__URL__/activityShow?actid={$activity.actid}">
+									<if condition="$activity['picture'][0]['picid'] neq NULL">
+									<img src="__URL__/pictureShow?action=activity&picid={$activity['picture'][0]['picid']}">
+									</if>
+									<br>
+									<h2>{$activity.topic}</h2>
+									<p>{$activity.content}</p>
+									<p class="ui-li-aside">已有<strong>{$activity.peoplenumber}</strong>人参与<br></p>
+									</a>
+								</li>
+							</volist>
+						</if>
+					</ul>
+			    </div>
+			</div>
+			<!--  
+			<div data-role="controlgroup" data-type="horizontal">
+			  <a href="#anylink" data-role="button" data-icon="search" data-iconpos="notext">按钮 1</a>
+			  <a href="#anylink" data-role="button">按钮 2</a>
+			  <a href="#anylink" data-role="button">按钮 3</a>
+			</div>
+			<a href="#popupMeizi" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="__URL__/pictureShow?action=article&picid=1" alt="妹子" style="width:30%"></a>
+			<div data-role="popup" id="popupMeizi" data-overlay-theme="b" data-theme="b" data-corners="false">
+    			<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img class="popphoto" src="__URL__/pictureShow?action=article&picid=1" style="max-height:512px;" alt="Paris, France">
+			</div>
+			-->	
+		</div>
+		
+		<div data-role="footer" data-position="fixed" data-tap-toggle="false">
+			<div data-role="navbar" >
+				<ul>
+					<li><a href="#" class="ui-btn-active ui-state-persist" data-transition="slide" data-direction="reverse">翼鲲精选</a></li>
+					<li><a href="#front_index2" data-transition="slide">最新动态</a></li>
+				</ul>
+			</div>	
+		</div>
+	</div>
+	
+	<div data-role="page" id="front_index2">
+		<div data-role="content">
+			<a href="#" data-ajax="false">暂无动态~</a>
+		</div>
+		<div data-role="footer" data-position="fixed" data-tap-toggle="false">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#front_index"  data-transition="slide" data-direction="reverse">翼鲲精选</a></li>
+					<li><a href="#" class="ui-btn-active ui-state-persist">最新动态</a></li>
+				</ul>
+			</div>			
+		</div>
+	</div>
+	
+	<div data-role="panel" data-position-fixed="true" data-display="overlay" data-theme="b" id="nav-panel">
+			<span>欢迎{$userinfo}</span>
+			<a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right" >关闭</a>
+			<br>
+			<br>
+			<br>
+			<br>
+			 <ul data-role="listview">
+				<li data-icon="home" ><a  href="__URL__">首页</a></li>
+				<li data-role="list-divider"></li>
+				<li data-icon="bullets"><a  href="__URL__/actList">所有活动</a></li>
+				<li data-role="list-divider"></li>
+				<li data-icon="user"><a  href="__URL__/member">学员风采</a></li>
+				<li data-role="list-divider"></li>
+				<li data-icon="info"><a  href="__URL__/notification">通知</a></li>
+				<li data-role="list-divider"></li>
+				<li data-icon="grid"><a  href="__URL__/center">个人中心</a></li>
+			</ul>
+	</div>
+</body>
+</html>

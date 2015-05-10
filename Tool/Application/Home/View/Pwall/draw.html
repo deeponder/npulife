@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>微唱大赛大屏幕抽奖</title>
+
+</head>
+
+<body>
+<center>
+<form action="{:U('drawdata')}" method="post">
+<label for="name">人数:</label> 
+<input type="text" name="draw"><br>
+<label for="name">奖品类别:</label> 
+<input type="text" name="cate">
+<input type="submit" value="抽奖" />
+</form>
+<div >
+                        <ul>
+						<volist name="list" id="vol">
+                            <li>{$vol.nickname}-----{$vol.contents}</li>
+                        </volist>
+						</ul>
+                    </div>
+					</center>
+</body>
+</html>

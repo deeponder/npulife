@@ -1,0 +1,11 @@
+ <include file="./Application/Home/View/Public/jmobile_black_header.html" />
+   <ul data-role="listview" data-inset="true" >
+   <?php   foreach($tzggList as $newsTitleList){ ?>
+	<li><a href="newslist?newslistCate={$cate}&newslistid={$newsTitleList['id']}" 
+
+data-transition="slide" rel="external" ><?php echo $newsTitleList['news_title']; ?>
+</a></li>
+	<?php }?>
+
+	</ul>
+ <include file="./Application/Home/View/Public/jmobile_black_footer.html" />

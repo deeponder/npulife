@@ -1,0 +1,53 @@
+<include file="Public/mobile_head"/>	
+<link href="{:CUSTOM_TEMPLATE_PATH}Detail/V1/detail.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body id="weisite">
+<div class="container">
+	<div class="detail top_line">
+    	<h6 class="title">{$info.title}</h6>
+        <p class="info"><span class="colorless">{$info.cTime|time_format}  </span><span><a href="http://mp.weixin.qq.com/s?__biz=MjM5OTI4NjUxMw==&mid=200246922&idx=1&sn=8ee946152e8bfecaf1e9ec4bcada3ffd#rd">西北工大微生活</a></span></p>
+        <section class="content">
+                <notempty name="info.cover"><p><img src="{$info.cover|get_cover_url}"/></p></notempty>
+                {$info.content|htmlspecialchars_decode}
+        
+				<!-- div标签放在页面需要展示的位置  -->
+				<div id="cyQing" role="cylabs" data-use="qing"></div>
+				<!-- 如果页面已有畅言的评论框，以下代码放在评论框代码的后面，来读取评论框的配置，否则需在div标签或代码中配置sid、cid(分类id) -->
+				<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
+				<script type="text/javascript" charset="utf-8" src="http://changyan.itc.cn/js/??lib/jquery.js,changyan.labs.js?appid=cyrbXnWIP"></script>
+				
+				<div id="SOHUCS" style="margin:0px;"></div>
+					<script>
+					  (function(){
+						var appid = 'cyrbXnWIP';
+						var conf = 'prod_8564e833294ed6df6b0f8a69f0a27595';
+						var doc = document,
+						s = doc.createElement('script');
+						s.id = 'changyan_mobile_js';
+						h = doc.getElementsByTagName('head')[0] || doc.head || doc.documentElement;
+						s.type = 'text/javascript';
+						s.charset = 'utf-8';
+						s.src =  'http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf;
+						h.insertBefore(s,h.firstChild);
+					  })();
+					</script>
+					
+				{$diLogo}
+		</section>		
+		<h6>{$youhui}</h6>
+		
+    </div>
+</div>
+
+
+<!-- 底部导航 
+{$footer_html}-->
+<!-- 统计代码 -->
+<notempty name="config.code">
+<p class="hide bdtongji">
+{$config.code}
+</p>
+</notempty>
+</body>
+<script type="text/javascript">
+</script>
+</html>

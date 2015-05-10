@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>摇一摇,找老乡</title>
+	<meta charset="utf-8" />
+	<!-- 下面两句从摇一摇整合-->
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<!-- 原来的主要样式表 -->
+	<link rel="stylesheet" type="text/css" href="/Public/Shake/css/main.css" />
+
+	<!-- 进度条样式表 -->
+	<link rel="stylesheet" type="text/css" href="/Public/Shake/css/loding.css" />
+</head>
+
+<body style="margin:0 auto;padding:0;">
+
+<!--<div id="main-image" style="position:absolute; width:100%; height:100%; z-index:-1"> <img src="http://10.129.13.31/thinkphp/Application/Home/View/Shake/images/main-image-3.jpg" height="100%" width="100%"/>  <img src="images/bg.png" height="100%" width="100%"/> </div> -->
+
+<!-- 下面是免责声明 -->
+
+<div id="mianze" style="display:block">
+
+	<div id="part1">
+		 <div id="part1-0">
+		 	<font size="+2"><b>游戏声明</b></font>
+		 </div>
+		 
+		 <div id="part1-1">
+		 	1.摇一摇功能需要用户的籍贯、联系方式等信息，请先认证个人信息。
+		 	<br>2.使用摇一摇功能默认用户同意公开上述信息。
+		 	<br>3.不可泄露信息给第三方。
+			<br>4.如果同意以上协议，请点击同意，进入游戏。
+		 	
+		 </div>
+		 
+		 <!--<div id="part1-2">
+		 	<font size="+1">&nbsp;&nbsp;&nbsp;&nbsp;<b></b></font>
+		 </div>
+		 
+		 <div id="part1-3">
+			 <font size="+1">&nbsp;&nbsp;&nbsp;&nbsp;<b></b></font>
+		 </div>-->
+	</div>
+
+	<div id="part2">
+		 <div id="part2-1"></div>
+		 
+		 <div id="part2-2">
+		 	<input type="button" value="同意" style="width:100%;height:100%;" onclick="agree()"/>
+           <!-- <button id="submit1" type="button" onclick="agree()">同意</button>-->
+		 </div>
+		 <a href="/index.php/Home/SchoolHome">
+		 <div id="part2-3">
+		 	<input type="button" value="不同意" style="width:100%;height:100%;"/>
+            <!--<button id="submit2" type="button">不同意</button>-->
+		 </div></a>
+
+	</div>
+</div>
+
+<!-- 下面是摇一摇的主界面-->
+
+
+	<div id="tips" style="display:none">
+		<b>开始摇吧！</b>
+	</div>
+
+<!-- 进度条 -->
+
+<!-- 控制进度条的高度 -->
+<div style="height:150px;display:block;"></div>
+
+<!--colorful pulse-->
+<div id="colorfulPulse" style="display:none;">
+  <span class="item-1"></span>
+  <span class="item-2"></span>
+  <span class="item-3"></span>
+  <span class="item-4"></span>
+  <span class="item-5"></span>
+  <span class="item-6"></span>
+  <span class="item-7"></span>
+</div>
+
+<!-- 摇一摇结果 -->
+<div id="find-apartment" style="display:none;">
+  <form>
+    <table style="width:100%;height:100%;text-align:center;">
+      <tr>
+        <td>
+        	<div style="width=100%;height=100%;border:#BDB76A 2px solid;margin:0 auto;display:table;"> 
+				<img style="width:75px;height:75px;" src="{$headPic}" /> 
+			</div>
+        </td>
+      </tr>
+      <tr>
+        <td><div style="width:100%;height:100%;text-align:center;">
+            <div class="table" style="height:auto;width:100%;">
+              <div class="cell" id="find-apartment-text"> 昵称： </div>
+              <div class="cell">
+                <div id="nickname" style="text-align:left;"> 学妹？ </div>
+              </div>
+            </div>
+            <div class="table" style="height:auto;width:100%;">
+              <div class="cell" id="find-apartment-text"> QQ： </div>
+              <div class="cell">
+                <div id="qq" style="text-align:left;"> 你猜？ </div>
+              </div>
+            </div>
+            <!--<div class="table" style="height:auto;width:100%;">
+              <div class="cell" id="find-apartment-text"> 学院： </div>
+              <div class="cell">
+                <div id="school" style="text-align:left;"> 西瓜学院？ </div>
+              </div>
+            </div>-->
+          </div></td>
+      </tr>
+      <tr>
+        <td><div style="width:100%;height:100%;">
+            <button id="find-apartment-submit" type="submit"> go</button>
+          </div></td>
+      </tr>
+    </table>
+  </form>
+</div>
+
+
+<div id="footer" style="position:absolute;bottom:0;height:40px;">
+  <div id="footer-legal"> Copyright©2014 瓜大生活圈版权所有 </div>
+</div>
+
+
+
+<!-- 下面是同意游戏说明，点击button实现界面跳转的脚本 -->
+		<script type="text/javascript">
+			function agree(){
+				var tips = document.getElementById("tips");
+				var mianze = document.getElementById("mianze");				
+				mianze.style.display="none";
+				tips.style.display="block";
+				
+			}
+		</script>
+
+
+
+<!-- 下面是进度条切换的脚本-->
+		<script type="text/javascript">
+				
+				//setTimeout("alert("asdjasd");", 1000);
+				
+				
+				function loading(){
+					swift_1();
+					setTimeout("swift_2()",3000);				
+				}
+
+				//进度条出现
+				function swift_1(){
+					var tips=document.getElementById("tips");
+					var colorfulPulse = document.getElementById("colorfulPulse");
+					colorfulPulse.style.display='block';
+					tips.style.display="none";					
+				} 
+
+				// 进度条消失，摇一摇结果出现
+				function swift_2(){
+					var content = document.getElementById("find-apartment");
+					var colorfulPulse = document.getElementById("colorfulPulse");
+					colorfulPulse.style.display='none';
+					content.style.display='block';
+				}
+
+		</script>
+
+<!-- 下面是html5支持摇一摇的脚本 --> 
+<!--<div id="shake" style="font-size: 14px; margin: 10px; line-height: 0px; display: none;"></div>-->
+
+		<script type="text/javascript">
+		
+				//需要判断浏览器是否支持
+				if (window.DeviceMotionEvent) {
+					window.addEventListener('devicemotion', deviceMotionHandler, false);
+					//document.getElementById("shake").innerHTML = '摇一摇，找“老乡”。';
+				} else{
+					//document.getElementById("shake").innerHTML = '您看到了以下提示，说明您现在还不支持摇一摇功能。';
+					alert('您看到了以下提示，说明您现在还不支持摇一摇功能。');
+				}
+				
+				var SHAKE_THRESHOLD = 3000;//摇动的阀值
+				var lastUpdate = 0;//变量保存上次更新的时间
+				var x, y, z, last_x, last_y, last_z;// x、y、z记录三个轴的数据以及上一次出发的时间
+				var count = 0;//计数器
+				
+				function deviceMotionHandler(eventData) {
+					var acceleration = eventData.accelerationIncludingGravity;// 获取含重力的加速度
+					var curTime = new Date().getTime();// 获取当前时间
+					var diffTime = curTime -lastUpdate;//时间差
+					
+					// 固定时间段
+		　　		if (diffTime > 100) {
+		
+						lastUpdate = curTime;
+						x = acceleration.x;
+					    y = acceleration.y;
+					    z = acceleration.z;
+					    
+					    var speed = Math.abs(x+y+z-last_x-last_y-last_z) / diffTime * 10000;//速度
+					    
+					    // document.getElementById("shake").innerHTML = document.getElementById("shake").innerHTML + "<br />" + speed;
+					    
+					    //在阀值内
+					    if(speed > SHAKE_THRESHOLD){
+					    	count++;
+							
+					    	//现在在同一个页面摇多次只能弹出同一条记录
+					    	//重新加载该页面，出现不同的记录
+					    	//alert('{$content['shenfengzheng']} {$content['uid']}' );
+					    	//alert("hello");
+							loading();
+							document.getElementById("nickname").innerHTML = '{$content["nickname"]}';
+							document.getElementById("qq").innerHTML = '{$content["qq"]}';
+							//document.getElementById("school").innerHTML = '{$content['school']}';
+					
+					    	// document.getElementById("shake").innerHTML += "<br />" + "已送你老乡！";
+					    }
+					    
+					    last_x = x;
+					    last_y = y;
+					    last_z = z;
+					}
+				}
+				
+				//document.getElementById("shake").style.display = 'block';
+		</script>
+
+<!-- 摇一摇代码结束 -->
+
+</body>
+</html>
+ 

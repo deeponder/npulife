@@ -1,0 +1,111 @@
+ <include file="./Application/Home/View/Public/jmobile_black_header.html" />
+   <div data-role="content">
+ <div id="student"  style="display:{$style.student}">
+    <div data-role="collapsible" data-collapsed="true">
+      <h1>我要请假</h1>
+      <ul data-role="listview" data-inset="true">
+		<form id="qingjia" action="{:U('apply')}"  method="post">
+		 <select id="toWho" name="toWho" required>
+            <option value='1'>辅导员:李宽</option>
+        </select>
+        <select id="type" name="type" required>
+            <option value='1'>事假</option>
+            <option value='2'>病假</option>
+        </select>
+        <div data-date="">
+			<input id="start_time" name="start_time" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate" style="width:300px" placeholder="请假开始时间"  required="required"/>
+        </div>
+        <div data-date="">
+		<input id="end_time" name="end_time" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate" style="width:300px" placeholder="请假结束时间"  required="required"/>
+        </div>
+		<p>请假事由:</p>
+        <textarea id="reason" name="reason" rows="3" required="true" placeholder="请假的具体事由"></textarea><br>
+        <input type="text" id="ECP" name="ECP" value="" placeholder="紧急联系人姓名" required><br>
+        <input id="ECP_phone" name="ECP_phone" type="text" value="" placeholder="紧急联系人电话" required><br>
+		<label>申请人:</label>
+        <input type="text" disabled  value="{$myName}" /><!-- 申请人姓名 -->
+        {$buttonHTML}
+        <input type="reset" id="reset" name="reset" value='重置'>
+    </form>
+		</ul>
+    </div>
+	<div data-role="collapsible" data-collapsed="true">
+      <h1>查看结果</h1>
+      <ul data-role="listview" data-inset="true">
+		<?php   foreach($qingjiaResult as $qj){ 
+			$wsqj_id = $qj['wsqj_id'];
+		?>
+		<a href={:U('content?ID='.$wsqj_id)} rel="external" >
+		<table class="table" border=1>
+		<tr>
+		    <td>申请时间：</td><td>{$qj.apply_time}</td>
+		</tr>
+		<tr>
+		    <td>起止时间：</td><td>{$qj.start_time}至{$qj.end_time}</td>
+		</tr>
+		<tr>
+		    <td>请假事由：</td><td>{$qj.reason}</td>
+		</tr>
+		<tr>
+		    <td>批准状态：</td><td>{$qj.auth}</td>
+		</tr>
+	</table></a><br>
+		<?php }?>
+		</ul>
+    </div>
+</div>
+<div id="admin"  style="display:{$style.admin}">
+	<div data-role="collapsible" data-collapsed="false">
+      <h1>未处理请假条</h1>
+           <ul data-role="listview" data-inset="true">
+		<?php   foreach($qingjiaList as $list){ 
+			$wsqj_id = $list['wsqj_id'];
+		?>
+		<a href={:U('content?ID='.$wsqj_id)} rel="external" >
+		<table class="table" border=1>
+		<tr>
+		    <td>申请人：</td><td>{$list.school_number}---{$list.name}</td>
+		</tr>
+		<tr>
+		    <td>申请时间：</td><td>{$list.apply_time}</td>
+		</tr>
+		<tr>
+		    <td>起止时间：</td><td>{$list.start_time}至{$list.end_time}</td>
+		</tr>
+		<tr>
+		    <td>请假事由：</td><td>{$list.reason}</td>
+		</tr>
+	</table></a><br>
+		<?php }?>
+		</ul>
+    </div>
+	  <div data-role="collapsible" data-collapsed="true">
+      <h1>历史请假条</h1>
+       <ul data-role="listview" data-inset="true">
+		<?php   foreach($qingjiaHistory as $history){ 
+			$wsqj_id = $history['wsqj_id'];
+		?>
+		<a href={:U('content?ID='.$wsqj_id)} rel="external" >
+		<table class="table" border=1>
+		<tr>
+		    <td>申请人：</td><td>{$history.school_number}---{$history.name}</td>
+		</tr>
+		<tr>
+		    <td>申请时间：</td><td>{$history.apply_time}</td>
+		</tr>
+		<tr>
+		    <td>起止时间：</td><td>{$history.start_time}至{$history.end_time}</td>
+		</tr>
+		<tr>
+		    <td>请假事由：</td><td>{$history.reason}</td>
+		</tr>
+		<tr>
+		    <td>批准状态：</td><td>{$history.auth}</td>
+		</tr>
+	</table></a><br>
+		<?php }?>
+		</ul>
+    </div>
+</div>
+  </div>
+ <include file="./Application/Home/View/Public/jmobile_black_footer.html" />

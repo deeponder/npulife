@@ -1,0 +1,27 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device; user-scalable=0;">
+<link href="__PUBLIC__/NewsContent/tzggcontent.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<?php 			
+			foreach($newstzgg as $newsinfoContent){ ?>
+			<div align=center>
+			<h3>{$newsinfoContent['news_title']}</h3>
+		
+			<h5><font color="b3c0ba">{$newsinfoContent['news_origin']}</font></h5>
+			</div>
+
+	{$newsinfoContent['news_content']}
+
+<div  align="center">
+<li><font color="0000FF">【附件请前往</font><a  href={$newsinfoContent['news_source']}>原网页</a><font color="0000FF">下载！】</font></li>
+</div>
+<?php
+			}
+			?>
+</body>                                      					
+</html>

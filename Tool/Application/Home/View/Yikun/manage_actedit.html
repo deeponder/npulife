@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<meta name="format-detection" content="telephone=no">
+<link href="__PUBLIC__/Yikun/css/jquery.mobile-1.4.5.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery.mobile-1.4.5.js"></script>
+
+<title>活动编辑</title>
+
+</head>
+<body>
+	
+
+
+<div data-role="page" id="page_actedit" data-dom-cache="false">
+
+	<div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme="a">
+		<h1>活动编辑</h1>
+		<a href="__URL__/manage" data-ajax="false" class=" ui-btn ui-alt-icon ui-corner-all ui-btn-inline ui-icon-back ui-btn-icon-notext" title="Learn more">返回首页</a>
+	</div>
+
+<script>
+
+var  actedit_pictureNum = 0;
+
+$(document).one("pageinit","#page_actedit",function(){
+
+		//alert("添加图片~");
+		actedit_add_picturefield();
+	 	actedit_add_pictureListerner("actedit_picture0");
+
+});
+
+
+function  actedit_select_picture(){
+	
+	var path = this.value;
+	var picId = "#"+$(this).attr("id");
+	var fieldId = picId+"_field";
+	var spanId = picId+"_span";
+	var deleteId = picId+"_delete";
+	
+	//alert("change:"+fieldId);
+	if(path == ''){
+		alert("error");
+	}else{
+		//alert(picId);
+		if(actedit_pictureNum > 0){
+			var subDeleteId = "#actedit_picture"+(actedit_pictureNum-1)+"_delete";
+			$(subDeleteId).hide();
+		}
+		//alert($(fieldId).html());
+		$(fieldId).show();
+		$(spanId).text("图片"+actedit_pictureNum+":"+path);
+		//alert($(spanId).text());
+		actedit_pictureNum++;
+		$("#actedit_pictureNum").val(actedit_pictureNum);
+		actedit_add_picturefield();
+		actedit_add_pictureListerner("actedit_picture"+actedit_pictureNum);
+		$(deleteId).on("tap",function(){
+			$(picId).val("");
+			$(fieldId).remove();
+			var upFieldId = "#actedit_picture"+(actedit_pictureNum)+"_field";
+			//alert("remove:"+upFieldId);
+			$(upFieldId).remove();
+			if(actedit_pictureNum > 0){
+				var subDeleteId = "#actedit_picture"+(actedit_pictureNum-2)+"_delete";
+				$(subDeleteId).show();
+			}
+			//$(fieldId).remove();
+			actedit_pictureNum--;
+			$("#actedit_pictureNum").val(actedit_pictureNum);
+			actedit_add_picturefield();
+			actedit_add_pictureListerner("actedit_picture"+actedit_pictureNum);
+		
+		});
+	}
+}
+
+function  actedit_add_picturefield(){
+	var string = '<div class="ui-field-contain" style="display:none" id="actedit_picture'+actedit_pictureNum+'_field">'
+				  	+'<input  type="file"  data-role="none" style="display:none" data-clear-btn="true" name="picture'+actedit_pictureNum+'" id="actedit_picture'+actedit_pictureNum+'" >'
+					+'<span id="actedit_picture'+actedit_pictureNum+'_span"></span><a  class="ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" id="actedit_picture'+actedit_pictureNum+'_delete"></a>'
+				+'</div>';
+	//alert(string);
+	$(string).appendTo($("#actedit_picture_field")).trigger( "create" );
+
+}
+
+function actedit_add_pictureListerner(picture_id){
+	$('#actedit_addpic').unbind("tap");
+	$('#'+picture_id).unbind("change");
+
+	$('#actedit_addpic').on("tap",function(){
+		$('#'+picture_id).click();
+		
+	});
+	$('#'+picture_id).on("change",actedit_select_picture);
+}
+
+function act_update() {  
+	$("#actedit_popupShowText").html("<span>活动更新中~~~</span>");
+	$("#actedit_from").submit();
+}  
+
+</script>
+
+		
+		<div data-rolo="content" id= "content">
+			<form method="post" action="__URL__/actedit"  enctype="multipart/form-data" data-ajax="false" id="actedit_from">
+			<input type="hidden" name="actid" value="{$activity['actid']}">
+				<div class="ui-field-contain">
+					<label for="act_topic">活动主题：</label>
+					<input type="text" name="topic" id="act_topic" data-clear-btn="true" value="{$activity['topic']}" maxlength="50" >
+				</div>
+				<div class="ui-field-contain">
+					<label for="act_teacher">活动的老师：</label>
+					<input type="text" name="teacher" id="act_teacher" data-clear-btn="true" value="{$activity['teacher']}" maxlength="50" >
+				</div>
+				<div class="ui-field-contain">
+					<label for="act_content">活动详情：</label>
+					<textarea cols="40" rows="8" name="content" id="act_content" >{$activity['content']}</textarea>
+				</div>
+				<div class="ui-field-contain">
+					<label for="act_datetime">报名截止日期：</label>
+    				<input type="datetime-local" data-clear-btn="true" name="deadline" id="act_datetime" value="{$activity['deadline']}">
+				</div>
+				<div class="ui-field-contain">
+					<label for="act_maxpeople">最大报名人数：</label>
+     				<input type="number" data-clear-btn="true" name="maxnumber" pattern="[0-9]*" id="act_maxpeople"  value="{$activity['maxnumber']}">
+				</div>
+			
+				<div class="ui-field-contain" id="actedit_act_picture_field">
+					<label for="actedit_addpic">活动图片：</label>
+					<if condition="($activity['picture'] eq NULL)">
+						<strong>&nbsp&nbsp&nbsp&nbsp暂无图片~</strong><br>
+					<else />
+						<for start="0" end="count($activity['picture'])">
+							<a href="#popupMeizi{$i}" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="__URL__/pictureShow?action=activity&picid={$activity['picture'][$i]}" alt="妹子" style="width:30%"></a>
+								<div data-role="popup" id="popupMeizi{$i}" data-overlay-theme="b" data-theme="b" data-corners="false" data-tolerance="30,15">
+		    					<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img class="popphoto" src="__URL__/pictureShow?action=activity&picid={$activity['picture'][$i]}" style="max-height:512px;" alt="活动图片">
+							</div>
+						</for>
+					</if>
+
+					<a  href="#"  class="ui-shadow ui-btn  ui-btn-inline ui-icon-plus ui-btn-icon-notext ui-btn-b ui-mini" id="actedit_addpic"></a>
+					<input type="hidden" name="pictureNum" id="actedit_pictureNum" value="">
+					<div id="actedit_picture_field">
+					  
+					 <!--  
+						<div class="ui-field-contain"  style="display:none" id="actedit_picture0_field">
+							<input  type="file"  style="display:none" data-role="none"  data-clear-btn="true" name="picture0" id="actedit_picture0" >
+							<span id="actedit_picture0_span"></span><a  class="ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" id="actedit_picture0_delete"></a>
+						</div>
+					-->
+					</div>
+				</div>
+			</form>
+			<a href="#actedit_popupShowText" data-rel='popup' data-position-to="window" class="ui-btn ui-shadow">提交</a>
+
+			<div data-role="popup" id="actedit_popupShowText" data-overlay-theme="b" data-theme="b" data-dismissible="false" >
+				<span>确认数据无误？</span>
+				<a id="act_queding" href="javascript:act_update(this);" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" >确定</a>
+				<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">取消</a>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>

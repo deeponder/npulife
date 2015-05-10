@@ -1,0 +1,22 @@
+
+    <!-- 底部
+    ================================================== -->
+<footer class="footer">
+      <div class="container">
+	   <if condition="is_login()">
+			
+      	  <p class="foot_nav"><a href="http://content.npulife.com/Tool/index.php/Home/Spider/?openid=123&id={:get_username()}&time={:time()}&token=535ca7e3cde42" target="_blank">点击此处触发爬虫，更新新闻。</p>
+		  <p class="foot_nav"><a href="http://wechat.npulife.com/Home/cheat/viewCount" target="_blank">点击此处触发浏览量工具，增加热度。</p>
+
+		</if>
+          <p> 本系统由 <strong><a href="http://www.nwpu.edu.cn" target="_blank">瓜大生活圈团队</a></strong> 强力驱动</p>
+      </div>
+</footer>
+
+<include file="Public/var"/>
+<block name="script"></block> <!-- 用于加载js代码 -->
+<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
+{:hook('pageFooter', 'widget')}
+<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
+	<block name="hidden"></block>
+</div>

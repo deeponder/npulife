@@ -1,0 +1,143 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, target-densitydpi=medium-dpi, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title></title>
+</head>
+<style>
+#question{
+	width:80%;
+	height:auto;
+	margin-left:auto;
+	margin-right:auto;
+}
+#result{
+		width:80%;
+	height:auto;
+	margin-left:auto;
+	margin-right:auto;
+}
+#s{background-color:#0c3;
+width:80%;
+height:20px;
+line-height:20px;
+-moz-border-radius:20px;  
+                -webkit-border-radius:20px;  
+                border-radius:20px; 
+				border:1px solid #ccc;
+}
+#content{
+ width:100%;
+ height:auto;
+ margin-left:auto;
+margin-right:auto;
+border-radius:30px; 
+border:1px solid #ccc;
+}
+.button{
+   width:100px;
+   height:40px;
+   border-radius:10px; 
+border:1px solid #ccc;
+}
+.progress-bar, .progress-bar b{background: url("/Tool/Public/Research/ico.png") no-repeat scroll 0 0; display: block;}  
+.progress-bar {background-position: 0 0; height: 15px;width: 100%;}  
+.progress-bar b {background-position: 0 -17px; height: 12px;}
+</style>
+<script type="text/javascript">
+   var c="{$b}";
+
+ window.onload=function(){
+  if(c=="no"){
+ document.getElementById("result").style.display = "none";
+document.getElementById("question").style.display="block";}
+else{ document.getElementById("result").style.display = "block";
+document.getElementById("question").style.display="none";
+
+}
+}
+
+
+
+</script>
+
+<body>
+	
+<div id="question">
+<form action="{:U('submit')}" method="get">
+<volist name="selectRadio" id="radio">
+{$radio[0]['pro_num']}.{$radio[0]['problem']} 
+<div id='content'>
+<UL>
+<div id='s'><LI>
+<input name="problem{$radio[0]['pro_num']}" type="radio" value={$radio[0]['selection']} />A、{$radio[0]['selContent']}</div></LI>
+<div id='s'><LI>
+<input name="problem{$radio[0]['pro_num']}" type="radio" value={$radio[1]['selection']} />B、{$radio[1]['selContent']}</div></LI>
+<div id='s'><LI>
+<input name="problem{$radio[0]['pro_num']}" type="radio" value={$radio[2]['selection']} />C、{$radio[2]['selContent']}</div></LI>
+<div id='s'><LI>
+<input name="problem{$radio[0]['pro_num']}" type="radio" value={$radio[3]['selection']} />D、{$radio[3]['selContent']}</div></LI>
+</UL>
+</div>
+</volist>
+<!-- 2、你会选B吗？
+<UL>
+<LI>
+<input name="problem2" type="radio" value="A" />A</LI>
+<LI>
+<input name="problem2" type="radio" value="B" />B</LI>
+<LI>
+<input name="problem2" type="radio" value="C" />C</LI>
+<LI>
+<input name="problem2" type="radio" value="D" />D</LI>
+</UL> -->
+
+<volist name="selectCheck" id="check">
+{$check[0]['pro_num']}.{$check[0]['problem']}
+<div id='content'>
+<UL>
+<div id='s'><LI>
+<input name="problem{$check[0]['pro_num']}[]" type="checkbox" value={$check[0]['selection']} />{$check[0]['selContent']}</div></LI>
+<div id='s'><LI>
+<input name="problem{$check[1]['pro_num']}[]" type="checkbox" value={$check[1]['selection']} />{$check[1]['selContent']}</div></LI>
+<div id='s'><LI>
+<input name="problem{$check[2]['pro_num']}[]" type="checkbox" value={$check[2]['selection']} />{$check[2]['selContent']}</div></LI>
+<div id='s'><LI>
+<input name="problem{$check[3]['pro_num']}[]" type="checkbox" value={$check[3]['selection']} />{$check[3]['selContent']}</div></LI>
+<div id='s'><LI>
+<input name="problem{$check[4]['pro_num']}[]" type="checkbox" value={$check[4]['selection']} />{$check[4]['selContent']}</div></LI>
+<div id='s'><LI>
+<input name="problem{$check[5]['pro_num']}[]" type="checkbox" value={$check[5]['selection']} />{$check[5]['selContent']}</div></LI>
+</UL>
+</div>
+</volist>
+<ul><center><input class='button' type="submit" value="提交" /></center></ul>
+</form>
+</div>
+<div id="result">
+<volist name="selectRadio" id="radio">
+{$radio[0]['pro_num']}.{$radio[0]['problem']}
+<UL>
+<?php for($i=0;$i<4;$i++){?>
+<LI>
+<?php echo $radio[$i]['selection']?>:<?php echo $radio[$i]['count']?></LI>
+<span class="progress-bar"><b style="width:10%;"> </b></span> 
+<?php }?>
+</UL>
+</volist>
+<volist name="selectCheck" id="check">
+{$check[0]['pro_num']}.{$check[0]['problem']}
+<UL> 
+<?php for($i=0;$i<6;$i++){?>
+<li>
+<?php echo $check[$i]['selection']?>:<?php echo $check[$i]['count']?></li>
+<span class="progress-bar"><b style="width:10%;"> </b></span> 
+<?php }?>
+</UL>
+</volist>
+</div>
+</body>
+</html>

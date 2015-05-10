@@ -1,0 +1,25 @@
+ <include file="./Addons/Activity/View/Public/jmobile_black_header.html" />
+ 
+<div id="launch">
+  <form id="form" action="{:U('launch_info')}"  method="post" class="form-horizontal p_10" >
+    <div>
+      <label for="activity_theme">活动主题 :<font color="red"> * </font></label>
+      <input  type="text" name="activity_theme" required="required" placeholder="输入活动主题"   />
+    </div>
+    <div >
+      <label for="activity_detail">活动详情：<font color="red"> * </font></label>
+      <textarea name="activity_detail" rows="3" required="required" placeholder="活动详情，请详细说明时间、地点、事件"></textarea>
+    </div>
+    <div>
+      <label for="deadline">报名截止日期:<font color="red"> * </font></label>
+	  <input type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate" style="width:300px" placeholder="报名截止日期" name="deadline" required="required"/>
+    </div>
+	<div>
+	  <label for="deadline">发起人: <font color="red"> * </font></label>
+      <input type="text" disabled  value="{$pInfo['truename']}" />
+	  </div>
+    <p><button class="home_btn submit-btn mb_10 mt_10" id="submit" type="submit" target-form="form">发起活动</button></p>
+  </form>
+</div> 
+
+ <include file="./Addons/Activity/View/Public/jmobile_black_footer.html" />

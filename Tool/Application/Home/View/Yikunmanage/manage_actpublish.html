@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<meta name="format-detection" content="telephone=no">
+<link href="__PUBLIC__/Yikun/css/jquery.mobile-1.4.5.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery.mobile-1.4.5.js"></script>
+
+<title>活动发布</title>
+
+<script>
+$( document ).one( "pageshow", function() {
+	$( "body > [data-role='header']" ).toolbar();
+	$( "body > [data-role='header'] [data-role='navbar']" ).navbar();
+});
+
+$( document ).on( "pagecontainerchange", function() {
+	// Each of the four pages in this demo has a data-title attribute
+	// which value is equal to the text of the nav button
+	// For example, on first page: <div data-role="page" data-title="Info">
+	var current = $( ".ui-page-active" ).jqmData( "title" );
+	// Change the heading
+	$( "[data-role='header'] h1" ).text( current );
+	// Remove active class from nav buttons
+	$( "[data-role='navbar'] a.ui-btn-active" ).removeClass( "ui-btn-active" );
+	// Add active class to current nav button
+	$( "[data-role='navbar'] a" ).each(function() {
+		if ( $( this ).text() === current ) {
+			$( this ).addClass( "ui-btn-active" );
+		}
+	});
+});
+</script>
+</head>
+<body>
+	<div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme="a">
+		<h1>活动管理</h1>
+		<div data-role="navbar">
+			<ul>
+				<li><a href="__URL__/manage" data-transition="flip" >活动发布</a></li>
+				<li><a href="__URL__/manage/action/actmanage" data-tansition="pop">活动管理</a></li>
+				<li><a href="__URL__/manage/action/member" data-transition="flip" >学员信息</a></li>
+				<li><a href="__URL__/manage/action/statistics" data-transition="flip">信息统计</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div data-role="page" id="page_actpublish" data-dom-cache="true">
+<script>
+
+var pictureNum = 0;
+
+
+$(document).on("pageinit","#page_actpublish",function(){
+	//alert("初始化~");
+	add_picturefield();
+	add_pictureListerner("act_picture0");
+
+});
+
+function select_picture(){
+	
+	var path = this.value;
+	var picId = "#"+$(this).attr("id");
+	var fieldId = picId+"_field";
+	var spanId = picId+"_span";
+	var deleteId = picId+"_delete";
+	
+	//alert("change:"+fieldId);
+	if(path == ''){
+		alert("error");
+	}else{
+		//alert(path);
+		if(pictureNum > 0){
+			var subDeleteId = "#act_picture"+(pictureNum-1)+"_delete";
+			$(subDeleteId).hide();
+		}
+		$(fieldId).show();
+		$(spanId).text("图片"+pictureNum+":"+path);
+		pictureNum++;
+		$("#act_pictureNum").val(pictureNum);
+		add_picturefield();
+		add_pictureListerner("act_picture"+pictureNum);
+		$(deleteId).on("tap",function(){
+			$(picId).val("");
+			$(fieldId).remove();
+			var upFieldId = "#act_picture"+(pictureNum)+"_field";
+			//alert("remove:"+upFieldId);
+			$(upFieldId).remove();
+			if(pictureNum > 0){
+				var subDeleteId = "#act_picture"+(pictureNum-2)+"_delete";
+				$(subDeleteId).show();
+			}
+			//$(fieldId).remove();
+			pictureNum--;
+			$("#act_pictureNum").val(pictureNum);
+			add_picturefield();
+			add_pictureListerner("act_picture"+pictureNum);
+		
+		});
+	}
+
+	//$('#act_picture')
+}
+
+function add_picturefield(){
+	var string = '<div class="ui-field-contain" style="display:none" id="act_picture'+pictureNum+'_field">'
+				  	+'<input  type="file"  data-role="none" style="display:none" data-clear-btn="true" name="picture'+pictureNum+'" id="act_picture'+pictureNum+'" >'
+					+'<span id="act_picture'+pictureNum+'_span"></span><a  class="ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" id="act_picture'+pictureNum+'_delete"></a>'
+				+'</div>';
+	//alert(string);
+	$("#picture_field").append(string).trigger( "create" );
+}
+
+function add_pictureListerner(picture_id){
+	$('#act_addpic').unbind("tap");
+	$('#'+picture_id).unbind("change");
+	$('#act_addpic').on("tap",function(){
+		//alert("的");
+		$('#'+picture_id).click();
+		
+	});
+	$('#'+picture_id).on("change",select_picture);
+}
+
+function act_publish() {  
+	//alert($("#act_popupShowText").text());    
+	//$("#act_popupShowText").popup('open');
+
+	//alert("sdf");
+	$("#act_popupShowText").html("<span>活动发布中~~~</span>");
+	$("#act_from").submit();
+	
+	
+	//alert($(this).text());
+	 // $("#act_queding").addClass("ui-state-disabled"); 
+}  
+
+</script>
+
+		
+		<div data-rolo="content" id= "content">
+			<form method="post" action="__URL__/actpublish"  enctype="multipart/form-data" data-ajax="false" id="act_from">
+				<div class="ui-field-contain">
+					<label for="act_topic">活动主题：</label>
+					<input type="text" name="topic" id="act_topic" data-clear-btn="true" placeholder="主题内容（少于50字）" maxlength="50" value="">
+				</div>
+				<div class="ui-field-contain">
+					<label for="act_teacher">活动的老师：</label>
+					<input type="text" name="teacher" id="act_teacher" data-clear-btn="true" placeholder="请正确填写老师名称" maxlength="50" value="">
+				</div>
+				<div class="ui-field-contain">
+					<label for="act_content">活动详情：</label>
+					<textarea cols="40" rows="8" name="content" id="act_content" placeholder="活动内容"></textarea>
+				</div>
+				<div class="ui-field-contain">
+					<label for="act_datetime">报名截止日期：</label>
+    				<input type="datetime-local" data-clear-btn="true" name="deadline" id="act_datetime" value="">
+				</div>
+				<div class="ui-field-contain">
+					<label for="act_maxpeople">最大报名人数：</label>
+     				<input type="number" data-clear-btn="true" name="maxnumber" pattern="[0-9]*" id="act_maxpeople" placeholder="请输入数字" value="">
+				</div>
+			
+				<div class="ui-field-contain" id="act_picture_field">
+					<label for="act_addpic">活动图片：</label>
+					<a  href="#"  class="ui-shadow ui-btn  ui-btn-inline ui-icon-plus ui-btn-icon-notext ui-btn-b ui-mini" id="act_addpic"></a>
+					<input type="hidden" name="pictureNum" id="act_pictureNum" value="">
+					<div id="picture_field">
+					  
+					 <!--  
+						<div class="ui-field-contain"  style="display:none" id="act_picture0_field">
+							<input  type="file"  style="display:none" data-role="none"  data-clear-btn="true" name="picture0" id="act_picture0" >
+							<span id="act_picture0_span"></span><a  class="ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" id="act_picture0_delete"></a>
+						</div>
+					-->
+					</div>
+				</div>
+				<div class="ui-field-contain">
+					<!--<label for="act_submit" class="ui-hidden-accessible"></label>
+					<input onclick="act_publish()" type="submit" value="提交" id="act_submit"> -->
+				</div>
+			</form>
+			<a href="#act_popupShowText" data-rel='popup' data-position-to="window" class="ui-btn ui-shadow">提交</a>
+
+			<div data-role="popup" id="act_popupShowText" data-overlay-theme="b" data-theme="b" data-dismissible="false" >
+				<span>确认数据无误？</span>
+				<a id="act_queding" href="javascript:act_publish(this);" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" >确定</a>
+				<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">取消</a>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>

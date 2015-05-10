@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset='UTF-8' />
+	<title>聊天室</title>
+	<style>
+		input, textarea {border:1px solid #CCC;margin:0px;padding:0px}
+
+		#body {max-width:800px;margin:auto}
+		#log {width:100%;height:400px}
+		#message {width:100%;line-height:20px}
+	</style>
+	<link rel="stylesheet" href="assets/css/amazeui.min.css">
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/fancywebsocket.js"></script>
+	<script>
+		var Server;
+
+		function log( text ) {
+			$log = $('#log');
+			//Add text to log
+			$log.append(($log.val()?"\n":'')+text);
+			//Autoscroll
+			$log[0].scrollTop = $log[0].scrollHeight - $log[0].clientHeight;
+		}
+
+		function send( text ) {
+			Server.send( 'message', text );
+		}
+
+		$(document).ready(function() {
+			log('连接中...');
+			Server = new FancyWebSocket('ws://127.0.0.1:8080');
+
+			$('#message').keypress(function(e) {
+				if ( e.keyCode == 13 && this.value ) {
+					log( '我: ' + this.value );
+					send( this.value );
+
+					$(this).val('');
+				}
+			});
+
+			//Let the user know we're connected
+			Server.bind('open', function() {
+				log( "连接成功." );
+			});
+
+			//OH NOES! Disconnection occurred.
+			Server.bind('close', function( data ) {
+				log( "未连接成功." );
+			});
+
+			//Log any messages sent from server
+			Server.bind('message', function( payload ) {
+				log( payload );
+			});
+
+			Server.connect();
+		});
+	</script>
+</head>
+
+<body>
+	<div id='body'>
+		<textarea id='log' name='log' readonly='readonly'></textarea>
+		<br/>
+		<input type='text' id='message' name='message' />
+	</div>
+	<br/>
+	<form action="main.php" method="post">
+	<p align = "center">
+	     点击按钮连接服务器，然后重新进入该页面
+  		<button type="submit" class="am-btn am-btn-primary" data-am-button>连接服务器</button>
+  	</p>
+		
+	</form>
+
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<include file="Public/mobile_head"/>	
+<body>
+		<div id="container" class="container body">
+            <div class="top_relative"  >
+            <p style="font-size:20px; text-align:center; font-weight:bold; position:static; padding:50px 15px">学号绑定</p>
+			<p>请输入您的真实信息，将您的微信号与学号绑定。绑定后可享受更多服务哦！</p>
+            </div>
+			
+		<form id="form" action="{:U('bindhandle')}" method="post" class="form-horizontal p_10">
+		<div >
+			  <label for="student_ID">学 号 :<font color="red"> * </font></label></label>
+			<input  type="text" name="student_ID" required="required" placeholder="学 号"   />
+		</div>
+		<div >
+			 <label for="name">姓 名 :<font color="red"> * </font></label></label>
+			<input type="text" name="name" required="required" placeholder="姓 名"   />
+		</div>
+
+		<div >
+			 <label for="ID_number">身份证:<font color="red"> * </font></label></label>
+			<input type="text" name="ID_number" required="required"  placeholder="身份证号"  />
+		</div>
+		<div >
+			 <label for="phone_number">手机号:<font color="red"> * </font></label>
+			<input type="text" name="phone_number" required="required" placeholder="手机号码"  />
+		</div>
+		<div >
+			 <label for="qq_number">QQ 号 :<font color="red"> * </font></label></label>
+			<input type="text" name="qq_number" required="required"  placeholder="QQ 号"  />
+		</div>
+		<button class="home_btn submit-btn mb_10 mt_10" id="submit" type="submit" target-form="form">绑定</button>
+		
+		</form>
+        
+</body>
+</html>

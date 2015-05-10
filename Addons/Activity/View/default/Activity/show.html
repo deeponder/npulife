@@ -1,0 +1,19 @@
+<include file="./Addons/Activity/View/Public/jmobile_black_header.html" />
+ 
+  <p text-align:left; font-weight:bold; position:static; padding:15px 15px"><b>活动主题:</b>
+  {$activity_detail['activity_theme']}</p>
+  <p text-align:left; font-weight:bold; position:static; padding:15px 15px"><b>活动详情:</b>
+  {$activity_detail['activity_detail']}</p>
+  <p text-align:left; font-weight:bold; position:static; padding:15px 15px">
+  <b>报名截止日期:</b>{$activity_detail['deadline']}</p>
+  <p text-align:left; font-weight:bold; position:static; padding:15px 15px">
+  <b>发起人:</b>{$truename['truename']}</p>
+  <center>
+  <b>当前参与人数:</b><span style="color:red;">{$count}</span></center>
+  <p ><center><b><span style="color:red;">{$info}</span></b></center></p>
+  <span><center><a href={:U('signup_show?activity_ID='.$id)} rel="external">{$signupinfo}</a></center></span>
+  <div style= "display:{$disp['join']};"><input value="报名参加" type='button'onClick="location.href='{:U('join?ID='.$id)}'"  /></div>
+  <div style= "display:{$disp['unjoin']};"> <input value="取消报名" type='button' onClick="location.href='{:U('unjoin?ID='.$id)}'" />
+  
+ 
+<include file="./Addons/Activity/View/Public/jmobile_black_footer.html" />

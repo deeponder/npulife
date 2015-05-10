@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache"/>
+    <meta name="viewport" content="width=device-width,user-scalable=0,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta name="MobileOptimized" content="320"/>
+
+    <meta name="copyright" content="瓜大生活圈团队出品" />
+    <meta name="mediaid" content="" />
+    <meta name="keywords" content="关键词" />
+    <meta name="description" content="优惠抢先"/>
+    <title>瓜大生活圈优惠券《{$theYouhuiqiangxian['title']}》详情</title>
+
+    <link rel="stylesheet" type="text/css" href="/Tool/Public/Voice/content_fin.css" />
+	<link rel="stylesheet" href="/Tool/Public/Voice/content_gallery-port.css" />
+	<script src="/Tool/Public/Voice/audiojs/audio.min.js"></script>
+	<script>
+	audiojs.events.ready(function() {
+		var as = audiojs.createAll();
+	});
+	</script>
+	
+	<script>
+	function onBridgeReady(){
+		WeixinJSBridge.call('hideOptionMenu');
+	}
+
+	if (typeof WeixinJSBridge == "undefined"){
+		if( document.addEventListener ){
+			document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+		}else if (document.attachEvent){
+			document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+			document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+		}
+	}else{
+		onBridgeReady();
+	}
+	</script>
+	
+<style>
+.hotsearchs a {font-weight: bold;}
+</style>
+
+<style>
+.click-2-more {text-align: center;background: #fff;line-height: 34px;padding: 10px 0 0;}
+.click-2-more a{display:block;-webkit-box-flex: 1;font-size: 16px;color: #77c;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;margin: 0 30px;}
+</style>
+
+<style>
+.section-page-wap{padding: 0 0.625em 1em;}
+.section-title-b{background-color:#fafafa!important;}
+.section-cbox-b{background-color:#fff!important;}
+.section-cbox-wap .cbox-post-b{border: 1px solid #eee!important;}
+.section-cbox-wap .cbox-post-wap .post-action-wap .action-function-wap .function-list-wap .list-upload-b {border-right: 1px solid #eee!important;}
+.section-cbox-wap .cbox-post-wap .post-action-b {border-top: 1px solid #eee!important;}
+.section-list-wap .list-kinds-wap .kinds-title-b {display:none!important;}
+.section-title-wap {padding: 0.625em!important;}
+.section-list-wap .list-kinds-wap .kinds-comment-wap{padding:0.65em 0!important;}
+.section-list-wap .list-kinds-wap .kinds-comment-b {border-bottom: 1px solid #f1f1f1!important;}
+.section-list-wap .list-kinds-wap .kinds-comment-wap .comment-header-wap .header-wrap-wap .wrap-msg-wap .msg-time-wap{font-weight: normal!important;}
+.section-list-wap .list-kinds-wap .kinds-comment-wap .comment-build-wrap-wap .wrap-build-wap .build-inner-wap {background-color: #fafafa!important;}
+.section-list-wap .list-kinds-wap .kinds-comment-wap .comment-build-wrap-wap .wrap-build-b{border: 1px solid #eee!important;}
+
+.section-page-wap .page-count-wap .count-mutual-b {background: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#f1f1f1));color: #666!important;border: 1px solid #d6d6d6;}
+.section-cbox-wap .cbox-post-wap .post-action-wap .action-issue-wap .issue-btn-wap .btn-mutual-b{background-image:url("http://s8.rr.itc.cn/org/wapChange/20145_23_11/b5ofy03817325133323.png")!important;}
+.section-cbox-wap .cbox-post-wap .post-action-wap .action-issue-wap .issue-btn-wap .btn-mutual-b:hover{background-image:url("http://s8.rr.itc.cn/org/wapChange/20145_23_11/b5ofy03817325133323.png")!important;}
+</style>
+    
+</head>
+
+<body class="text ">
+  
+<header class="h_min h_fixed">
+    <style>
+		.worldcup_link{height:35px;display:inline-block;padding:0;background:0}.worldcup_link_wrap{display:inline-block}.worldcup_link i{display:inline-block;vertical-align:middle;margin:0 1px 5px 0;width:25px;height:35px;background:url(http://s8.rr.itc.cn/org/wapChange/20146_12_19/b7tue40444149145520.png) no-repeat center;background-size:14px}
+	</style>
+
+<div class="h_min_w">
+    <h1 class="logo_min">
+    <!--返回到栏目页-->
+    	<a href="http://wechat.npulife.com/index.php/Home/Youhuiqiangxian/listYouhuiqiangxian">
+            <i class="i back"></i>
+    	</a>
+    </h1>
+
+</div>
+</header>
+
+<article class="fin">
+    <h1 class="finTit">{$theYouhuiqiangxian['title']}</h1>
+
+    <div class="finInf">
+        <div class="inf">
+            <em>
+              <!-- {$theYouhuiqiangxian['nickname']}-->
+            </em>
+        </div>
+		<div class="tool">{$theYouhuiqiangxian['view_count']}次领取</div>
+    </div>
+
+    <!--正文从这里开始-->
+    <div class="finCnt">
+			
+			{$theYouhuiqiangxian['content']}
+    </div>
+</article>
+	
+	<div id="SOHUCS" sid="youhuiqiangxian{$theYouhuiqiangxian['id']}"></div>
+<script>
+(function(){
+    var expire_time = parseInt((new Date()).getTime()/(5*60*1000));
+    var head = document.head || document.getElementsByTagName("head")[0] || document.documentElement;
+    var script_version = document.createElement("script"),script_cyan = document.createElement("script");
+    script_version.type = script_cyan.type = "text/javascript";
+    script_version.charset = script_cyan.charset = "utf-8";
+    script_version.onload = function(){
+        script_cyan.id = 'changyan_mobile_js';
+        script_cyan.src = 'http://changyan.itc.cn/upload/mobile/wap-js/changyan_mobile.js?client_id=cyrbXnWIP&'
+                        + 'conf=prod_8564e833294ed6df6b0f8a69f0a27595&version=' + cyan_resource_version;
+        head.insertBefore(script_cyan, head.firstChild);
+    };
+    script_version.src = 'http://changyan.sohu.com/upload/mobile/wap-js/version.js?_='+expire_time;
+    head.insertBefore(script_version, head.firstChild);
+})();
+</script>
+	
+<footer class="site">
+
+
+<div class="back-to-home">
+<section class="back-2-home">
+<a href="http://wechat.npulife.com/index.php/Home/Youhuiqiangxian/listYouhuiqiangxian">进入优惠抢先列表</a>
+</section>
+</div>
+
+<p class="cop">2013-2014瓜大生活圈团队出品</p>
+<p class="cop">软件与微电子学院 开发</p>
+
+</footer>
+
+<div class="layout" style="display:none;"><div class="lay" style="height:1570px;"></div></div><!-- @JS同学：设置高度为当前屏幕高度 外层加个div为了解决android自带浏览器隐藏遮罩层页面变黄高亮的问题 --><!-- @JS同学：设置高度为当前屏幕高度 -->
+
+</body>
+</html>

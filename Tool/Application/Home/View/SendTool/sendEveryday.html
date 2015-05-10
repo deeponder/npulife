@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+<html>
+    <!--head-->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Cache-Control" content="no-cache" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+        <meta name="MobileOptimized" content="320"/>
+        <meta name="copyright" content="Copyright &copy; 2013 Sohu.com Inc. All Rights Reserved." />
+        <meta name="description" content="西工大微生活，校园门户" />
+        <meta name="keywords" content="西工大微生活，校园" />
+        <title>每日导览</title> 
+        <link rel="apple-touch-icon-precomposed" href="/Tool/Public/NewSchoolHome/sousuo.png">
+        <link rel="stylesheet" type="text/css" href="/Tool/Public/NewSchoolHome/NewSchoolHome.css" media="all" />
+        <style>
+        .sohunews-ntype{display:inline-block;padding:0 3px;color:#fff;font-size:10px;border-radius:3px;margin:0 2px;position:relative;top:-2px;height:16px;line-height:17px}
+        .nt1{background:#6bb93c}
+        .nt2{background:#fa873a}
+        .nt3{background:#c80000}
+        .nt4{background:#48a6e2}
+        .schWrap:before{content:'';float:right;width:1px;height:1px;}
+        .ads-01 a:after{top: 10px;left: 3px;}
+         h6.bg3{background:#e6e6e6 url("http://s8.rr.itc.cn/org/wapChange/20144_16_15/b5rqui3427268861343.png") no-repeat;height:40px;background-size: 80%;padding:0 12px;}
+    h6.bg3 em a,h6.bg3 em a:visited{color:#252628;}
+    h6.bg3 aside a,h6.bg3 aside a:visited{color:#999;}
+    h6.bg3 em a,h6.bg3 aside a{font-size:16px;line-height: 40px;}
+    h6.bg3 aside{float: right;}
+    h6.bg3 aside li{display: inline-block;}
+    h6.bg3 aside li:after{content: "\b7";padding: 0 5px;color:#999999;}
+    h6.bg3 aside li:last-child{background: transparent;}
+    h6.bg3 aside li:last-child:after{content: "";padding: 0;display: none;}
+        
+        </style>
+    </head>
+    <!--head-->
+
+    <body class="home">
+    <div class="sch_new sch_new_20140508">
+    <div class="schWrap fat">
+        <form action="/Tool/index.php/Home/SendTool/sendAll" method="post">
+            <input name="keyword" type="text" class="key" value="" placeholder="填写ID，英文逗号隔开">
+            <button type="submit" class="submit">发送</button>
+		</form>
+    </div>
+    <a class="cancel_search" href="#"></a>
+</div>
+
+    <div class="pageBody">
+       
+        <!-- 精推区域 -->
+        <section class="cnl">
+            <section class="ls">
+                <div class="it">
+					<div class="h4WP">
+						<!--<a href="/index.php/Home/NewSchoolHome/detail?id={$data.id}" class="h4" >{$data.title}</a>-->
+					</div>
+				</div>
+            </section>
+        </section>       
+        <section class="cnl">
+        
+            <style type="text/css">
+				.iF6 {margin-top:5px;}
+			</style>
+
+<h3 class="h ht1">
+</h3>
+
+<h3 class="h ht1">
+<em><a href="#">每日导览</a></em>
+</h3>
+
+            <section class="ls">
+                <volist name="newsList" id="data">
+					<div class="it" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+						<div class="h4WP">
+							<a href="/Tool/index.php/Home/SendTool/preview?id={$data.id}"    class="h4" >{$data.id}:){$data.title}</a>
+						</div>
+					</div>
+				</volist>
+            </section>
+			
+        </section>
+
+<script>
+window.addEventListener('load', function() {
+    //查询焦点
+    var schIpt = document.getElementById('searchForm')['paras'], tip = '代码/中文/拼音缩写', smt = document.getElementById('smtbtn'), form = document.getElementById('searchForm');
+    schIpt.onfocus = function() {
+        if (this.value == tip) {this.value = ''}
+    };
+    schIpt.onblur = function() {
+        if (this.value == '') {this.value = tip}
+    };
+    smt.onclick = function() {
+        if (schIpt.value == '代码/中文/拼音缩写') schIpt.value = '';
+        form.submit();
+    };
+    //翻牌效果
+    setTimeout(function() {
+        var elm = document.getElementById('FT_index'), active = true;
+        elm.scrollTop = 1;
+
+        setInterval(function() {
+            if (!active) return;
+            if (elm.scrollTop % 24 == 0) {
+                active = false;
+                setTimeout(function() {
+                    active = true;
+                    elm.scrollTop += 1
+                }, 2000);
+                if (elm.scrollTop == 72) {
+                    elm.scrollTop = 24;
+                }
+            } else {
+                elm.scrollTop += 1;
+            }
+        }, 20)
+    }, 2000);
+}, false);
+</script> 
+
+        <section class="reTop">
+			<a href="javascript:window.scrollTo(0,0);" class="btn btn1"><i class="i iF iF1"></i>返回顶部</a><!--点击时为按钮a增加class：on-->
+		</section>
+    </div> 
+    
+    <footer class="site">
+           <p class="cop">
+				2013-2014 瓜大生活圈团队出品
+			</p>
+        </footer>
+    
+        <!--js-->
+        
+        <script type="text/javascript" src="/Public/NewSchoolHome/NewSchoolHome.js"></script>
+        <script type="text/javascript" src="/Public/NewSchoolHome/jquery.min.js"></script>
+<script>
+window.addEventListener('load', function(){
+    if (/_once_=000108_red/i.test(window.location.href))  {
+        document.querySelector(".hn1").setAttribute("style","border-bottom:1px solid #e5e5e5;margin-top:-10px;padding:10px 0;background-color:#fbfbfb")
+     }
+}, false);
+</script>
+     <script> 
+    (function(){ 
+    passion.ones({itemspaceid:"12278",adsrc:"13",width:16,height:1,max_turn:3}) 
+    passion.ones({itemspaceid:"12274",adsrc:"13",width:640,height:120,max_turn:3})
+    passion.ones({itemspaceid:"12279",adsrc:"13",width:16,height:1,max_turn:2}) 
+    passion.ones({itemspaceid:"12275",adsrc:"13",width:640,height:120,max_turn:2})  
+    passion.ones({itemspaceid:"12281",adsrc:"13",width:16,height:1,max_turn:2}) 
+    passion.ones({itemspaceid:"12280",adsrc:"13",width:16,height:1,max_turn:2}) 
+    passion.ones({itemspaceid:"12288",adsrc:"13",width:16,height:1,max_turn:2}) 
+    passion.ones({itemspaceid:"12282",adsrc:"13",width:640,height:120,max_turn:2}) 
+    passion.ones({itemspaceid:"12291",adsrc:"13",width:16,height:1,max_turn:2}) 
+    passion.ones({itemspaceid:"12289",adsrc:"13",width:16,height:1,max_turn:2}) 
+    passion.ones({itemspaceid:"12290",adsrc:"13",width:16,height:1,max_turn:2}) 
+    passion.ones({itemspaceid:"12292",adsrc:"13",width:16,height:1,max_turn:2})  
+    passion.ones({itemspaceid:"12293",adsrc:"13",width:16,height:1,max_turn:2}) 
+    }()); 
+    </script> 
+   
+        <style>
+.apkworldcup{position:fixed;left:0;right:0;bottom:0;width:100%;background:#B2D631 url("http://s7.rr.itc.cn/org/wapChange/20146_19_18/a6hsvq2400598793323.jpg") repeat-x;-webkit-background-size:320px auto;background-size:320px auto;display:none;}
+.apkworldcup .inner{padding:10px;color:#C4B5B5;background:url("http://s8.rr.itc.cn/org/wapChange/20146_13_11/b84pdk0152937367343.png")<figure>这是布局标签的内容<figcaption>这是布局图标签的题注</figcaption></figure> right bottom no-repeat;-webkit-background-size:320px auto;background-size:320px auto;}
+.apkworldcup .close{color:#CCCCCC;font-size:28px;line-height:30px;padding:0 5px 20px 20px;float:right;margin-left:-20px;}
+.apkworldcup .title{font-size:13px;margin-bottom:6px;}
+.apkworldcup .title .h1{font-weight:bold;color:#FFFFFF;}
+.apkworldcup .title .h2{color:#FFFE00;}
+.apkworldcup .info{font-size:9px;margin-bottom:5px;color:#FFFFFF;}
+.apkworldcup .toDetail .btn{font-size:9px;padding:5px;color:#508B3F;background:#FFF001;border-radius:3px;border-bottom:2px solid #DCFF65;}</style>
+<script>
+window.addEventListener('load', function()
+	{
+	if (!/_trans_=000018_sohuAPP_worldcup/i.test(window.location.href)) return;
+	
+	if ((+(new Date()) < (+new Date('2014/6/22'))) || (+(new Date()) > (+new Date('2014/7/12')))) return;
+	
+	var floatlayer = document.querySelector('.apkworldcup'), judge_already = 'judge_already';
+	if (CookieUtil.get(judge_already)) return;
+
+	if(navigator.userAgent.match(/Adr/i) || navigator.userAgent.match(/Android/i))
+		{
+		floatlayer.style.display = 'block';
+		Statistics.addStatistics('000098_worldcup_homefloatview');
+		CookieUtil.set(judge_already, '1');
+		}
+	
+	floatlayer.addEventListener('click', function(e)
+		{
+		CookieUtil.set(judge_already, '1');
+		if (e.target.className === 'close') floatlayer.style.display = 'none';
+		else setTimeout(function() {window.location.href = floatlayer.getAttribute('href');}, 100);
+		}, false);
+	}, false);
+</script>
+
+<script>
+
+</script>
+  
+  </body>
+</html>

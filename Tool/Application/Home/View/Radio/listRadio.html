@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html><head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>瓜大星主播火热进行中！这里是初赛全部作品，停不下来啊！</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, target-densitydpi=medium-dpi, user-scalable=no">
+	
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+
+	<link rel="stylesheet" type="text/css" href="/Tool/Public/radio/bootstrap-custom.min.css">
+	<link rel="stylesheet" type="text/css" href="/Tool/Public/radio/fontello.css">
+	<link rel="stylesheet" type="text/css" href="/Tool/Public/radio/mobile.css">
+	<link rel="stylesheet" type="text/css" href="/Tool/Public/radio/emoji.css">
+	
+	<script src="/Tool/Public/radio/cdn_djl.js" type="text/javascript" async=""></script>
+	<script type="text/javascript" async="" src="/Tool/Public/radio/ga.js"></script>
+	<script type="text/javascript" src="/Tool/Public/radio/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/Tool/Public/radio/tm.js"></script>
+	<script type="text/javascript" src="/Tool/Public/radio/mobile.js"></script>
+	
+	<script src="/Tool/Public/radio/cdn_dianjiliu.js"></script></head>
+	<script>
+	function onBridgeReady(){
+		WeixinJSBridge.call('showOptionMenu');
+	}
+
+	if (typeof WeixinJSBridge == "undefined"){
+		if( document.addEventListener ){
+			document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+		}else if (document.attachEvent){
+			document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+			document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+		}
+	}else{
+		onBridgeReady();
+	}
+	</script>
+	
+	<body>
+		
+<div class="layout">
+	<header class="mobile-header" id="header">
+	<nav class="nav">
+	
+		<div class="logo">
+			<a href="http://mp.weixin.qq.com/s?__biz=MjM5OTI4NjUxMw==&mid=202841723&idx=1&sn=63fcf1ac66f6e09fe99195145228515c#rd"><span><b>瓜大星主播</b>(点我了解详情)</span></a>
+		</div>
+		
+			<div id="nav-dropdown-groups" class="nav-dropdown-list-wrapper">
+			<div class="nav-dropdown-list-overlay"></div>
+			<div class="top-arrow"></div>
+			
+		</div>
+	</nav>
+</header>
+
+	<div id="wrapper" style="overflow: hidden;">
+		<div id="scroller" style="-webkit-transition: -webkit-transform 0ms; transition: -webkit-transform 0ms; -webkit-transform-origin: 0px 0px; -webkit-transform: translate(0px, 0px) translateZ(0px);">
+			<nav class="sec-nav">
+				<div class="title-tabs two-tabs">
+					<ul>
+						<li><a href="/Tool/index.php/Home/radio/listradio" class="active"><span class="inner-wrapper"><span class="inner-detail">最新作品</span></span></a></li>
+						<li><a href="/Tool/index.php/Home/radio/hotradio"><span class="inner-wrapper"><span class="inner-detail">最热榜单</span></span></a></li>
+					</ul>
+				</div>
+			</nav>
+			
+			<section>
+				<div class="items" id="items">
+					<volist name="radioList" id="radio">
+					<a href="http://wechat.npulife.com/Tool/index.php/Home/radio/playradio?radioid={$radio.id}">
+						<dl class="item padding underline">
+							<dt>								
+								<span>{$radio.songname}</span>
+								<!--<img width="14" class="img-indicate" src="/Tool/Public/radio/icon_has_image.png">-->
+							</dt>
+							<dd>
+								<span class="gray font-size-medium">No.{$radio.id}</span>
+								<span class="gray font-size-medium">&nbsp;{$radio.nickname}</span>
+								<span class="comment gray font-size-medium float-right" style="margin-right: 8px">热度：{$radio.view_count}</span>
+							</dd>
+						</dl>
+					</a>
+					</volist>
+				</div>
+			</section>
+			
+			<section id="load-more" class="padding">
+				<a class="load-more needsclick" href="javascript:void(0)">加载更多</a>
+			</section>
+			
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+$(document).ready(function() {
+
+	var iscroll = new iScroll('wrapper');
+
+	var active_obj = $(".title-tabs .active");
+	var offset_left = active_obj.offset().left + active_obj.width()/2 - 3;
+	$(".active-arrow").css('left',offset_left + "px" );
+
+	var page = 0,
+		time = {$time},
+		count = {$count},
+		$loadHtml = $("#load-more").find(".load-more");
+
+		if(count<20){
+								$("#load-more").hide();
+
+		}
+	// alert(count);
+	$("a.load-more").click(function() {
+		$.ajax({
+			type		: "get",
+			url			: "http://wechat.npulife.com/Tool/index.php/Home/radio/getMoreradio?page=" + (page + 1) + "&time=" + time,
+			cache		: false,
+			dataType	: "json",
+			beforeSend	: function() { $loadHtml.html("正在加载..."); },
+			complete	: function() { $loadHtml.html("加载更多"); },
+			success		: function(result) {
+				page++;
+				var size = result.data.length;
+				for(var i=0;i<size;i++)
+				{
+					$('.items').append('<a href="http://wechat.npulife.com/Tool/index.php/Home/radio/playradio?radioid='+result.data[i]['id']+'">'+
+						'<dl class="item padding underline">'+
+							'<dt>'+
+								'<span class="red"></span>'+
+								'<span class="yellow"></span>'+
+								'<span>'+result.data[i]['songname']+'</span>'+
+								'<img width="14" class="img-indicate" src="">'+
+							'</dt>'+
+							'<dd>'+
+								'<span class="gray font-size-medium">No.'+result.data[i]['id']+'</span>'+
+								'<span class="gray font-size-medium">&nbsp;&nbsp;'+result.data[i]['nickname']+'</span>'+
+								'<span class="comment gray font-size-medium float-right" style="margin-right: 8px">热度:&nbsp;'+result.data[i]['view_count']+'</span>'+
+							'</dd>'+
+						'</dl>'+
+					'</a>');
+				}
+				// 如果当次获取到的数据不足一页, 则证明已经去到数据末尾, 将其隐藏
+				if (size < 20) {
+					$("#load-more").hide();
+				}
+				callback();
+			},
+			error       : function(){}//alert("ERROR");
+		});
+		return false;
+	});
+	
+	function callback() {
+		setTimeout(function() {
+			iscroll.refresh();
+			$("a.needsclick").css("pointer-events", "auto");
+		}, 400);
+	}
+});
+</script>		
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0057)http://content.npulife.com/Tool/index.php/Home/HomeSchool -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- 适应移动设备的调整 -->
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<script src="__PUBLIC__/HomeSchool/bootstrap/js/jquery-1.7.1.min.js"></script>
+<script src="__PUBLIC__/HomeSchool/bootstrap/js/jquery-1.7.2.min.js"></script>
+
+<title>瓜大生活圈-校园门户</title>
+
+<!--<!-- 新 /Tool/Public/bootstrap 核心 CSS 文件 
+<link rel="stylesheet" href="http://cdn.bootcss.com//Tool/Public/bootstrap/3.2.0/css//Tool/Public/bootstrap.min.css">
+
+<!-- 可选的/Tool/Public/bootstrap主题文件
+<link rel="stylesheet" href="http://cdn.bootcss.com//Tool/Public/bootstrap/3.2.0/css//Tool/Public/bootstrap-theme.min.css">
+-->
+<!-- 非 cdn 的 css 文件，优先使用这个 -->
+<link href="__PUBLIC__/HomeSchool/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/HomeSchool/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+<style type="text/css">
+	body { padding-top: 120px; }
+</style>
+<script>
+
+function find(){
+	var value=document.getElementById("find").style.display;
+	if(value=="block")
+	{
+		document.getElementById("find").style.display="none"
+		}
+	else{document.getElementById("find").style.display="block"}
+	}
+</script>
+</head>
+
+<body style="zoom: 1;">
+
+<!-- 下层导航 -->
+      <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="padding-top: 50px">
+      <div class="container">
+        <div class="navbar-header">
+      <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">导航</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>-->
+          <!-- 这几个栏目的名字长度会影响到导航栏一行显示还是两行显示 --> 
+
+        <a class="navbar-brand" onclick="d(&#39;table1&#39;)" href="http://wechat.npulife.com/index.php/Home/HomeSchool#">新闻关注</a>
+          <a class="navbar-brand" onclick="d(&#39;table2&#39;)" >通知公告</a>
+          <a class="navbar-brand" onclick="d(&#39;table3&#39;)" >媒体工大</a>
+          
+          <a class="navbar-brand" href="http://wechat.npulife.com/index.php/Home/HomeSchool#" onclick="find()">更多</a>
+         
+          <!-- 若要添加栏目，请参照下面这一行进行添加
+             <a class="navbar-brand" href="#">首页</a>
+            -->
+</div>
+        <div id="find" style="display:none"> 
+       <a class="find-brand" href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=1">学术交流</a>
+          <a class="find-brand" href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=9">社团活动</a>
+          <a class="find-brand" href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=4">研工之声</a>
+          <a class="find-brand" href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=5">翱翔学堂</a>
+          <a class="find-brand" href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=6">教授有约</a>
+          
+          <a class="find-brand" href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=27">国际交流</a>
+          <a class="find-brand" href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=7">学声嘹亮</a>
+          <a class="find-brand" href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=11">开心一刻</a>
+          <a class="find-brand" href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=10">爱讲英语</a>
+          <a class="find-brand" href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=12">生活技巧</a>
+          </div>
+
+        <!-- <div id="navbar" class="navbar-collapse collapse">
+        <!-- 校园门户子栏目 -->
+          <!-- <div class="nav navbar-nav">
+            <li class="active"><a href="#">校园门户</a></li>
+           <a href="#"  class="navbar-brand_menu">新闻关注</a></li>
+           <a href="#" class="navbar-brand_menu">通知公告</a></li>
+            <a href="#" class="navbar-brand_menu">媒体工大</a></li> --> 
+            <!-- 若要添加栏目，请参照下面这一行进行添加
+             <li><a href="#contact">通知公告</a></li>
+            -->
+            
+            <!-- 子栏目下拉列表
+             -->
+             
+           <!-- <div class="dropdown">
+              <a id="dLabel" href="#" class="dropdown-toggle" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">更多 <span class="caret"></span></a>
+              
+              <div class="dropdown-menu" role="menu"  aria-labelledby="dLabel">
+               <a href="#">学术交流</a>
+                <a href="#">创新竞赛</a>
+                <a href="#">社团活动</a>
+               <div class="divider"></div>
+                <div class="dropdown-header">其他</div>
+                <a href="#">个人中</a>
+                <a href="#">其他</a>
+              </div>
+            </div>
+            -->
+         <!--  </div> -->
+          <!--<ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="#">导航栏目</a></li>
+            <li ><a href="#">导航栏目</a></li>
+          </ul>-->
+       <!--  </div> --><!--/.nav-collapse -->
+      <!-- /div> -->
+    </div></nav>
+    
+    <!-- 上层导航 -->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+      
+        <div class="logo">校园门户</div>
+       
+        </div>
+         <div class="search-box">  <form action="/index.php/Home/HomeSchool/search" method="post"><input type="text" size="10px" height="4px" name = "keyword" placeholder="输入你想知道的内容" /><button type = "submit" class="search-brand">搜索</button></div>
+        <div id="navbar" class="navbar-collapse collapse">
+        
+          
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+<div id="table1" style="display:block">
+
+<div class="addition_title" >新闻关注</div> 
+
+<div class="container">
+   		<ul class="list-group" id="list-group">
+		<div id="div1" class="div1">
+   		  <volist name = "articleList" id = "article">
+		  <li class="list-group-item">
+   		    <div class="media-body">
+			  <a href="http://wechat.npulife.com/index.php/Home/HomeSchool/newslist1?newslistid={$article['id']}">
+			  <!-- <a href="http://content.npulife.com/Tool/index.php/Home/HomeSchool/newslist?newslistid=7">
+   		     西工大荣获“陕西大学生在线2013年优秀联络站”称号 </a> -->
+			 {$article['title']}</a>
+			 </volist>
+   		      </div>
+	      </li><!-- <li class="list-group-item">
+   		    <div class="media-body">
+   		     
+			  <a href="http://content.npulife.com/Tool/index.php/Home/HomeSchool/newslist?newslistid=6">
+   		     陕西大学生在线召开2014年度联络站工作会暨2013年度总结</a>
+   		      </div>
+	      </li>  -->           
+          
+            </div>
+		</ul>
+<center> <div id="change1"class="change" onclick="change('news')">
+
+       <!--  <input type="button"> -->
+		<span class="button"></span> 
+		<span id="news" class="label">换一换</span>
+        </div>
+        </center>
+	</div>
+</div>
+<div id="table2" style="display:none">
+<div class="addition_title" >通知公告</div> 
+
+<div class="container">
+   		<ul class="list-group" id="list-group">
+		<div id="div2" class="div2">
+   		  <volist name = "tzggList" id = "tzgg">
+		  <li class="list-group-item">
+   		    <div class="media-body">
+			  <a href="http://wechat.npulife.com/index.php/Home/HomeSchool/newslist2?newslistid={$tzgg['id']}">
+			  <!-- <a href="http://content.npulife.com/Tool/index.php/Home/HomeSchool/newslist?newslistid=7">
+   		     西工大荣获“陕西大学生在线2013年优秀联络站”称号 </a> -->
+			 {$tzgg['news_title']}</a>
+			 </volist>
+   		      </div>
+	      </li><!-- <li class="list-group-item">
+   		    <div class="media-body">
+   		     
+			  <a href="http://content.npulife.com/Tool/index.php/Home/HomeSchool/newslist?newslistid=6">
+   		     陕西大学生在线召开2014年度联络站工作会暨2013年度总结</a>
+   		      </div>
+	      </li>  -->           
+          
+            </div>
+		</ul>
+<center> <div id="change2"class="change" onclick="change('tz')">
+
+       <!--  <input type="button"> -->
+		<span class="button"></span> 
+		<span id="tz" class="label">换一换</span>
+        </div>
+        </center>
+	</div>
+</div>
+<div id="table3" style="display:none">
+<div class="addition_title" >媒体工大</div> 
+
+<div class="container">
+   		<ul class="list-group" id="list-group">
+		<div id="div3" class="div3">
+   		  <volist name = "mtgdList" id = "mtgd">
+		  <li class="list-group-item">
+   		    <div class="media-body">
+			  <a href={$mtgd['news_source']}>
+			  <!-- <a href="http://content.npulife.com/Tool/index.php/Home/HomeSchool/newslist?newslistid=7">
+   		     西工大荣获“陕西大学生在线2013年优秀联络站”称号 </a> -->
+			 {$mtgd['news_title']}</a>
+			 </volist>
+   		      </div>
+	      </li><!-- <li class="list-group-item">
+   		    <div class="media-body">
+   		     
+			  <a href="http://content.npulife.com/Tool/index.php/Home/HomeSchool/newslist?newslistid=6">
+   		     陕西大学生在线召开2014年度联络站工作会暨2013年度总结</a>
+   		      </div>
+	      </li>  -->           
+          
+            </div>
+		</ul>
+<center> <div id="change3" class="change" onclick="change('mt')">
+
+       <!--  <input type="button"> -->
+		<span class="button"></span> 
+		<span id="mt" class="label">换一换</span>
+        </div>
+        </center>
+	</div>
+</div>
+<!-- 栏目内容 -->
+
+<div class="old">   
+<a class="old_link"> 往日专题</a>
+</div>
+
+
+<div style="display:none"> </div>
+<div class="copyright"> 
+	<center> (c) 2013-2014 瓜大生活圈团队出品 </center> 
+</div>
+
+<script src="__PUBLIC__/HomeSchool/bootstrap/js/jquery.min.js"></script>
+
+<script src="__PUBLIC__/HomeSchool/bootstrap/js/bootstrap.min.js"></script>
+<script>
+function d(str){
+	var i=1;
+	for(;i<=3;i++)
+	{
+		document.getElementById("table"+i).style.display="none";
+		}
+		document.getElementById(str).style.display="block";
+	}
+	var page1 = 1,
+	page2 = 1;
+	page3=1,
+	time = {$time},
+	$loadHtml = $("#news").find('.label');
+function change(str){
+        var strin1 = page1+';'+time,
+		    strin2 = page2+';'+time,
+			strin3 = page3+';'+time;
+		if(str=='news'){
+		$.ajax({
+			type		: "get",
+			url			:"{:U('getMoreMyArticles')}",
+			//cache		: false,
+			data:       'ischecked='+strin1,
+			dataType	: "json",
+			beforeSend	: function() { $("#news").html("正在刷新..."); },
+			complete	: function() { $("#news").html("换一换"); },
+			error       : function(){alert("ERROR")},
+			success		: function(result) {
+				page1++;
+				var size = result.data.length;
+				
+				document.getElementById("div1").innerHTML='';
+				for(var i=0;i<size;i++)
+				{
+			$('.div1').append('<li class="list-group-item"><div class="media-body"> <a href="http://wechat.npulife.com/index.php/Home/HomeSchool/newslist?newslistid='+result.data[i]['id']+' ">'+result.data[i]['title']+'</a></div> </li> ');		
+				}
+				 if (size < 3) {
+					$("#change1").hide();
+				}
+				//callback();
+			}
+			
+		});}
+		else if(str=='tz')
+		{
+		$.ajax({
+			type		: "get",
+			url			:"{:U('getMoreTZ')}",
+			//cache		: false,
+			data:       'ischecked='+strin2,
+			dataType	: "json",
+			beforeSend	: function() { $('#tz').html("正在刷新..."); },
+			complete	: function() {$('#tz').html("换一换"); },
+			error       : function(){alert("ERROR")},
+			success		: function(result) {
+				page2++;
+				var size = result.data.length;
+				
+				document.getElementById("div2").innerHTML='';
+				for(var i=0;i<size;i++)
+				{
+			$('.div2').append('<li class="list-group-item"><div class="media-body"> <a href="http://wechat.npulife.com/index.php/Home/HomeSchool/newslist2?newslistid='+result.data[i]['id']+' ">'+result.data[i]['news_title']+'</a></div> </li> ');		
+				}
+				 if (size < 3) {
+					$("#change2").hide();
+				}
+				//callback();
+			}
+			
+		});
+		}
+		else{
+		$.ajax({
+			type		: "get",
+			url			:"{:U('getMoreMT')}",
+			//cache		: false,
+			data:       'ischecked='+strin3,
+			dataType	: "json",
+			beforeSend	: function() { $('#mt').html("正在刷新..."); },
+			complete	: function() {$('#mt').html("换一换"); },
+			error       : function(){alert("ERROR")},
+			success		: function(result) {
+				page3++;
+				var size = result.data.length;
+				
+				document.getElementById("div3").innerHTML='';
+				for(var i=0;i<size;i++)
+				{
+			$('.div3').append('<li class="list-group-item"><div class="media-body"> <a href='+result.data[i]['news_source']+' >'+result.data[i]['news_title']+'</a></div> </li> ');		
+				}
+				 if (size < 3) {
+					$("#change3").hide();
+				}
+				//callback();
+			}
+			
+		});
+		}
+		//return false;
+	}
+</script>
+<!-- 非 CDN 的js文件 测试时手机端不能显示，故注释掉了，优先使用CDN
+<script src="/Tool/Public/bootstrap/js/jquery-1.11.1.min.js"></script>
+<script src="/Tool/Public/bootstrap/js//Tool/Public/bootstrap.min.js"></script>
+-->
+
+</body></html>

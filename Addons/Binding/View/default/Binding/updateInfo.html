@@ -1,0 +1,23 @@
+<include file="Public/mobile_head"/>	
+<body>
+	<div id="container" class="container body">
+            <div class="top_relative"  >
+            <p style="font-size:20px; text-align:center; font-weight:bold; position:static; padding:50px 15px">修改个人信息</p>
+			<p>修改请慎重哦！</p>
+            </div>
+			
+		<form id="form" action="{:U('updatehandle')}" method="post" class="form-horizontal p_10">
+		<div >
+			 <label for="phone_number">手机号:<font color="red"> * </font></label>
+			<input type="text" name="phone_number" required="required" placeholder="手机号码"  />
+		</div>
+		<div >
+			 <label for="qq_number">QQ 号 :<font color="red"> * </font></label></label>
+			<input type="text" name="qq_number" required="required"  placeholder="QQ 号"  />
+		</div>
+		<button class="home_btn submit-btn mb_10 mt_10" id="submit" type="submit" target-form="form">确认修改</button>
+		
+		</form>
+</body>
+</html>
+ 

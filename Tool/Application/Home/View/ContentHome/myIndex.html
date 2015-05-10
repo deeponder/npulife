@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://tpai.qq.com/mobile/topics -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>聚合瓜大全部文章</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, target-densitydpi=medium-dpi, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+
+	<link rel="stylesheet" type="text/css" href="/Public/ContentHome/bootstrap-custom.min.css">
+	<link rel="stylesheet" type="text/css" href="/Public/ContentHome/fontello.css">
+	<link rel="stylesheet" type="text/css" href="/Public/ContentHome/mobile.css">
+	<link rel="stylesheet" type="text/css" href="/Public/ContentHome/emoji.css">
+		
+	<script src="/Public/ContentHome/cdn_djl.js" type="text/javascript" async=""></script>
+	<script type="text/javascript" async="" src="/Public/ContentHome/ga.js">
+	</script><script type="text/javascript" src="/Public/ContentHome/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/Public/ContentHome/tm.js"></script>
+	<script type="text/javascript" src="/Public/ContentHome/mobile.js"></script>
+		
+	<script src="/Public/ContentHome/cdn_dianjiliu.js"></script></head>
+	
+	<body>
+		
+<div class="layout">
+	<header class="mobile-header" id="header">
+	<nav class="nav">
+
+		<div class="logo">
+			<img alt="内容神器！" src="/Public/ContentHome/logo.png">
+		</div>
+	
+			<div id="nav-dropdown-groups" class="nav-dropdown-list-wrapper">
+			<div class="nav-dropdown-list-overlay"></div>
+			<div class="top-arrow"></div>
+			
+		</div>
+	</nav>
+</header>
+
+	<div id="wrapper" style="overflow: hidden;">
+		<div id="scroller" style="-webkit-transition: -webkit-transform 0ms; transition: -webkit-transform 0ms; -webkit-transform-origin: 0px 0px; -webkit-transform: translate(0px, 0px) translateZ(0px);">
+			<nav class="sec-nav">
+				<div class="title-tabs two-tabs">
+					<ul>
+						<li><a href="/index.php/Home/ContentHome/myIndex" class="active"><span class="inner-wrapper"><span class="inner-detail">栏目内容</span></span></a></li>
+						<li><a href="/index.php/Home/ContentHome/otherIndex"><span class="inner-wrapper"><span class="inner-detail">聚合文章</span></span></a></li>
+					</ul>
+				</div>
+			</nav>
+			
+			<section>
+				<div class="items" id="items">
+					<volist name="articleList" id="data">
+					<a href="/index.php/Home/ContentHome/myDetail?id={$data.id}">
+						<dl class="item padding underline">
+							<dt>
+								<span class="red"></span>
+								<span class="yellow"></span>
+								<span>{$data.title}</span>
+								<img width="14" class="img-indicate" src="/Public/ContentHome/icon_has_image.png">
+							</dt>
+							<dd>
+								<span class="gray font-size-medium">{$data.cate_name}</span>
+								<span class="gray font-size-medium">&nbsp;{$data.cTime|date='Y-m-d G:i:s',###}</span>
+								<span class="comment gray font-size-medium float-right" style="margin-right: 8px"><i class="icon-heart-empty"></i>&nbsp;{$data.view_count}</span>
+							</dd>
+						</dl>
+					</a>
+					</volist>
+				</div>
+			</section>
+			
+			<section id="load-more" class="padding">
+				<a class="load-more needsclick" href="javascript:void(0)">换一换</a>
+			</section>
+			
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+$(document).ready(function() {
+
+	var iscroll = new iScroll('wrapper');
+
+	var active_obj = $(".title-tabs .active");
+	var offset_left = active_obj.offset().left + active_obj.width()/2 - 3;
+	$(".active-arrow").css('left',offset_left + "px" );
+
+	var page = 1,
+		time = {$time},
+		$loadHtml = $("#load-more").find(".load-more");
+	//alert(time);
+	$("a.load-more").click(function() {
+		$.ajax({
+			type		: "get",
+			url			: "/index.php/Home/ContentHome/getMoreMyArticles?page=" + (page + 1) + "&time=" + time,
+			cache		: false,
+			dataType	: "json",
+			beforeSend	: function() { $loadHtml.html("正在刷新..."); },
+			complete	: function() { $loadHtml.html("换一换"); },
+			success		: function(result) {
+				page++;
+				var size = result.data.length;
+				$('.items').html("");
+				for(var i=0;i<size;i++)
+				{
+					
+					$('.items').append('<a href="/index.php/Home/ContentHome/myDetail?id='+result.data[i]['id']+'">'+
+						'<dl class="item padding underline">'+
+							'<dt>'+
+								'<span class="red"></span>'+
+								'<span class="yellow"></span>'+
+								'<span>'+result.data[i]['title']+'</span>'+
+								'<img width="14" class="img-indicate" src="/Public/ContentHome/icon_has_image.png">'+
+							'</dt>'+
+							'<dd>'+
+								'<span class="gray font-size-medium">'+result.data[i]['cate_name']+'</span>'+
+								'<span class="gray font-size-medium">&nbsp;'+result.data[i]['pubdate']+'</span>'+
+								'<span class="comment gray font-size-medium float-right" style="margin-right: 8px"><i class="icon-heart-empty"></i>&nbsp;14</span>'+
+							'</dd>'+
+						'</dl>'+
+					'</a>');
+				}
+				if (size < 5) {
+					$("#load-more").hide();
+				}
+				callback();
+			},
+			error       : function(){alert("ERROR");}
+		});
+		return false;
+	});
+	
+	function callback() {
+		setTimeout(function() {
+			iscroll.refresh();
+			$("a.needsclick").css("pointer-events", "auto");
+		}, 400);
+	}
+});
+</script>		
+</body></html>

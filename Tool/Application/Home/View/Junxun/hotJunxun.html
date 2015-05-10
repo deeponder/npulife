@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://tpai.qq.com/mobile/topics -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>连队排行榜</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, target-densitydpi=medium-dpi, user-scalable=no">
+		<!--<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">-->
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+
+	<link rel="stylesheet" type="text/css" href="/Tool/Public/Diantai/bootstrap-custom.min.css">
+	<link rel="stylesheet" type="text/css" href="/Tool/Public/Diantai/fontello.css">
+	<link rel="stylesheet" type="text/css" href="/Tool/Public/Diantai/mobile.css">
+	<link rel="stylesheet" type="text/css" href="/Tool/Public/Diantai/emoji.css">
+		
+	<script src="/Tool/Public/Diantai/cdn_djl.js" type="text/javascript" async="">
+	</script><script type="text/javascript" async="" src="/Tool/Public/Diantai/ga.js">
+	</script><script type="text/javascript" src="/Tool/Public/Diantai/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/Tool/Public/Diantai/tm.js"></script>
+	<script type="text/javascript" src="/Tool/Public/Diantai/mobile.js"></script>
+	
+	<script src="/Tool/Public/Diantai/cdn_dianjiliu.js"></script></head>
+	<script>
+	function onBridgeReady(){
+		WeixinJSBridge.call('showOptionMenu');
+	}
+
+	if (typeof WeixinJSBridge == "undefined"){
+		if( document.addEventListener ){
+			document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+		}else if (document.attachEvent){
+			document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+			document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+		}
+	}else{
+		onBridgeReady();
+	}
+	</script>
+	
+	<body>
+		
+<div class="layout">
+	<header class="mobile-header" id="header">
+	<nav class="nav">
+	
+		<div class="logo">
+			<img alt="军训" src="/Tool/Public/Junxun/logo.png">
+		</div>
+		
+			<div id="nav-dropdown-groups" class="nav-dropdown-list-wrapper">
+			<div class="nav-dropdown-list-overlay"></div>
+			<div class="top-arrow"></div>
+			
+		</div>
+	</nav>
+</header>
+
+	<div id="wrapper" style="overflow: hidden;">
+		<div id="scroller" style="-webkit-transition: -webkit-transform 0ms; transition: -webkit-transform 0ms; -webkit-transform-origin: 0px 0px; -webkit-transform: translate(0px, 0px) translateZ(0px);">
+			<nav class="sec-nav">
+				<div class="title-tabs two-tabs">
+					<ul>
+						<li><a href="/Tool/index.php/Home/Junxun/listJunxun"><span class="inner-wrapper"><span class="inner-detail">更新榜</span></span></a></li>
+						<li><a href="/Tool/index.php/Home/Junxun/hotJunxun" class="active"><span class="inner-wrapper"><span class="inner-detail">热度榜</span></span></a></li>
+					</ul>
+				</div>
+			</nav>
+			
+			<section>
+				<div class="items" id="items">
+					<volist name="junxunList" id="junxun">
+					<a href="http://wechat.npulife.com/Tool/index.php/Home/Junxun/playJunxun?id={$junxun.id}">
+						<dl class="item padding underline">
+							<dt>								
+								<span>{$junxun.songname}</span>								
+							</dt>
+							<dd>
+								<span class="gray font-size-medium">{$junxun.nickname}</span>
+								<span class="comment gray font-size-medium float-right" style="margin-right: 8px">热度：{$junxun.view_count}</span>
+							</dd>
+						</dl>
+					</a>
+					</volist>
+				</div>
+			</section>
+			
+			<section id="load-more" class="padding">
+				<a class="load-more needsclick" href="javascript:void(0)">加载更多</a>
+			</section>
+			
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+$(document).ready(function() {
+
+	var iscroll = new iScroll('wrapper');
+
+	var active_obj = $(".title-tabs .active");
+	var offset_left = active_obj.offset().left + active_obj.width()/2 - 3;
+	$(".active-arrow").css('left',offset_left + "px" );
+
+	var page = 0,
+		time = {$time},
+		$loadHtml = $("#load-more").find(".load-more");
+	//alert(time);
+	$("a.load-more").click(function() {
+		$.ajax({
+			type		: "get",
+			url			: "http://wechat.npulife.com/Tool/index.php/Home/Diantai/getMoreDiantai?page=" + (page + 1) + "&time=" + time,
+			dataType	: "json",
+			beforeSend	: function() { $loadHtml.html("正在加载..."); },
+			complete	: function() { $loadHtml.html("加载更多"); },
+			success		: function(result) {
+				page++;
+				var size = result.data.length;
+				for(var i=0;i<size;i++)
+				{
+					$('.items').append('<a href="http://wechat.npulife.com/Tool/index.php/Home/Diantai/playDiantai?voiceid='+result.data[i]['id']+'">'+
+						'<dl class="item padding underline">'+
+							'<dt>'+
+								'<span class="red"></span>'+
+								'<span class="yellow"></span>'+
+								'<span>'+result.data[i]['songname']+'</span>'+
+								'<img width="14" class="img-indicate" src="">'+
+							'</dt>'+
+							'<dd>'+
+								'<span class="gray font-size-medium">No.'+result.data[i]['id']+'</span>'+
+								'<span class="gray font-size-medium">&nbsp;&nbsp;'+result.data[i]['nickname']+'</span>'+
+								'<span class="comment gray font-size-medium float-right" style="margin-right: 8px">热度:&nbsp;'+result.data[i]['view_count']+'</span>'+
+							'</dd>'+
+						'</dl>'+
+					'</a>');
+				}
+				// 如果当次获取到的数据不足一页, 则证明已经去到数据末尾, 将其隐藏
+				if (size < 20) {
+					$("#load-more").hide();
+				}
+				callback();
+			},
+			error       : function(){}//alert("ERROR");
+		});
+		return false;
+	});
+	
+	function callback() {
+		setTimeout(function() {
+			iscroll.refresh();
+			$("a.needsclick").css("pointer-events", "auto");
+		}, 400);
+	}
+});
+</script>		
+</body></html>

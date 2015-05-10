@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<meta name="format-detection" content="telephone=no">
+<link href="__PUBLIC__/Yikun/css/jquery.mobile-1.4.5.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery.mobile-1.4.5.js"></script>
+<title>YI KUN BNA</title>
+</head>
+<body>
+	<div data-role="page" id="front_index">
+		<div data-role="header">
+			<h1>欢迎访问我的主页</h1>
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#page1">首页</a></li>
+					<li><a href="#page2">页面二</a></li>
+					<li><a href="#anylink">搜索</a></li>
+				</ul>
+			</div>
+	  	</div>
+	
+		<div data-role="content">
+			<p>我是一名移动开发者！</p>
+			<div data-role="collapsible" data-collapsed="false">
+			  <h1>点击我 - 我可以折叠！</h1>
+			  <p>现在我默认是展开的。</p>
+			</div>
+			<a href="#page2" data-role="button" data-transition="slide">转到页面二</a>
+			
+			<div data-role="controlgroup" data-type="horizontal">
+			  <a href="#anylink" data-role="button" data-icon="search" data-iconpos="notext">按钮 1</a>
+			  <a href="#anylink" data-role="button">按钮 2</a>
+			  <a href="#anylink" data-role="button">按钮 3</a>
+			</div>
+			<a href="#popupMeizi" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="__URL__/pictureShow?action=article&picid=1" alt="妹子" style="width:30%"></a>
+			<div data-role="popup" id="popupMeizi" data-overlay-theme="b" data-theme="b" data-corners="false">
+    			<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img class="popphoto" src="__URL__/pictureShow?action=article&picid=1" style="max-height:512px;" alt="Paris, France">
+			</div>
+		</div>
+		
+		<div data-role="footer">
+			<h1>页脚文本</h1>
+		</div>
+	</div>
+	<div data-role="page" id="page2">
+		<div data-role="header">
+			<h1>欢迎访问我的主页</h1>
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#page1">首页</a></li>
+					<li><a href="#page2">页面二</a></li>
+					<li><a href="#anylink">搜索</a></li>
+				</ul>
+			</div>
+	  	</div>
+		<div data-role="content">
+		<a href="#page1">转到页面一</a>
+		</div>
+	</div>
+<!-- 
+	<form name="form1" method="post" action="__URL__/picture" enctype="multipart/form-data">  
+	  <p>图片：<input type="file" name="picture"></p>  
+	  <p><input type="hidden" name="action" value="add"><input type="submit" name="b1" value="提交"></p>  
+	</form>
+--><img src="__URL__/pictureShow?action=article&picid=1">	
+
+</body>
+</html>

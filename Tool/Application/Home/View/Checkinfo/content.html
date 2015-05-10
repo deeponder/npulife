@@ -1,0 +1,29 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device; user-scalable=0;"></meta>
+<link href="__PUBLIC__/NewsContent/newscontent.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<?php 			
+			foreach($newsinfo as $newsinfoContent){ ?>
+<div align=center>
+			<h3>{$newsinfoContent['news_title']}</h3>
+		
+			<h5><font color="b3c0ba">{$newsinfoContent['news_origin']}</font></h5>
+</div>
+
+	{$newsinfoContent['news_content']}
+
+<div>
+	<li>{$newsinfoContent['news_attachment']}</li>
+<div  align="center">
+<a href={$newsinfoContent['news_source']}>查看原网页</a>
+</div>
+<?php
+			}
+			?>
+</body>                                      					
+</html>

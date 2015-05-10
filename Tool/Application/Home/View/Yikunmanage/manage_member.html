@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<meta name="format-detection" content="telephone=no">
+<link href="__PUBLIC__/Yikun/css/jquery.mobile-1.4.5.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery.mobile-1.4.5.js"></script>
+
+<title>学员信息</title>
+</head>
+<body>
+
+	<div data-role="page" id="page_member" data-dom-cache="true">
+		
+		<div data-rolo="content" id= "content">
+			<if condition="$studentNotBind eq NULL">
+			<else />
+				<div data-role="collapsible">
+					<h2>没有绑定的学员：</h2>
+					<table data-role="table" id="manage_notbindmember_table" data-mode="columntoggle" data-column-btn-text="数据列表" class="ui-responsive table-stroke">
+						<thead>
+						<tr>
+						<th >姓名</th>
+						<th data-priority="1"><abbr title="">学号</abbr></th>
+						<th >学院</th>
+						<th data-priority="2">年级</th>
+						<th data-priority="3">奖助金等级</th>
+						</tr>
+						</thead>
+						<tbody id="member_table_body">
+						<volist name="studentNotBind" id="student">
+							<tr>
+							<td >{$student.name}</td>
+							<td>{$student.snumber}</td>
+							<td>{$student.college}</td>
+							<td>{$student.grade}</td>
+							<td>{$student.grantlevel}</td>
+							</tr>
+						</volist>
+						</tbody>
+					</table>
+				</div>
+				<br>
+			</if>
+
+			<if condition="$studentBad eq NULL">
+			<else />
+				<div data-role="collapsible">
+					<h2>有缺席记录的学员：</h2>
+					<table data-role="table" id="manage_badmember_table" data-mode="columntoggle" data-column-btn-text="数据列表" class="ui-responsive table-stroke">
+						<thead>
+						<tr>
+						<th >头像</th>
+						<th >姓名</th>
+						<th data-priority="1"><abbr title="">学号</abbr></th>
+						<th data-priority="2">参与</th>
+						<th >缺席</th>
+						<th>连续缺席数</th>
+						</tr>
+						</thead>
+						<tbody id="member_table_body">
+						<volist name="studentBad" id="student">
+							<tr>
+							<td style="width:30%"><img style="border-radius:100%;width:50%;" src="{$student.headerPic}"  ></td>
+							<td >{$student.name}</td>
+							<td>{$student.snumber}</td>
+							<td>{$student.actattend}次</td>
+							<td>{$student.actabsent}次</td>
+							<td>{$student.absent}</td>
+							</tr>
+						</volist>
+						</tbody>
+					</table>
+				</div>
+				<br>
+			</if>
+
+			<if condition="$studentGood eq NULL">
+			<else />
+		
+				<table data-role="table" id="manage_badmember_table" data-mode="columntoggle" data-column-btn-text="数据列表" class="ui-responsive table-stroke">
+					<thead>
+					<tr>
+					<th >头像</th>
+					<th >姓名</th>
+					<th data-priority="1"><abbr title="">学号</abbr></th>
+					<th data-priority="3">学院</th>
+					<th data-priority="2">年级</th>
+					<th >参与</th>
+					</tr>
+					</thead>
+					<tbody id="member_table_body">
+					<volist name="studentGood" id="student">
+						<tr>
+						<td style="width:30%"><img style="border-radius:100%;width:50%;" src="{$student.headerPic}"  ></td>
+						<td >{$student.name}</td>
+						<td>{$student.snumber}</td>
+						<td>{$student.college}次</td>
+						<td>{$student.grade}</td>
+						<td>{$student.actattend}次</td>
+						</tr>
+					</volist>
+					</tbody>
+				</table>
+			</if>
+			
+		</div>
+	</div>
+	
+<script>
+	
+</script>
+</body>
+</html>

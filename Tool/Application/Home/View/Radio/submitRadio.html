@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta charset="utf-8" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /> 
+  <title>作品提交</title> 
+  
+  <link rel="stylesheet" type="text/css" href="/Tool/Public/Radio/voice.css" media="all" />
+  <script charset="utf-8" src="/Tool/Public/Radio/jquery-2.0.3.min.js"></script>
+  <script>
+	function onBridgeReady(){
+		WeixinJSBridge.call('hideOptionMenu');
+	}
+
+	if (typeof WeixinJSBridge == "undefined"){
+		if( document.addEventListener ){
+			document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+		}else if (document.attachEvent){
+			document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+			document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+		}
+	}else{
+		onBridgeReady();
+	}
+	
+	function onSubmit()
+	{
+		if(1)
+		{
+			submitRadio();
+		}		
+	}
+	
+	function submitRadio()
+	{
+		this.innerHTML = '正在提交...';
+		var url = "__URL__/recordRadio";
+
+		var nickname = $("#nickname").val();
+		var songname = $("#songname").val();
+		var media_id = $("#media_id").val();
+		var openid = $("#openid").val();
+		// alert(nickname);
+		$.getJSON(url,{nickname:nickname,songname:songname,openid:openid,media_id:media_id},function(result){
+
+			if(result.status==1) {
+						alert("作品提交成功，您是"+result.id+"号选手！作品需要审核，请耐心等待~");
+						location.href = "http://wechat.npulife.com/Tool/index.php/Home/Radio/listRadio?openid="+$("#openid").val();
+					}
+					if(result.status==2)
+					{
+						alert(result.message);
+					}
+							this.innerHTML = '确定';
+
+		
+	});
+
+		
+	}
+  </script>
+  <style>
+    .pay_type h3:after {background:none;}
+    .address_list .edit:after {width:30px;}
+    .address_list .edit {right:0;}
+    #noSelectPage:after {background:none;}
+    .address_list ul:before {display: none;}
+    </style> 
+ </head> 
+ <body> 
+  <div id="c_wg.myAddress_edit" style="">
+   <div class="wx_bar"> 
+    <div class="wx_bar_back"> 
+     <a id="back" href="javascript:void(0);"></a> 
+    </div> 
+    <div class="wx_bar_tit">
+     作品提交
+    </div>
+   </div>
+   <div class="wx_wrap">
+    <div class="address_new">
+     <input type="hidden" id="openid" value="{$openid}" /> 
+     <input type="hidden" id="media_id" value="{$media_id}" /> 
+     <p><label for="nickname"><span class="tit">昵称*</span><input type="text" id="nickname" name="nickname" value="" placeholder="不超过10个字" /></label></p> 
+     <p><label for="songname"><span class="tit">歌曲名*</span><input type="text" id="songname" name="songname" value="" placeholder="原创请注明" /></label></p> 
+     <!--<p><label for="mobile"><span class="tit">手机号码</span><input type="txt" id="mobile" name="mobile" value="" placeholder="手机号码" /></label></p> 
+     <p><label for="adinfo"><span class="tit">QQ号</span><input id="adinfo" name="adinfo" value="" type="text" placeholder="QQ号" /></label></p> -->
+     <p class="action"><button class="submit" id="addBtn" onclick="onSubmit();">确认</button></p>
+    </div>
+   </div>
+  </div>  
+ </body>
+</html>

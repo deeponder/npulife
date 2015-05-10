@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{$title}</title>
+<script type="text/javascript" language="javascript"> 
+function imgFix() { 
+//定义要限制的图片宽高,这个宽高要同style里面定义的相同，高或宽小于限定高宽的图片保持原尺寸
+var widthRestriction = 200; 
+var heightRestriction = 200; 
+var allElements = document.getElementsByTagName('*')
+for (var i = 0; i < allElements.length; i++) 
+{ 
+if (allElements[i].className.indexOf('imgBox') >= 0) //获取class名称 
+{ 
+var imgElements = allElements[i].getElementsByTagName('img'); 
+for (var j=0; j < imgElements.length; j++) 
+{ 
+if ( imgElements[j].width > widthRestriction || imgElements[j].height > heightRestriction ) 
+{ 
+if ( imgElements[j].width > imgElements[j].height)
+{ 
+imgElements[j].height = imgElements[j].height*(widthRestriction/imgElements[j].width); 
+imgElements[j].width = widthRestriction; 
+} else 
+{ 
+imgElements[j].width = imgElements[j].width*(heightRestriction/imgElements[j].height); 
+imgElements[j].height = heightRestriction; 
+}
+} 
+if ( imgElements[j].height < heightRestriction ) 
+{ 
+imgElements[j].style.paddingTop = ( heightRestriction -imgElements[j].height ) /2 + "px"; 
+} 
+} /*for j*/ 
+} 
+}/*for i*/ 
+} 
+window.onload = imgFix; 
+</script> 
+
+<link rel="stylesheet" href="neirong.css">
+</head>
+
+<body class="body">
+<div style="background-color:#CCF">
+<p align="center"><b>{$news['title']}</b></p>
+</div>
+
+<div align="center">
+<h3>{$news['title']}</h3>
+</div>
+<div align="center"><ul class="imgBox"> 
+<li><img src="neirong.jpg" alt="yourimg" /></li> 
+</ul> </div>
+<div>
+{$news['content']}
+</div>
+
+<br/>
+<br/>
+
+<footer align="center" style="font-size:12px">
+<p>2013-2014瓜大生活圈团队出品</p>
+</footer>
+
+</body>
+</html>

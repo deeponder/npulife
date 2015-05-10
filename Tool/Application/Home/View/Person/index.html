@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content=" initial-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<title>个人中心</title>
+<link rel='stylesheet' type='text/css' href="__PUBLIC__/personal/css/main.css"/>
+<link href='http://www.youziku.com/webfont/CSS/e733cddd251baa4cce28b2e6337d1cea' rel='stylesheet' type='text/css'/>
+<script type="text/javascript">
+function tab(n){
+	var tabnav="tab"+n;
+	var tabid="tabid"+n;
+	var nImg = "img"+n;
+	var menuImg = document.getElementById(nImg);
+	cleardisplay();
+	document.getElementById(tabid).style.display="block";
+	if (n == 0){
+		menuImg.setAttribute("src","__PUBLIC__/personal/images/function.png");
+	} 
+	else if (n == 1) {
+		menuImg.setAttribute("src","__PUBLIC__/personal/images/life.png");
+	}
+	else if (n == 2) {
+		menuImg.setAttribute("src","__PUBLIC__/personal/images/footprint.png");
+	}
+	else if (n == 3) {
+		menuImg.setAttribute("src","__PUBLIC__/personal/images/information.png");
+	}
+	else if (n == 4) {
+		menuImg.setAttribute("src","__PUBLIC__/personal/images/remind.png");
+	}
+	else if (n == 5) {
+		menuImg.setAttribute("src","__PUBLIC__/personal/images/advice.png");
+	}
+	// document.getElementById(nImg).style.borderColor="#808080";
+	// document.getElementById(tabnav).style.backgroundColor="#7281d6";
+}
+
+//tab切换时，置所有tebdetails的display属性为none,隐藏该元素,还原tabitem选项底色
+function cleardisplay() {
+	for (i=0;i<6;i++){
+		var cleartabid="tabid"+i;
+		var resettabid="tab"+i;
+		var nImg = "img"+i;
+		menuImg = document.getElementById(nImg);
+		document.getElementById(cleartabid).style.display="none";
+		if (i == 0){
+			menuImg.setAttribute("src","__PUBLIC__/personal/images/function_first.png");
+		} 
+		else if (i == 1) {
+			menuImg.setAttribute("src","__PUBLIC__/personal/images/life_first.png");
+		}
+		else if (i == 2) {
+			menuImg.setAttribute("src","__PUBLIC__/personal/images/footprint_first.png");
+		}
+		else if (i == 3) {
+			menuImg.setAttribute("src","__PUBLIC__/personal/images/information_first.png");
+		}
+		else if (i == 4) {
+			menuImg.setAttribute("src","__PUBLIC__/personal/images/remind_first.png");
+		}
+		else if (i == 5) {
+			menuImg.setAttribute("src","__PUBLIC__/personal/images/advice_first.png");
+		}
+		// document.getElementById(nImg).style.borderColor="#cdcdcd"; 
+	}
+}
+
+</script>
+</head>
+<body>
+
+<!-- <div id="mianwrap"> -->
+    <!-- wrap -->
+    <div id="wrap">
+        <div id="headwrap">
+            <div id="head-left"> 
+                <img src="__PUBLIC__/personal/images/8.jpg">
+            </div>
+            
+            <div id="head-middle">
+             <ul>
+                <li><span>积分：{$mem['score']}</span></li><!--credit-->
+                <li><span>等级：{$mem['score']/10}</span></li><!--credit-->
+            </ul>
+            </div>
+            <div id="head-right">
+                <img src="{$lionaddr}">
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div id="content-wrap">
+            <div id="content-left">
+                <ul>
+                    <!-- <li><a href="#" id="tab0" onclick="tab(0)"><img id="img0" style="border-color: #808080" onmouseout="this.src='images/function_first.png'" onmouseover="this.src='images/function.png'" src="images/function.png"></a></li>
+                    <li><a href="#" id="tab1" onclick="tab(1)"><img id= "img1" onmouseout="this.src='images/life_first.png'" onmouseover="this.src='images/life.png'" src="images/life_first.png"></a></li>
+                    <li><a href="#" id="tab2" onclick="tab(2)"><img id= "img2" onmouseout="this.src='images/footprint_first.png'" onmouseover="this.src='images/footprint.png'" src="images/footprint_first.png"></a></li>
+                    <li><a href="#" id="tab3" onclick="tab(3)"><img id= "img3" onmouseout="this.src='images/information_first.png'" onmouseover="this.src='images/information.png'" src="images/information_first.png"></a></li>
+                    <li><a href="#" id="tab4" onclick="tab(4)"><img id= "img4" onmouseout="this.src='images/remind_first.png'" onmouseover="this.src='images/remind.png'" src="images/remind_first.png"></a></li>
+                    <li><a href="#" id="tab5" onclick="tab(5)"><img id= "img5" onmouseout="this.src='images/advice_first.png'" onmouseover="this.src='images/advice.png'" src="images/advice_first.png"></a></li> -->
+                    <li><a href="#" id="tab0" onclick="tab(0)"><img id="img0"  src="__PUBLIC__/personal/images/function.png"></a></li>
+                    <li><a href="#" id="tab1" onclick="tab(1)"><img id= "img1" src="__PUBLIC__/personal/images/life_first.png"></a></li>
+                    <li><a href="#" id="tab2" onclick="tab(2)"><img id= "img2" src="__PUBLIC__/personal/images/footprint_first.png"></a></li>
+                    <li><a href="#" id="tab3" onclick="tab(3)"><img id= "img3" src="__PUBLIC__/personal/images/information_first.png"></a></li>
+                    <li><a href="#" id="tab4" onclick="tab(4)"><img id= "img4" src="__PUBLIC__/personal/images/remind_first.png"></a></li>
+                    <li><a href="#" id="tab5" onclick="tab(5)"><img id= "img5" src="__PUBLIC__/personal/images/advice_first.png"></a></li>
+                </ul>
+            </div>
+            <div id="content-right">
+                <div id="tabdetail" class="tab-section">
+                    <!--常用功能-->
+                    <div id='tabid0' class="all-tab">
+                        <ul>
+                            <li>
+                                <a href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/binding/_controller/binding/_action/personInfo.html"><img src="__PUBLIC__/personal/images/grade.png" alt="" /><span>成绩查询</span></a>
+                            </li>
+                            <!-- <li><a href="#"><img src="__PUBLIC__/personal/images/book.png" alt="" /><span>图书借阅</span></a></li> -->
+                            <li><a href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=8"><img src="__PUBLIC__/personal/images/job.png" alt="" /><span>就业实习</span></a></li>
+                            <li><a href="http://www.nwpu.edu.cn/info/1003/12014.htm"><img src="__PUBLIC__/personal/images/phone.png" alt="" /><span>办公电话</span></a></li>
+                            <li><a href="http://wechat.npulife.com/Public/Index/imagess/%E6%A0%A1%E5%8E%862014.png"><img src="__PUBLIC__/personal/images/%E6%A0%A1%E5%8E%862015.jpg" alt="" /><span>工大校历</span></a></li>
+                            <li><a href="http://wechat.npulife.com/index.php/Home/Youhuiqiangxian/listYouhuiqiangxian"><img src="__PUBLIC__/personal/images/discount.png" alt="" /><span>优惠抢先</span></a></li>
+                        </ul>
+                    </div>
+
+                    <!--瓜圈生活-->
+                    <div id='tabid1' class="all-tab" style='display:none;'>
+                        <ul>
+                            <li>微唱大赛火热进行中！！</li>
+							  <li>微唱大赛火热进行中！！</li>
+                        </ul>
+                    </div>
+
+                    <!--我的足迹-->
+                  <!--   <div id='tabid2' class="all-tab" style='display:none;'>
+                        <ul>
+                            <li>亲，我们一直默默关注你的动态哦。</li>
+                            
+                        </ul>
+                    </div> -->
+                    
+                    
+                    <!--个人信息-->
+                    <div id="tabid3" class="all-tab" style='display:none;'>
+                        <ul id="inforItemOne">
+                            <li><span>姓名:　</span><span>{$mem['truename']}</span></li> 
+                            <!-- <li><a href="#"><span>瓜龄:　</span><span>0.5岁</span><img src="images/arrows.png"></a></li> -->
+                            <!-- <li><span>性别:　</span><span>男</span></li> -->
+                            <li><span>学院:　</span><span>{$mem['school']}</span></li>
+                        </ul>
+                        <ul id="inforItemTwo">
+                            <li><span>QQ:　</span><span>{$mem['qq']}</span></li> 
+                            <!-- <li><span>手机号:　</span><span>15829965024</span></li> -->
+                            <!-- <li><a href="#"><span>地址:　</span><span>西北工业大学友谊校区1号楼</span><img src="__PUBLIC__/personal/images/arrows.png"></a></li> -->
+                        </ul>
+                        <a href="http://wechat.npulife.com/tool/home/personal/update"><span id="modify">修改</span></a>
+                    </div>
+
+                    <!--消息提醒-->
+                    <div id='tabid4' class="all-tab" style='display:none;'>
+                        <ul>
+                            <li>亲，西北工大微生活新添个人空间新功能，赶紧来体验吧，我们需要您的支持。</li>
+                        </ul>
+                    </div>
+
+                    <!--我的建议-->
+                    <div id='tabid5' class="all-tab" style='display:none;'>
+                     <!--<div>建议记录</div>-->
+                        <div id="prompt">
+                            <span>
+                                感谢您对“西北工大微生活”的关注，如果你在使用过程中有任何意见和建议，请写下来告诉我们。
+                            </span>  
+                        </div>
+                        <div id="write-box">
+                            <textarea autofocus="autofocus"></textarea>
+                        </div>
+                        <div id="submit-div">
+                            <a href="#"><span>提交</span></a>
+                        </div>
+                    </div>
+                    
+                </div>        
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+<!-- </div> -->
+</body>
+<!--
+<script type="text/javascript" src="http://www.youziku.com/UserDownFile/jquery.min.js"></script>
+<script type="text/javascript" src="http://www.youziku.com/UserDownFile/jquery.md5.js"></script>
+<script type="text/javascript"> 
+    function youziku19451() {
+        var resultStr = $(".minijiankatong").text();
+        var md5 = "";
+        resultStr = Trim(resultStr);
+        resultStr = SelectWord(resultStr);
+        md5 = $.md5("a60c9b3e0b6d463a9091ff163b16c666"+"minijiankatong" + resultStr);
+        $.getJSON("http://www.youziku.com/webfont/CSSPOST?jsoncallback=?", { "id": md5, "guid": "a60c9b3e0b6d463a9091ff163b16c666", "type": "5" }, function (json) {
+            if (json.result == 0) {/*alert("需要生成");*/
+                $.post("http://www.youziku.com/webfont/PostCorsCreateFont", { "name": "minijiankatong", "gid": "a60c9b3e0b6d463a9091ff163b16c666", "type": "5", "text": resultStr }, function (json) {
+                if (json == "0") { /*alert("参数不对");*/
+                } else if (json == "2") {/*alert("超过每日生成字体数的上限");*/
+                } else if (json == "3") { /*alert("当前正在生成请稍后");*/
+                } else {/*alert("正在生成");*/
+                }
+            });
+            }
+            else {/*alert("下载css文件");*/
+                loadExtentFile("http://www.youziku.com/webfont/css?id=" + md5 + "&guid=" + "a60c9b3e0b6d463a9091ff163b16c666" + "&type=5");
+            }
+        });
+    }
+    (function youziku() {
+    if (window.location.href.toString().substring(0, 7) == "file://") {
+            alert("你当前是通过双击打开html文件，进行本地测试的，这样看不到字体效果，一定要通过本地建立的虚拟网站或发布到外网进行测试。详见有字库的使用说明。");
+        }else{
+        youziku19451();
+        }
+    })()
+</script>
+-->
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>微唱猜歌游戏</title>
+<link rel="stylesheet" href="/Tool/Public/Voice/playVoice/song_details.css"  type="text/css" />
+<link rel="stylesheet" href="/Tool/Public/Voice/playVoice/frame_only.css"  type="text/css" />
+<link rel="stylesheet" href="/Tool/Public/Voice/playVoice/css/not.the.skin.css">
+		<link rel="stylesheet" href="/Tool/Public/Voice/playVoice/circle.skin/circle.player.css">
+
+		<script type="text/javascript" src="/Tool/Public/Voice/playVoice/js/jquery-1.9.0.min.js"></script>
+		<script type="text/javascript" src="/Tool/Public/Voice/playVoice/js/jquery.transform2d.js"></script>
+		<script type="text/javascript" src="/Tool/Public/Voice/playVoice/js/jquery.grab.js"></script>
+		<script type="text/javascript" src="/Tool/Public/Voice/playVoice/js/jquery.jplayer.js"></script>
+		<script type="text/javascript" src="/Tool/Public/Voice/playVoice/js/mod.csstransforms.min.js"></script>
+		<script type="text/javascript" src="/Tool/Public/Voice/playVoice/js/circle.player.js"></script>
+		
+		<!--<script type="text/javascript">
+		
+		</script>-->
+		<script type="text/javascript">
+		
+		</script>
+		<script>
+		timedCount();
+		var c=0;
+		var t;
+		function timedCount()
+		{
+			$("#listen_count").html("用时"+c+"秒");
+			c=c+1;
+			t=setTimeout("timedCount()",1000);
+		}
+		</script>
+		<script>
+		var realSongname = "好大一棵树";
+		var userSongname;
+		$(function(){
+			var mp3Url = "http://content.npulife.com/Tool/Upload/WeSing/1.mp3";
+		
+			var myCirclePlayer = new CirclePlayer("#jquery_jplayer_1",
+			{
+				mp3:mp3Url
+			}, 
+			{
+				supplied:"mp3",
+				cssSelectorAncestor: "#cp_container_1"
+			});
+			
+			$("#submitBtn").click(function(){
+				userSongname = $("#songname").val();
+				if(!realSongname.indexOf(userSongname))
+				{
+					$.ajax({
+						type: "POST",   
+						url: "/Tool/index.php/Home/GuessSong/ajaxSubmitAnswer", 
+						dataType: "json",   
+						success: function(result) {     
+							//alert(result.id);
+							
+							mp3Url = "http://content.npulife.com/Tool/Upload/WeSing/"+result.id+".mp3";
+							
+							$("#cp_container_1").html(''
+								+'<div class="cp-buffer-holder">' 
+								+'	<div class="cp-buffer-1"></div>'
+								+'	<div class="cp-buffer-2"></div>'
+								+'</div>'
+								+'<div class="cp-progress-holder">' 
+								+'	<div class="cp-progress-1"></div>'
+								+'	<div class="cp-progress-2"></div>'
+								+'</div>'
+								+'<div class="cp-circle-control"></div>'
+								+'<ul class="cp-controls">'
+								+'	<li><a class="cp-play" tabindex="1">play</a></li>'
+								+'	<li><a class="cp-pause" style="display:none;" tabindex="1">pause</a></li>' 
+								+'</ul>'
+							);
+							
+							myCirclePlayer = new CirclePlayer("#jquery_jplayer_1",
+							{
+								mp3:mp3Url
+							}, 
+							{
+								supplied:"mp3",
+								cssSelectorAncestor: "#cp_container_1"
+							});
+							
+						},
+						error : function(){
+							alert("ERROR");
+						}
+					});	
+				}
+			});
+		});
+		</script>
+</head>
+
+<body>
+
+<div class="layout_2">
+		
+		
+		<div class="main_container">
+			<div class="song_title" style="height:auto;">
+                <p class="count" id="listen_count">用时0秒</p>
+				<h2><span title="{$theVoice['songname']}">第1关</span><a href="javascript:;" class="icon_mv" style="display:none;" id="js_icon_mv"></a><i class="icon_hq"></i></h2>
+				<div style="display:none;" class="data" id="top_song_data"></div>
+				<div class="opertate" id="play_add"><div id="jquery_jplayer_1" class="cp-jplayer"></div>
+
+		<div id="jquery_jplayer_2" class="cp-jplayer"></div>
+
+		<div class="prototype-wrapper">
+
+			<div id="cp_container_1" class="cp-container">
+				<div class="cp-buffer-holder"> 
+					<div class="cp-buffer-1"></div>
+					<div class="cp-buffer-2"></div>
+				</div>
+				<div class="cp-progress-holder"> 
+					<div class="cp-progress-1"></div>
+					<div class="cp-progress-2"></div>
+				</div>
+				<div class="cp-circle-control"></div>
+				<ul class="cp-controls">
+					<li><a class="cp-play" tabindex="1">play</a></li>
+					<li><a class="cp-pause" style="display:none;" tabindex="1">pause</a></li> 
+				</ul>
+			</div>
+
+		</div></div>
+				
+			</div>
+			<!--歌曲标题区_E-->	
+            <!--歌曲详情_S-->
+            <div class="song_detail">
+            	<ul class="song_info">
+                	<li>
+                        <input type="text" id="songname" style="width:70%; height:2.5em;">
+                        <input type="submit" id="submitBtn" style="width:25%; height:2.5em;" value="开猜！">
+                    </li>
+					<li>
+					</li>
+                </ul>
+				
+               
+            <!--歌曲详情_E-->
+            
+			<!--歌词_S-->
+			<div class="lyrics">
+				<div class="title">
+					<h3><a href="http://content.npulife.com/Tool/index.php/Home/Voice/listVoice">进入微唱大赛作品列表</a></h3>
+				</div>
+			</div>
+			<!--歌词_E-->
+			
+		</div>
+	
+		</div>
+        </div>
+       
+	
+    <div class="foot">
+    <p ><a href="http://mp.weixin.qq.com/s?__biz=MjM5OTI4NjUxMw==&mid=200544682&idx=2&sn=9ad8046a4a1a20b63aae88d302925e49#rd">进入大赛详情</a></p>
+    <p >2013-2014 瓜大生活圈团队出品</p>
+	<p >开发人员：软件与微电子学院 李宽&amp;黄志鹏&amp;王倩茹</p>
+    </div>
+    
+	
+</body>
+</html>

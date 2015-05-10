@@ -1,0 +1,382 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta id="viewport" name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<meta name="format-detection" content="telephone=no">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<METAHTTP-EQUIV="Pragma"CONTENT="no-cache">
+<METAHTTP-EQUIV="Cache-Control"CONTENT="no-cache">
+<METAHTTP-EQUIV="Expires"CONTENT="0">
+
+<script src="/Public/BigSchool/js/jquery-2.0.0.min.js"></script>
+<script src="/Public/BigSchool/js/common.js"></script>
+<title>西北工大微生活{$HeadTitle}</title>
+<link rel="stylesheet" type="text/css" href="/Public/BigSchool/css/wap.css">
+<link rel="stylesheet" type="text/css" href="/Public/BigSchool/css/wap_flow.css">
+</head>
+
+<style type="text/css">
+    
+    #load-more{
+    text-align:center;
+        }
+
+    .load-more{
+    cursor:pointer;display:block;line-height:34px;height:34px;float:none;border:1px solid #ccc;text-align:center;
+}
+</style>
+
+<body class="None  withHeader article">
+<input type="hidden" name='dingyue_id' id='dingyue_id' value="{$dingyue}">
+<header id="header">
+    <div class="top_bar">
+        <div class="abs_m"> 
+        <a href="/Home/BigSchool/" class="refresh_title btn" action-type="fresh"></a>
+        <a href="/Home/BigSchool/" class="refresh_btn btn" action-type="fresh"></a>
+        </div>
+
+        
+        <div class="abs_l">
+            <a class="btn user" onClick="Drawer.toggle(); return false;">
+                <div class="avatar bg_avatar" style="background:url({$headimg});background-size: 29px 29px;"></div>
+            </a>
+        </div>
+    <!--
+        <div class="abs_r">
+        	<a href="/Home/BigSchool/search/" class="btn search"></a>
+        </div>
+        -->
+    </div>
+
+    <div class="top_menu_bar">
+        <div class="top_menu_more" >
+            <div class="list_shadow"></div>
+            <a href="/Home/BigSchool/channels/" class="btn"><b><font color="red" size="2.5"><br>{订阅}&nbsp;&nbsp;</font><br/></b></a>
+
+        </div>
+        <div id="top_menu" class="top_menu">
+            <div class="top_menu_list"></div>
+        </div>
+    </div>
+  
+</header>
+
+<content>    
+    <div class="list_content" pull-fresh>
+    
+    <volist name="articleList" id="article">
+	    <section hot-time="{$article["cTime"]}" class="middle_mode has_action">
+	        <a href="{$article["url"]}" class="article_link clearfix" onClick="actionLog('click_headline','3712939382')">
+	            <h3>{$article["title"]}</h3>  
+	            <div class="list_img_holder">
+	                <img style="opacity: 1;" src="{$article["picurl"]}" onerror="errorimg.call(this)" onload="loadimg.call(this)">
+	            </div>
+	            <div class="item_info">
+	                <span class="src space">{$article["category"]}</span>
+	                <span class="cmt">{$article["view_count"]}</span>
+	                <span class="time fr canhide" title="{$article["friendlyDate"]}">{$article["friendlyDate"]}</span>
+	            </div>
+	        </a>
+	        <!--<a class="list_action" onClick="listAction.showMenu(this, 3712939382); return false"></a>-->
+	        <!--<i class="icon_hot"></i>-->
+	    </section>
+    </volist>
+    
+    </div>
+    
+    
+       <section id="load-more" class="padding">
+            <a class="load-more" href="javascript:void(0)">加载更多</a>
+        </section>
+    
+</content>
+
+<!--登录弹窗-->
+<div id="modal_login" class="jqmWindow" onTouchmove="return false">
+        
+    <div class="jqmClose closeBtn" ga_event="login" ga_label="close"></div>
+</div>
+
+<div id="connect_window">
+	<iframe src=""  frameborder="0" scrolling="no" width="290" height="400" onTouchmove="return false"></iframe>
+    <div class="jqmClose closeBtn" ga_event="login" ga_label="close"></div>
+</div>
+
+<div id="left" class="view ">
+
+    
+    <div class="loginArea" id="login"  ontouchmove='return false'>
+        <div class="login_tip"><span >昵称：{$nickname}</span></div>
+        <div class="login_tip"><span >ID：{$uid}</span></div>        
+        <div class="login_tip"><span >积分：{$userjifen}</span></div>
+    </div>
+    
+    <div class="loginArea" id="logout" style="display:none"  ontouchmove='return false'>
+        <span class="avatar"><img src="" class="large no_bg" data-context="user-pic"></span>
+        <span class="name" data-context="user-name"></span>
+    </div>
+        
+    <div id="left_menu">
+    	<ul>
+            <!--<li id="favorite" style="display:none"><a class="btn favorite" href="#">收藏</a></li>-->
+            <!-- <li><a href="/Home/BigSchool" class="btn search">搜索</a></li> -->
+            <!-- 修改1----------------------------------- -->
+            <a href="javascript:void(0);" id='search_all'class="btn search">搜索全部</a>
+            <if condition="${channel} neq '__all__'">
+                <a href="javascript:void(0);" id='search_category' data-channel='{$channel}' class="btn search">在{$channelname}中搜索</a>
+            </if>
+            <input id='search_keyword' type='text' class=''></input>
+            <!-- 修改1----------------------------------- -->
+            <!--<li><a href="#" target="_blank" class="btn activity">活动</a></li>-->
+            <!--<li><a href="#"  class="btn app">应用推荐</a></li>-->
+            <!--<li><a href="#" class="btn feedback">反馈</a></li>
+            <li><a href="#" target="_blank" class="btn about">关于我们</a></li>
+            <li><a href="#" target="_blank" class="btn cooperation">合作</a></li>-->
+        	<!--<li id="quit" style="display:none"><a onClick="user.logout(); return false" class="btn quite">退出</a></li>-->
+        </ul>
+    </div>
+    
+    <div ontouchmove='return false' class="blank"></div>
+</div>
+
+
+<input type="hidden" name='page_id' id='page_id' value="/index/">
+<!-- 修改2----------------------------------- -->
+<script>
+
+//ajax 动态加载更多
+    var page = 1;
+     var channel = $('#search_category').data('channel');
+    // alert(channel);
+    // var data = new Array();
+    $('a.load-more').click(function(){
+            // alert('dfd');
+        var url = '/Home/BigSchool/getmore';
+        
+    // alert(channel);
+
+
+        $.getJSON(url,{page:page,channel:channel},function(articleList){
+            // alert("dfdf");
+                  if(articleList == null){
+            alert("没有更多了~");
+        }else{
+            
+            for(var i=0;i<articleList.length;i++){
+
+
+
+                
+                var str = '<section hot-time="'+articleList[i]['cTime']+'" class="middle_mode has_action">'
+                            +'<a href="'+articleList[i]['url']+'" class="article_link clearfix" onClick="actionLog("click_headline","3712939382")">'
+                                +'<h3>'+articleList[i]['title']+'</h3>'  
+                                +'<div class="list_img_holder">'
+                                    +'<img style="opacity: 1;" src="'+articleList[i]['picurl']+'" onerror="errorimg.call(this)" onload="loadimg.call(this)">'
+                                +'</div>'
+                                +'<div class="item_info">'
+                                    +'<span class="src space">'+articleList[i]['category']+'</span>'
+                                    +'<span class="cmt">'+articleList[i]['view_count']+'</span>'
+                                    +'<span class="time fr canhide" title="'+articleList[i]['friendlyDate']+'">'+articleList[i]['friendlyDate']+'</span>'
+                                +'</div>'
+                            +'</a>'
+                        +'</section>';
+                $('.list_content').append(str);
+            }
+        }
+            page++;
+
+
+        });
+        
+    });
+
+//搜索功能
+function search_all(){
+    var url='/Home/BigSchool/search';
+    var key = $('#search_keyword').val();
+    //alert("hi");
+    $.getJSON(url,{channel:'',key:key},function(articleList){
+        if(articleList == null){
+            alert("没有结果！");
+        }else{
+
+            $('.list_content').empty();
+            for(var i=0;i<articleList.length;i++){
+                var str = '<section hot-time="'+articleList[i]['cTime']+'" class="middle_mode has_action">'
+                            +'<a href="'+articleList[i]['url']+'" class="article_link clearfix" onClick="actionLog("click_headline","3712939382")">'
+                                +'<h3>'+articleList[i]['title']+'</h3>'  
+                                +'<div class="list_img_holder">'
+                                    +'<img style="opacity: 1;" src="'+articleList[i]['picurl']+'" onerror="errorimg.call(this)" onload="loadimg.call(this)">'
+                                +'</div>'
+                                +'<div class="item_info">'
+                                    +'<span class="src space">'+articleList[i]['category']+'</span>'
+                                    +'<span class="cmt">'+articleList[i]['view_count']+'</span>'
+                                    +'<span class="time fr canhide" title="'+articleList[i]['friendlyDate']+'">'+articleList[i]['friendlyDate']+'</span>'
+                                +'</div>'
+                            +'</a>'
+                        +'</section>';
+                $('.list_content').append(str);
+               
+            }
+            Drawer.toggle(); 
+        }
+    });
+}
+function search_category(){
+    var channel = $('#search_category').data('channel');
+    var url='/Home/BigSchool/search';
+    var key = $('#search_keyword').val();
+   // alert(channel);
+    $.getJSON(url,{channel:channel,key:key},function(articleList){
+        if(articleList == null){
+            alert("没有结果！");
+        }else{
+            $('.list_content').empty();
+            for(var i=0;i<articleList.length;i++){
+                var str = '<section hot-time="'+articleList[i]['cTime']+'" class="middle_mode has_action">'
+                            +'<a href="'+articleList[i]['url']+'" class="article_link clearfix" onClick="actionLog("click_headline","3712939382")">'
+                                +'<h3>'+articleList[i]['title']+'</h3>'  
+                                +'<div class="list_img_holder">'
+                                    +'<img style="opacity: 1;" src="'+articleList[i]['picurl']+'" onerror="errorimg.call(this)" onload="loadimg.call(this)">'
+                                +'</div>'
+                                +'<div class="item_info">'
+                                    +'<span class="src space">'+articleList[i]['category']+'</span>'
+                                    +'<span class="cmt">'+articleList[i]['view_count']+'</span>'
+                                    +'<span class="time fr canhide" title="'+articleList[i]['friendlyDate']+'">'+articleList[i]['friendlyDate']+'</span>'
+                                +'</div>'
+                            +'</a>'
+                        +'</section>';
+                $('.list_content').append(str);
+            }
+            Drawer.toggle();
+        }
+    });
+}
+$('#search_all').click(search_all);
+$('#search_category').click(search_category);
+</script>
+<!-- 修改2---------------------------------- -->
+<script>
+
+var _gaq = _gaq || [];
+var test_channel = "", test_version = "";
+_gaq.push(['_setAccount', 'UA-28423340-7']);
+_gaq.push(['_addOrganic','baidu','word']);
+_gaq.push(['_setLocalRemoteServerMode']);
+_gaq.push(['_setDomainName', '.toutiao.com']);
+_gaq.push(['_trackPageview','/index/']);
+
+function gaqpush(ga_event, ga_label){
+	gaevent('event',ga_event,ga_label);
+};
+
+function gaevent(category, action, label){
+	if(test_channel.indexOf(action) >-1) label = label+test_version;
+	console.log("ga:"+category+","+action+","+label);
+	_gaq.push(['_trackEvent', category, action, label, 1]);
+};
+
+(function() {
+ var ga = document.createElement('script');
+ ga.type = 'text/javascript';
+ ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+ var s = document.getElementsByTagName('script')[0];
+ s.parentNode.insertBefore(ga, s);
+})();
+
+$("body").on('click', '[ga_event]', function(e){
+	 var $this =  $(this);
+	 var ga_category = $this.attr('ga_category') || 'event';
+	 var ga_event = $this.attr('ga_event');
+	 var ga_label = $this.attr('ga_label');
+	 gaevent(ga_category,ga_event,ga_label);
+	 var href = this.href, target = this.target;
+	 if(href !== "#" && target !== "_blank") {
+	 	setTimeout(function(){ 
+	 		location.href = href 
+	 	},400);
+	 	return false;
+	 }
+});
+</script>
+
+<script>
+var indexFlow,indexSwitch,
+    item_type = "4",
+    tag = "{$tag}",
+    current_user_id = "",
+    utm_source = "None",
+    last_update = {$nowdate};
+
+
+var channelCategory = ["__all__","tongzhi","huodong","xueshu","jiuye","jingsai","xigongda","sanhang","quan","yangongzhisheng","xiaohua","xuetang","renwu","yikun","jiaoliu","xuesheng","yingyu","shenghuo","zhinan","baida","gongda","youhui"],
+    channelCategoryName = ['推荐','通知','活动','学术','就业','竞赛','西北工业大学','三航青年','瓜大生活圈','研工之声','笑话','学堂','人物','翼鲲','国际交流','学声嘹亮','英语','生活技巧','办事指南','百问百答','最美工大','优惠'],
+    channelItemTemplate = '<a href="/Home/BigSchool?channel=#category#" class="btn">#name#</a>',
+    channelDefaultCount = 5;
+
+    /*我们要想个办法让标签的值传进来就行了var a="{$a}"*/
+
+
+   /*var channelCategory ="{$channelCategory}",
+       channelCategoryName="{$channelCategoryName}",
+       channelDefaultCount=4,
+       channelItemTemplate = '<a href="/Home/BigSchool?channel=#category#" class="btn">#name#</a>';*/
+    //storedMenu.split(",") 
+    var s = document.getElementById('dingyue_id').value;
+
+    if(s != '')
+    {
+    	localStorage["menuDefaults"] = s;
+        //alert(localStorage["menuDefaults"]);
+
+    	var sArray = s.split(',');
+   		var j=1;//定位定位定位定位定位
+
+   		for(var i=1;i<sArray.length;i++)
+    	{
+        	if(sArray[i] == "") break;
+        	if(channelCategory[j] != sArray[i])
+        	{
+
+                
+            	//定位位置kPosi
+            	var kPosi;
+            	for(var k=j;k<channelCategory.length;k++)
+            	{
+               		if(channelCategory[k] == sArray[i])
+                		kPosi = k;
+           		}
+           		//对调两个元素的位置
+            	var temp1 = channelCategory[j];
+            	channelCategory[j] = channelCategory[kPosi];
+            	channelCategory[kPosi] = temp1;
+
+            	var temp2 = channelCategoryName[j];
+           		channelCategoryName[j] = channelCategoryName[kPosi];
+            	channelCategoryName[kPosi] = temp2;
+        	}
+          	j++;
+    
+    	}
+    
+    	channelDefaultCount = sArray.length;
+    }
+    //channelCategory = sArray;
+    
+
+    //改变localstorage的值
+    //localStorage["menuDefaults"] = s;
+
+    
+</script>
+<script src="/Public/BigSchool/js/ads.js"></script>
+<script src="/Public/BigSchool/js/canvasutils.js"></script>
+<script src="/Public/BigSchool/js/touchpull.js"></script>
+<script src="/Public/BigSchool/js/pull2refresh_v2.js"></script>
+<script src="/Public/BigSchool/js/user.js"></script>
+<script src="/Public/BigSchool/js/flow.js"></script>
+<script src="/Public/BigSchool/js/list_action.js"></script>
+<script src="/Public/BigSchool/js/index.js"></script>
+</body>
+</html>

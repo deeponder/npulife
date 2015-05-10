@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>微唱大赛火热进行中！这里是海选全部作品，停不下来啊！</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, target-densitydpi=medium-dpi, user-scalable=no">
+	
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+
+	<link rel="stylesheet" type="text/css" href="/Tool/Public/Voice/Voice_round22/detail.css">
+	<script src="/Tool/Public/Voice/playVoice_round2/js/jquery-1.7.1.min.js"></script>
+	 
+	<style>
+#img {
+    -webkit-border-radius: 50%;
+      border-radius: 50%;
+	  height:60px;
+	  width:60px;
+	  margin-top:20px;
+	  
+}
+</style>
+	<script type="text/javascript">
+
+   var audio = document.createElement('audio');
+
+
+
+ function playmusic(s) {
+
+
+
+// alert(s);
+audio.src = "/Tool/Public/Voice/Voice_round22/medias/"+s+".mp3"; 
+audio.play();
+}
+</script>
+	
+
+</head>
+
+	
+	<body>
+
+		
+<div class="top" align="center">歌曲：{$theVoice.song_name}</div>
+<div class="top_artist">
+<div class="challenger" >
+<img id="chaimg" src='/Tool/Public/Voice/playVoice_round2/medias/photo/{$theVoice['name']}.jpg' />
+ <img  id="chaimg1" src="/Tool/Public/Voice/Voice_round22/listen1.png"  onclick="playmusic('{$theVoice.name}')" />
+ </div>
+
+  <div class="mod_microblog" >
+  <div class="comment_content" id="mblog_cmtlist" style="display: block;">
+  <div class="item ">
+      <h5 class="padding-left font-size-big">擂主：{$theVoice['name']}</h5>
+      
+      <div class="icon" style="width:80px">
+    
+      <img id ="{$theVoice.name}" src="/Tool/Public/Voice/Voice_round22/good_pink.png" onclick="temp_love1('{$theVoice.name}')"/>
+      <span id ="{$theVoice.name}1">{$theVoice.temp_count}</span>
+      </div>
+      <p class="padding-left">编号：{$theVoice.song_id}</p>
+    </div>    
+       </div>
+			
+            </div>
+            <!--擂主结束-->
+            </div>
+            
+            
+          <volist name="voiceList" id="voice">  
+            
+<div class="mod_microblog">
+  <div class="comment_content" id="mblog_cmtlist" style="display: block;">
+	
+		
+				<div class="item" id="items">
+
+					
+					<!-- <a href="http://localhost/think/index.php/home/Voice/listVoice?voiceid={$voice.id}"> -->
+				
+						<!-- <div onclick = "playmusic();event.cancelBubble=true;" 	> -->
+					 
+<img class="avatar normal-size" src="http://t0.qlogo.cn/mbloghead/059430485646a8eb068c/100" alt="">
+						<h5>打擂：{$voice.name}</h5>
+      
+      <div class="icon" style="width:100px">
+      <span style="float:left;"><img src="/Tool/Public/Voice/Voice_round22/listen.jpg" onclick="playmusic('{$voice.name}')" /></span>
+      <span style="margin-left:6px;"><img id ="{$voice.name}" src="/Tool/Public/Voice/Voice_round22/good_pink.png" onclick="temp_love1('{$voice.name}')" /></span>
+      <span  style="float:right;" id ="{$voice.name}1">{$voice.temp_count}</span>
+      </div>
+      <p>编号：{$voice.song_id}</p>
+										<!-- </div> -->
+					<!-- <button  onclick="playmusic()">	</button> -->
+					
+				</div>
+			
+			
+		
+			</div>
+		</div>
+</volist>
+
+<div id="warn" align="center"><a class="warnfont">亲，这首歌还未被挑战哦！快来试试？</a></div>
+<script >
+if({$num}!=0){
+document.getElementById("warn").style.display = "none";}
+function temp_love1(name)
+{
+//document.getElementById("love_count").innerHTML = name;
+$.ajax({
+type:"post",
+url:"{:U('temp_love')}",
+dataType:'json',
+data:'name='+name,
+error:function()
+{
+alert("aaa");
+},
+success:function(theVoice)
+{
+//alert(name);
+if(theVoice.is_good=='false')
+{
+alert("亲，你已经投过票了");
+}
+else{
+var love_hand = document.getElementById(name);
+love_hand.src="/Tool/Public/Voice/Voice_round22/after-tem_love.png";
+//alert("点赞成功");*/
+document.getElementById(name+"1").innerHTML = theVoice.tem_count;
+}
+}
+});
+}
+
+	
+  </script> 
+</body>
+</html>

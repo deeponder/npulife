@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>夜跑排名</title>
+	<!-- <link href="http://tb1.bdstatic.com/tb/static-member/style/furank.css?v=1222222" rel="stylesheet" type="text/css" />
+	-->
+	<script type="text/javascript" src="__PUBLIC__/jquery-1.7.2.min.js"></script>
+	<style type="text/css">
+body{
+	/*margin:100px;*/
+/*	padding-left: 200px;
+	padding-right: 100px;*/
+	margin-left: 20px;
+	margin-right: 10px;
+	/*background-color: #cccccc;*/
+/*	background-image: url(__PUBLIC__/back.png) ;
+	background-size: 100%;*/
+	/*background-repeat: no-repeat;*/
+	}
+		.d_rank_list {
+/*position: absolute;
+right: 0;
+top: 0px;
+height: 100%;
+width: 100%;
+border: 1px solid #eee;
+background-color: #fff;*/
+}
+
+.drl_main {
+margin: 1px 1px 0 1px;
+height: 640px;
+
+}
+.drl_list {
+margin: 0 auto;
+width: 100%;
+}
+
+tbody {
+display: table-row-group;
+vertical-align: middle;
+border-color: inherit;
+}
+.drl_list_title {
+height: 38px;
+color: #666;
+text-align: left;
+}
+
+.drl_list_item {
+height: 28px;
+line-height: 28px;
+color: #666;
+text-align: left;
+}
+.drl_info {
+border-bottom: 1px solid #ededed;
+height: 35px;
+line-height: 35px;
+/*background-color: #fbfbfb;*/
+}
+.drl_info li {
+font-size: 12px;
+}
+.d_rank_list li {
+float: left;
+}
+.drl_info li b {
+color: #333;
+padding-left: 15px;
+}
+li {
+display: list-item;
+text-align: -webkit-match-parent;
+list-style-type:none;
+}
+h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, code, form, fieldset, legend, button, input, textarea, th, td {
+margin: 0;
+padding: 0;
+}
+#load-more{
+	text-align:center;
+}
+
+.load-more{
+	cursor:pointer;display:block;line-height:34px;height:34px;float:none;border:1px solid #ccc;text-align:center;
+}
+
+	</style>
+
+</head>
+<body>
+
+
+<!-- <div><center><img src="__PUBLIC__/nightrun/images/2.jpg" height="200px" width="90%"></center></div><br> -->
+
+	<div class="d_rank_list" >
+		<div>
+			<a name="p" id="p"></a>
+		</div>
+
+		<div class="drl_main" >
+
+			<ul class="drl_info">
+				<li> 
+					<span ><img src="{$myhead}" height="30" width="30" alt=""></span>
+				</li>
+				<li> <b>昵称：</b>
+					{$mynickname}
+				</li>
+				<li> <b>积分：</b>
+					{$mycredit}
+				</li>
+				<li> <b>我的排名：</b>
+					{$myrank}
+				</li>
+				<li>
+					<b>变化：</b>
+					<img src="__PUBLIC__/nightrun/images/{$myrankstate}.png"  wideth=10 height=10 alt="">
+				</li>
+			
+			</ul>
+			<table class="drl_list" cellspacing="0" cellpadding="0">
+				<tbody>
+					<tr class="drl_list_title">
+						<th >
+							<span>排名</span>
+						</th>
+						<th >
+							<span>头像</span>
+						</th>
+						<th >
+							<span>圈粉</span>
+						</th>
+						<th >
+							<span>积分</span>
+						</th>
+						<th >
+							<span>时长</span>
+						</th>
+						<th >
+							<span>变化</span>
+						</th>
+					</tr>
+					<volist name="list" id="vo">
+						<tr class="drl_list_item">
+							<td class="drl_item_index">{$vo.num}</td>
+							<td class="drl_item_name">
+								<div class="drl_item_card drl_item_card_sp ">
+									<img src="{$vo.headurl}"  wideth=30 height=30 alt=""></div>
+							</td>
+							<td class="drl_item_title">
+								<div>
+									<span>{$vo.nickname}</span>
+								</div>
+							</td>
+							<td class="drl_item_exp">
+								<span>{$vo.credit}</span>
+							</td>
+							<td class="drl_item_status">{$vo.totallong}</td>
+							<td >
+							<img src="__PUBLIC__/nightrun/images/{$vo.rankstate}.png"  wideth=10 height=10 alt="">
+							</td>
+						</tr>
+					</volist>
+
+				</tbody>
+			</table>
+			 <section id="load-more" class="padding">
+			<a class="load-more" href="javascript:void(0)">加载更多</a>
+		</section>
+		
+	</div>
+
+</div>
+<!-- </div>
+<div class="d_panel_ladder">
+	<div class="p_ladder" data-field="{&quot;user&quot;:{&quot;index&quot;:9667,&quot;user_name&quot;:&quot;ihuimou&quot;,&quot;exp&quot;:&quot;191&quot;,&quot;level&quot;:6,&quot;num&quot;:0,&quot;status&quot;:0},&quot;rankinfo&quot;:[]}">
+		<div class="p_ladder_guy" style="bottom: 474px;"></div>
+		<div class="p_ladder_pop" style="bottom: 532px;">
+			<div class="d_pop_main">
+				<div class="d_pop_head">
+
+					<img src="{$myhead}"></div>
+				<div class="d_pop_uname">{$mynickname}</div>
+				<div class="d_pop_texture">
+					<p class="p_pop_texture">
+
+						<p>我的排名：{$myrank}</p>
+						<p>路漫漫其修远兮，吾将发贴而求索。</p>
+
+					</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+</div>
+</div>
+-->
+<script type="text/javascript">
+	// $(document).ready(function(){
+	// 	var page = 1;
+	// 	$loadhtml = $('#load-more').find('.load-more');
+	// 	$('a.load-more').click(function(){
+	// 		// alert("jkjkj");
+	// 		$.ajax({
+
+	// 		// alert('df');
+	// 			type : "get",
+	// 			url: "__URL__/getmorerank?page="+(page+1),
+	// 			cache: false,
+	// 			dataType: "json",
+	// 			beforeSend	: function() { $loadHtml.html("正在加载..."); },
+	// 			complete	: function() { $loadHtml.html("加载更多"); },
+	// 			success: function(result){
+	// 				alert('df');
+	// 				page++;
+	// 				var size = result.length;
+
+	// 				for(var i=0;i<size;i++){
+	// 					$('tbody').append('<tr class="drl_list_item"><td class="drl_item_index">'+result[i]['num']+'</td>'
+	// 						+'<td class="drl_item_name">'
+	// 							+'<div class="drl_item_card drl_item_card_sp ">'
+	// 								+'<img src="'+result[i]['headurl']+'"  wideth=30 height=30 alt=""></div>'
+	// 						+'</td><td class="drl_item_title"><div><span>'+result[i]['nickname']+'</span></div></td><td class="drl_item_exp">'
+	// 							+'<span>暂无</span></td><td class="drl_item_status">'+result[i]['totallong']+'</td><td >'
+	// 						+'<img src="__PUBLIC__/nightrun/images/'+result[i]['rankstate']+'.png"  wideth=10 height=10 alt=""></td></tr>');
+	// 				}
+
+	// 				if(size<1){
+	// 					$("#load-more").hide();
+	// 				}
+	// 				// callback();
+	// 			},
+	// 			error: function(){
+	// 				alert("ERROR!");
+	// 			}
+
+	// 		 });
+	// 		return false;
+	// 	});
+		// function callback(){
+		// 	setTimeout(function() {
+		// 	iscroll.refresh();
+		// 	$("a.needsclick").css("pointer-events", "auto");
+		// }, 400);
+		// }
+	// });
+
+//ajax 动态加载更多
+	var page = 1;
+	// var data = new Array();
+	$('a.load-more').click(function(){
+			// alert('dfd');
+		var url = '__URL__/getmorerank';
+	
+		$.getJSON(url,{page:page},function(result){
+			if(result == null){
+				alert('已加载全部内容');
+
+			}
+
+			for(var i=0;i<result.length;i++){
+				// data.push(new Array(v['num'],v['headurl'],v['nickname'],v['rank'],v['totallong'],v['rankstate']));
+				
+//pay attention to the html form!!!!!!!!!!!!!!!!!!!!!!!
+				var str = '<tr class="drl_list_item"><td class="drl_item_index">'+result[i]['num']+'</td>'
+							+'<td class="drl_item_name">'
+								+'<div class="drl_item_card drl_item_card_sp ">'
+									+'<img src="'+result[i]['headurl']+'"  wideth=30 height=30 alt=""></div>'
+							+'</td><td class="drl_item_title"><div><span>'+result[i]['nickname']+'</span></div></td><td class="drl_item_exp">'
+								+'<span>'+result[i]['credit']+'</span></td><td class="drl_item_status">'+result[i]['totallong']+'</td><td >'
+							+'<img src="__PUBLIC__/nightrun/images/'+result[i]['rankstate']+'.png"  wideth=10 height=10 alt=""></td></tr>';
+				$('tbody').append(str);
+					
+			}
+			page++;
+
+
+		});
+		
+	});
+	
+
+	// function loaddata(){
+
+	// }
+
+	// window.onload=function(){
+	// 	loadmore()
+	// }
+	
+</script>
+
+</body>
+</html>

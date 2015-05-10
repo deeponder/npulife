@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<title>2015 我想对你说</title>
+<link href="__PUBLIC__/say/css/IWantToSayYou.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/say/js/jquery-1.9.0.min.js"></script>
+
+<script language="javascript"> 
+var flg = 0;
+/*显示或隐藏表白输入框架*/
+function ShowAndHide(e) {
+	var detail = document.getElementById("detail");
+	if (flg == 0) {
+		detail.className = "detail";
+		flg = 1;
+	} else {
+		detail.className = "hidden";
+		flg = 0;
+	}
+}
+
+function dianZan(){
+		
+		var sayid = $(this).data('sayid');
+		var url = '__URL__/dianZan';
+		var object = this;			//存储触发事件的元素对象
+		$.getJSON(url,{sayid:sayid},function(data){
+			if(data['check'] == 'success'){
+				var num = object.getAttribute ('data-goodnum');
+				object.setAttribute ('data-goodnum',parseInt(num)+1);
+				object.innerHTML = object.getAttribute ('data-goodnum');
+				object.setAttribute('disabled','true');
+				object.className = "buttonClik";
+			}else{
+				alert("服务器跟新失败~");
+			}
+			
+		});
+}
+
+var page =1;
+function getMore(){
+	this.className="nomore";
+	this.innerHTML = '加载中...';
+	var url = '__URL__/getMore';
+	var object = this;
+	$.getJSON(url,{page:page},function(sayingList){
+		if(sayingList == null){
+			alert("已经木有了~");
+			object.className="more";
+			object.innerHTML = '';
+		}else{
+			object.className="more";
+			object.innerHTML = '';
+			for(var i=0;i<sayingList.length;i++){
+				var str = '<li  class="li_express">'
+							+'<div class="lists"   >'
+								+'<div id="list">'
+							    	+'<div id="headPic">'
+							        	+'<img src="'+sayingList[i]['saying']['headurl']+'" width="58" height="58" style="border-radius:50%" />'
+							        +'</div>'
+							        +'<div id="expressContent">   '   
+							        +'<table width="100%">'
+					           		 +'<tr class="tr">'
+					              		+'<td><font style="font-weight:bold" size="2px">'+sayingList[i]['saying']['nickname']+'</font></td>'
+					            	 +'</tr>'
+					            	 +'<tr>'
+					              		+'<td colspan="2" style="border-top-color:#999; border-top-style:solid; border-top-width:medium"><br />'
+					               		 +sayingList[i]['saying']['text']
+					               		+'</td>'
+					           		 +'</tr>'
+					         		 +'</table>'
+							        +'</div>'          
+								 +'</div>'
+								 +'<div id="agree">'
+								 + '<span ><font style="font-weight:bold" size="2px"> '+sayingList[i]['saying']['saytime']+'</font></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'
+								      +'<button id="zbutton'+String(page)+'"';
+								      if (sayingList[i]['saying']['isgood'] == 'disabled') {
+								      	str=str+' class="buttonClik"';
+								      }else{
+								      	str=str+' class="button" ';
+								      }
+								      str=str+sayingList[i]['saying']['isgood']+' data-sayid="'+sayingList[i]['saying']['id']+'" data-goodnum="'+sayingList[i]['saying']['goodnum']+'">'
+								      +sayingList[i]['saying']['goodnum']+'</button>'
+								     //+'<button class="button">评</button>'    
+								 +'</div>'  
+								+'</div>'  	
+							+'</li>';
+				$('ul#saylist').append(str);
+					
+			}
+			var zbutton = 'button#zbutton'+String(page);
+			page++;
+			$(zbutton).click(dianZan);
+
+		}
+	});
+	
+	
+}
+
+function tijiao(){
+	this.setAttribute('disabled','true');
+	$('form').submit();
+
+}
+window.onload = function(){
+
+}
+
+/* 获得焦点时，清除表白框默认值 */
+function ClearText(){
+	var expreCon = document.getElementById("expCon");
+	if(expreCon.innerHTML == "请输入要发表的内容"){
+		expreCon.innerHTML = "";
+		}
+	}
+function nmClearText(){
+	var nmName =document.getElementById('id-nmName');
+	if(nmName.innerHTML == "输入任意名称"){
+		nmName.innerHTML = "";
+	}
+}
+
+/* 失去焦点时，恢复表白框默认值 */
+function DefaultText(){
+	var expreCon = document.getElementById("expCon");
+	if(expreCon.innerHTML == ""){
+		expreCon.innerHTML = "请输入要发表的内容";
+		}
+	}
+
+function nmDefaultText(){
+	var nmName =document.getElementById('id-nmName');
+	if(nmName.innerHTML == ""){
+		nmName.innerHTML = "输入任意名称";
+	}
+	}
+
+function nmCheck(){
+	var detail = document.getElementById("id-nmName");
+	var object = document.getElementById("id-check");
+	if (object.checked) {
+		detail.className = "detail";
+	} else {
+		detail.className = "hidden";
+	}
+
+}
+
+</script> 
+</head>
+
+<body>
+
+
+<div id="container" class="linear">  <!--容器：其背景颜色是渐变色-->
+
+		
+			<img alt="" src="/Tool/Public/say/images/title.png" width="100%" height="40%">
+	
+
+<!-- 	<div id="top"> 
+		<button class="back"></button>
+		<button class="individual"></button>
+	</div> -->
+
+	<!-- <div id="title"> 
+	</div> -->
+
+	<div id="combine">  <!--筛选和表白-->
+ 		<div id="select" class="es"> <!--筛选-->
+ 			<if condition="$looktype eq '1'" >
+ 			<a id="zuijin" class="select1" href="__URL__/say?otype=0">看最近</a>
+ 			<else/>
+ 			<a id="zuizan" class="select2" href="__URL__/say?otype=1">看最赞</a>
+ 			</if>
+ 		</div>
+ 		<div id="express">
+ 			<button class="express1" onclick="ShowAndHide(this)">说点啥</button>
+		 </div> <!--表白-->
+	</div>
+</div> <!--容器结束-->
+	<div id="detail" class="hidden">   <!--筛选和表白的详细内容-->
+ 		<!-- <div id="writeExpressionPic">      
+  			<div id="xin"><img src="__PUBLIC__/say/images/xin.png" height="70" width="70" /></div>
+ 		</div> -->
+ 		
+
+ 		
+ 		<div id="writeExpression">    <!--要表白的内容-->
+         <form action="__URL__/saying" name="express" method="post">    	
+       		 <table width="100%">
+             <tr>
+             <td colspan="3">
+             <textarea id="expCon" name="text" style="overflow:hidden; width:97%" rows="4" onfocus="ClearText()" onblur="DefaultText()">请输入要发表的内容</textarea>
+             </td>  
+            
+             
+             </tr>
+             <tr>
+             	<td><input type="checkbox" name="niming" id="id-check" value="1" onclick="nmCheck(this)" align="right"> <font color="#c0c0c0">匿名</font></td>
+             	 <td>
+             		 <textarea id="id-nmName" name="nmName" class="hidden" style="overflow:hidden; width:80%" rows="1" onfocus="nmClearText()" onblur="nmDefaultText()">输入任意名称</textarea>
+             	</td>
+
+             	<td class="td" align="right"><input id="tijiao" type="submit" value="提交"/></td>
+             	
+          	 </tr>
+            </table>           
+        </form>
+  		</div>
+	</div> <!--筛选和表白的详细内容结束-->            
+       
+<div>
+	<span>目前已有<font color="red">{$attendnum}</font>人参与留言了~</span>
+</div>
+
+<ul id="saylist" >
+	<volist name="sayingList" id="say" empty="暂无任何表白~">
+		<li  class="li_express">
+		<div class="lists"   > 
+			<div id="list">  <!--表白的列表项-->
+		    	<div id="headPic">
+		        	<img src="{$say.saying.headurl}" width="58" height="58" style="border-radius:50%" />  <!--头像-->
+		        </div>
+		        <div id="expressContent">      
+		        <table width="100%">
+           		 <tr class="tr">
+              		<td><font style="font-weight:bold" size="2px">{$say.saying.nickname}</font></td>
+              		
+            	 </tr>
+            	 <tr>
+              		<td colspan="2" style="border-top-color:#999; border-top-style:solid; border-top-width:medium"><br />
+               		 {$say.saying.text}
+               		</td>
+
+           		 </tr>
+
+         		 </table>
+		        </div>          
+			 </div>
+			
+			 <div id="agree">
+			      <!--<img src="__PUBLIC__/say/images/heart.png" /> -->
+			      <span ><font style="font-weight:bold" size="2px"> {$say.saying.saytime}</font></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button id="zbutton" <if condition="$say['saying']['isgood'] eq 'disabled'"> class="buttonClik"<else/>class="button" </if> {$say.saying.isgood} data-sayid="{$say.saying.id}" data-goodnum="{$say.saying.goodnum}">
+			      {$say.saying.goodnum}</button>       <!--点赞--><!--<img src="__PUBLIC__/say/images/communication.png" /> -->
+			     <!-- <button class="button">评</button> -->      <!--评论-->
+			 </div>  
+			</div>  	
+		</li>
+	</volist>
+</ul>
+    
+
+
+<div id="bottom"> 
+	<button id="getMore" class="more" value="更多" style="width:100%"></button> <!--获取更多的表白内容列表-->
+</div>
+<script type="text/javascript">
+	
+	$("button#zbutton").click(dianZan);
+	$("button#getMore").click(getMore);
+	$("input#tijiao").click(tijiao);
+</script>
+<footer class="site">
+
+
+
+<center>&copy2013-2014瓜大生活圈团队出品</center>
+<center>技术支持：林鹤，李璐池，黄志鹏</center>
+<center>友情支持:王倩茹，江叶春</center>
+
+</footer>
+</body>
+
+</html>

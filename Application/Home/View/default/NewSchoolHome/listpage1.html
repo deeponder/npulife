@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/Public/NewSchoolHome/category.css">
+<title>校园门户-{$categoryName}</title>
+</head>
+
+<body class="body">
+<div style="background-color:#CCF;font-size:4em;">
+<p align="center"><b>{$categoryName}</b></p>
+</div>
+<br/>
+
+<volist name="newsList" id="data">
+	<div class="div1">
+		<p style="color:#000;margin-left:0.5em;font-size:3em;">
+			<a href="/index.php/Home/NewSchoolHome/detail?id={$data.id}" style="text-decoration:none;color:#000">{$data.title}</a>
+		</p>
+	</div>
+</volist>
+
+<br/>
+<br/>
+
+<footer align="center" style="font-size:12px">
+<p>2013-2014瓜大生活圈团队出品</p>
+</footer>
+
+</body>
+</html>

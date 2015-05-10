@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<meta name="format-detection" content="telephone=no">
+<link href="__PUBLIC__/Yikun/css/jquery.mobile-1.4.5.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery.mobile-1.4.5.js"></script>
+
+<title>YI KUN BNA</title>
+</head>
+<body>
+
+	<div data-role="page" data-title="学员风采" id="front_member" data-dom-cache="false">
+<script>
+var pageIndex;
+$( document ).one( "pagecreate","#front_member", function() {
+	pageIndex = 1;
+	$('#front_member_getMoreButton').on("tap",function(){
+		
+		showLoader();
+		$.ajax({
+			url:'__URL__/getMore',// 跳转到 action    
+		    data:"action=member&page="+pageIndex,  
+		    type:'post',    
+		    cache:false,    
+		    dataType:'json',    
+		    success:function(data) {    
+		        if(data != null){    
+		        	 hideLoader();
+		        	 for(var i in data){
+		        		// alert(data[i]["topic"]);
+		        		 var string = 
+		        			 '<tr>'
+							+'<th><img style="border-radius:100%;width:60%" src="'+data[i]["headerPic"]+'"></th>'
+							+'<td class="title">'+data[i]["name"]+'</td>'
+							+'<td>'+data[i]["snumber"]+'</td>'
+							+'<td>'+data[i]["actattend"]+'</td>'
+							+'<td>'+data[i]["actabsent"]+'</td>'
+							+'</tr>';
+							alert(string);
+						$('#member_table_body').append(string);
+		        		//alert (data[i]['topic']);
+		        	 }
+		        	pageIndex++;
+		        	// alert(data[0]['topic']);
+		        }else{    
+		        	hideLoader();
+		            alert("已经没有了！");    
+		        }    
+		     },    
+		     error: function() {    
+		    	 hideLoader();
+		    	 alert("网络异常！");   
+		     }    
+		});  
+	});
+});
+
+function showLoader() {  
+    //显示加载器.for jQuery Mobile 1.2.0  
+    $.mobile.loading('show', {  
+        text: '加载中...', //加载器中显示的文字  
+        textVisible: true, //是否显示文字  
+        theme: 'c',        //加载器主题样式a-e  
+        textonly: false,   //是否只显示文字  
+        html: '<img src="__PUBLIC__/Yikun/images/load.gif" align="center" style="width:100%">'          
+    });  
+}  
+  
+//隐藏加载器.for jQuery Mobile 1.2.0  
+function hideLoader()  
+{  
+    $.mobile.loading('hide');  
+}  
+</script>
+		<div data-rolo="content" id= "content">
+			<table data-role="table" id="front_member_table" data-mode="columntoggle" data-column-btn-text="数据列表" class="ui-responsive table-stroke">
+				<thead>
+				<tr>
+				<th >头像</th>
+				<th >姓名</th>
+				<th data-priority="1"><abbr title="">学号</abbr></th>
+				<th >参与</th>
+				<th data-priority="2">缺席</th>
+				</tr>
+				</thead>
+				<tbody id="member_table_body">
+				<volist name="students" id="student">
+					<tr>
+					<td style="width:30%"><img style="border-radius:100%;width:50%;" src="{$student.headerPic}"  ></td>
+					<td >{$student.name}</td>
+					<td>{$student.snumber}</td>
+					<td>{$student.actattend}次</td>
+					<td>{$student.actabsent}次</td>
+					</tr>
+				</volist>
+				</tbody>
+			</table>
+			<button  id="front_member_getMoreButton" class="ui-corner-all ui-btn ui-shadow">加载更多</button>
+		</div>
+	</div>
+
+</body>
+</html>

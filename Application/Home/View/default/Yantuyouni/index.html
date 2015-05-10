@@ -1,0 +1,366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>瓜大生活圈-研途有你</title>
+        <base href="." />
+        <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="format-detection" content="telephone=no" />
+        <link href="/Public/Index/cate10_0.css" rel="stylesheet" type="text/css" />
+        <link href="/Public/Index/iscroll.css" rel="stylesheet" type="text/css" />
+
+        <style>
+            #cate10 .catemenu li:nth-child(n+4) img {
+                display: block;
+            }
+            #cate10 .catemenu li:nth-child(n+4) a {
+                padding: 20px 5px 10px;
+            }
+			/*
+            #cate10 .catemenu li a {
+                background-image: -webkit-gradient(linear, right bottom, left top, from(#282828), to(#272727), color-stop(47%, #676767));
+                background-image: -webkit-linear-gradient(bottom right, #282828, #272727 47%, #676767);
+                background-image: linear-gradient(to top left, #282828, #272727 47%, #676767);/*黑色渐变的3个颜色，可以自由更换*/
+                margin:0;
+                border-radius: 0;
+            }
+            #cate10 .catemenu li:nth-child(2n) a {
+                background-image: -webkit-gradient(linear, right bottom, left top, from(#2f5d97), to(#557dab), color-stop(47%, #9bb4d4));
+                background-image: -webkit-linear-gradient(bottom right, #2f5d97, #557dab 47%, #9bb4d4);
+                background-image: linear-gradient(to top left, #2f5d97, #557dab 47%, #9bb4d4);/*蓝色渐变的3个颜色，可以自由更换*/
+                color:#fff;/*文字的颜色，可以自由更换*/
+            }
+			*/
+            #cate10 .catemenu {
+                margin:0;
+                border-radius: 0;
+            }
+            #cate10 .catemenu a {
+                border:0; color:#000000;/*文字的颜色，可以自由更换*/
+            }
+            #cate10 {
+                //background-color:#000000;/*黑色背景，可以自由更换*/
+            }
+			
+			#cate10 .catemenu .notuse a{
+				
+				color : #dddddd;
+			}
+        </style>
+        <script src="/Public/Index/iscroll.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            var myScroll;
+			var network;
+						
+            function loaded() {
+                myScroll = new iScroll('wrapper', {
+                    snap: true,
+                    momentum: false,
+                    hScrollbar: false,
+                    onScrollEnd: function () {
+                        document.querySelector('#indicator > li.active').className = '';
+                        document.querySelector('#indicator > li:nth-child(' + (this.currPageX+1) + ')').className = 'active';
+                    }
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', loaded, false);
+			
+			
+			function onBridgeReady(){
+				WeixinJSBridge.invoke('getNetworkType',{},
+				function(e){
+					WeixinJSBridge.log(e.err_msg);
+					network = e.err_msg.split(":")[1];
+					if(network!="wifi")
+					{
+						//location.href = "/index2.html";
+					}
+				});
+			}
+
+			if (typeof WeixinJSBridge == "undefined"){
+				if( document.addEventListener ){
+					document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+				}else if (document.attachEvent){
+					document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+					document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+				}
+			}else{
+				onBridgeReady();
+			}
+
+        </script>
+
+    </head>
+
+    <body id="cate10">
+    <!--背景音乐-->
+            <div class="banner">
+		<div id="wrapper">
+			<!--<div id="scroller">
+				<ul id="thelist">
+				<?php foreach($slideshow as $aslide){?>
+					<li>
+						<p><?php echo $aslide['title'] ?></p>
+						<a href="<?php echo $aslide['url'] ?>"><img src="<?php echo $aslide['img'] ?>"/></a>
+					</li>
+				<?php }?>						
+				</ul>
+			</div>-->
+		</div>
+		<div id="nav">
+			<div id="prev" onclick="myScroll.scrollToPage('prev', 0,400,3);return false">&larr; prev</div>
+			<ul id="indicator">
+			<li   class="active"  >1</li><li     >2</li><li     >3</li>
+			</ul>
+			<div id="next" onclick="myScroll.scrollToPage('next', 0);return false">next &rarr;</div>
+		</div>
+		<div class="clr"></div>
+		</div>
+
+        <div id="insert1"></div>
+
+        <div class="catemenu">
+            <ul>
+			
+                <li>
+                    <a href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=1" >
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/学术交流.jpg" />');}
+						</script>						
+						学术交流</a>
+                </li>
+				<li>
+                    <a href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=2">
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/创新竞赛.jpg" />');}
+						</script>
+						创新竞赛</a>
+                </li>
+				<li>
+                    <a href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=9">
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/工大活动.jpg" />');}
+						</script>						
+						社团活动</a>
+                </li>
+				
+				<li>
+                    <a href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=15">
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/工大活动.jpg" />');}
+						</script>						
+						优惠抢先</a>
+                </li>
+				<li>
+                    <a href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=27">
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/国际交流.jpg" />');}
+						</script>
+						国际交流</a>
+                </li>
+				
+				<li>
+                    <a href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=3" >
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/翼鲲专区.jpg" />');}
+						</script>
+						翼鲲专区</a>
+                </li>				
+				<li >
+                    <a href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=4" >
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/研工之声.jpg" />');}
+						</script>
+						研工之声</a>
+                </li>
+				<li >
+                    <a href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=5" >
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/翱翔学堂.jpg" />');}
+						</script>
+						翱翔学堂</a>
+                </li>
+				<li>
+                    <a href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=6">
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/教授有约.jpg" />');}
+						</script>
+						教授有约</a>
+                </li>
+				
+				
+				<li >
+                    <a href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=7">
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/学术交流.jpg" />');}
+						</script>						
+						学声嘹亮</a>
+                </li>
+				<li>
+                    <a href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=8">
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/就业实习.jpg" />');}
+						</script>
+						就业实习</a>
+                </li >
+				
+				
+				
+				<li>
+                    <a href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=10">
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/爱讲英语.jpg" />');}
+						</script>
+						爱讲英语</a>
+                </li>
+				<li>
+                    <a href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=11">
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/开心一刻.jpg" />');}
+						</script>
+						开心一刻</a>
+                </li>
+				
+				<li>
+                    <a href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=12">
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/生活技巧.jpg" />');}
+						</script>
+						生活技巧</a>
+                </li>
+				
+				<li>
+                    <a href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=13">
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/最美工大.jpg" />');}
+						</script>
+						最美工大</a>
+                </li>
+				
+				<li>
+                    <a href="http://wx.wsq.qq.com/251737366">
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/随手达人.jpg" />');}
+						</script>
+						我要吐槽</a>
+                </li>				
+				<li>
+                    <a href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=19">
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/办事指南.jpg" />');}
+						</script>
+						办事指南</a>
+                </li>
+				<li>
+                    <a href="http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/wei_site/_controller/wei_site/_action/lists.html&cate_id=20">
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/百问百答.jpg" />');}
+						</script>
+						百问百答</a>
+                </li>
+				
+				
+				
+				<li >
+                    <a href="http://wechat.npulife.com/index.php?s=/home/Chengji/">
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/成绩查询.jpg" />');}
+						</script>
+						成绩查询</a>
+                </li>				
+				<li >
+                    <a href="http://wechat.npulife.com/index.php?s=/home/wszf/">
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/财务查询.jpg" />');}
+						</script>
+						财务查询</a>
+                </li>
+				
+				<li class="notuse">
+                    <a href="#">
+                        <script>
+						if(network=="wifi"){document.write('<img src="/Public/Index/imagess/图书借阅.jpg" />');}
+						</script>
+						图书借阅</a>
+                </li>
+				
+				
+				
+				
+                <div class="clr"></div>
+            </ul>
+        </div>
+
+        <script>
+
+
+            var count = document.getElementById("thelist").getElementsByTagName("img").length;
+
+
+            for(i=0;i<count;i++){
+                document.getElementById("thelist").getElementsByTagName("img").item(i).style.cssText = " width:"+document.body.clientWidth+"px";
+
+            }
+
+            document.getElementById("scroller").style.cssText = " width:"+document.body.clientWidth*count+"px";
+
+
+            setInterval(function(){
+                myScroll.scrollToPage('next', 0,400,count);
+            },3500 );
+
+            window.onresize = function(){
+                for(i=0;i<count;i++){
+                    document.getElementById("thelist").getElementsByTagName("img").item(i).style.cssText = " width:"+document.body.clientWidth+"px";
+
+                }
+
+                document.getElementById("scroller").style.cssText = " width:"+document.body.clientWidth*count+"px";
+            }
+
+        </script>
+        <div id="insert2"></div>
+        <div style="display:none"> </div>
+  <div class="copyright">
+(c) 2013-2014 瓜大生活圈 研工部出品</div>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js" type="text/javascript"></script>
+<br>
+<br>
+<br>
+
+<script>
+function displayit(n){
+	for(i=0;i<4;i++){
+		if(i==n){
+			var id='menu_list'+n;
+			if(document.getElementById(id).style.display=='none'){
+				document.getElementById(id).style.display='';
+				document.getElementById("plug-wrap").style.display='';
+			}else{
+				document.getElementById(id).style.display='none';
+				document.getElementById("plug-wrap").style.display='none';
+			}
+		}else{
+			if($('#menu_list'+i)){
+				$('#menu_list'+i).css('display','none');
+			}
+		}
+	}
+}
+function closeall(){
+	var count = document.getElementById("top_menu").getElementsByTagName("ul").length;
+	for(i=0;i<count;i++){
+		document.getElementById("top_menu").getElementsByTagName("ul").item(i).style.display='none';
+	}
+	document.getElementById("plug-wrap").style.display='none';
+}
+
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+	WeixinJSBridge.call('hideToolbar');
+});
+</script>
+</body></html>

@@ -1,0 +1,19 @@
+ <include file="./Addons/Activity/View/Public/jmobile_black_header.html" />
+ 
+	 <div>
+	 <?php for($i=count($theme)-1;$i>=0;$i--){ 
+	 if($theme[$i]['status']==0)
+				$color[$i]="gray";
+			else{
+				$color[$i]="blue";
+				}
+	 
+	 ?>
+		<a  style=" text-decoration: none; color: {$color[$i]};" href={:U('show?ID='.$theme[$i]['activity_ID'])} rel="external">
+		<li><p>{$theme[$i]['activity_theme']}---{$theme[$i]['truename']}</p></li></a>
+		<p>{$theme[$i]['count']}</p>
+		<p>{$type}{$theme[$i]['startime']}{$theme[$i]['signup_date']}</p>
+	 <?php } ?>	
+		</div>
+
+ <include file="./Addons/Activity/View/Public/jmobile_black_footer.html" />

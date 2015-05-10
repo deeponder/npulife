@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<meta name="format-detection" content="telephone=no">
+<link href="__PUBLIC__/Yikun/css/jquery.mobile-1.4.5.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery.mobile-1.4.5.js"></script>
+<title>活动足迹</title>
+</head>
+<body>
+
+<div data-role="page"  id="front_center_activity">
+<script>
+	var pageIndex;
+	$( document ).one( "pagecreate","#front_center_activity", function() {
+		pageIndex = 1;
+		$('#getMoreButton').on("tap",function(){
+			
+			showLoader();
+			$.ajax({
+				url:'__URL__/getMore',// 跳转到 action    
+			    data:"action=foot&page="+pageIndex,  
+			    type:'post',    
+			    cache:false,    
+			    dataType:'json',    
+			    success:function(data) {    
+			        if(data != null){    
+			        	 hideLoader();
+			        	 for(var i in data){
+			        		// alert(data[i]["topic"]);
+			        		 var string = 
+			        			 '<li>'
+									+'<time class="cbp_tmtime" datetime="2013-04-10 18:30"><span>'+data[i]["year"]+'</span> <span>'+data[i]["hour"]+'</span></time>'
+								
+									+'<a href="__URL__/activityShow?actid='+data[i]["actid"]+'"><div class="cbp_tmicon cbp_tmicon-earth"></div></a>'
+				
+									+'<div class="cbp_tmlabel">'
+									+'<img class="ui-shadow ui-corner-all" src="__URL__/pictureShow?action=activity&picid='+data[i]["picture"][0]+'" alt="活动图片" style="width:30%;float:left;margin-bottom: 5px; margin-right: 10px">'
+									+'<br>'
+									+'<br>'
+									+'<h2>'+data[i]["topic"]+'</h2>';
+									if(data[i]["experience"] == null){
+										string += '<p>您还没有写活动心得~</p>';
+									}else{
+										string += '<p>'+data[i]["experience"]+'</p>';
+									}
+									string = string+ '</div>'
+								+'</li>';
+								
+								//alert(string);
+							$('.cbp_tmtimeline').append(string);
+			        		//alert (data[i]['topic']);
+			        	 }
+			        	pageIndex++;
+			        	// alert(data[0]['topic']);
+			        }else{    
+			        	hideLoader();
+			            alert("已经没有了！");    
+			        }    
+			     },    
+			     error: function() {    
+			    	 hideLoader();
+			    	 alert("网络异常！");   
+			     }    
+			});  
+		});
+	});
+	
+	function showLoader() {  
+	    //显示加载器.for jQuery Mobile 1.2.0  
+	    $.mobile.loading('show', {  
+	        text: '加载中...', //加载器中显示的文字  
+	        textVisible: true, //是否显示文字  
+	        theme: 'c',        //加载器主题样式a-e  
+	        textonly: false,   //是否只显示文字  
+	        html: '<img src="__PUBLIC__/Yikun/images/load.gif" align="center" style="width:100%">'          
+	    });  
+	}  
+	  
+	//隐藏加载器.for jQuery Mobile 1.2.0  
+	function hideLoader()  
+	{  
+	    $.mobile.loading('hide');  
+	}  
+</script>
+	<div data-role="content" id="content">
+		<ul date-role="listview" class="cbp_tmtimeline">
+			<if condition="($activityAttend eq NULL)">
+				<li ><span>暂无活动~</span></li>	
+			<else />
+				<volist name="activityAttend" id="activity">
+					<li>
+						<time class="cbp_tmtime" datetime="2013-04-10 18:30"><span>{$activity['year']}</span> <span>{$activity['hour']}</span></time>
+						<a href="__URL__/activityShow?actid={$activity.actid}"><div class="cbp_tmicon cbp_tmicon-earth"></div></a>
+						<div class="cbp_tmlabel">
+							<img class="ui-shadow ui-corner-all" src="__URL__/pictureShow?action=activity&picid={$activity['picture'][0]}" alt="活动图片" style="width:30%;float:left;margin-bottom: 5px; margin-right: 10px">
+							<br>
+							<br>
+							<h2>{$activity.topic}</h2>
+							<if condition="$activity['experience'] eq NULL">
+								<p>您还没有写活动心得~</p>
+							<else />
+							<p>{$activity.experience}</p>
+							</if>
+							
+						</div>
+					</li>
+				</volist>
+			</if>
+		</ul>
+		<if condition="($activityAttend eq NULL)">
+		<else />
+				<button id="getMoreButton" class="ui-btn ui-shadow ui-corner-all">加载更多</button>
+		</if>
+		
+	</div>
+				
+</div>
+
+
+</body>
+</html>

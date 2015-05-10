@@ -1,0 +1,24 @@
+﻿ <include file="./Application/Home/View/Public/jmobile_black_header.html" />
+
+	
+		<?php 
+			echo '缴费情况';
+			foreach($inforRes as $sfqk){ ?>
+
+			<div data-role="collapsible"> 
+			<p><?php echo '收费项目: '.$sfqk->sfxmmc ?></p>
+			<p><?php echo '金  额: '.$sfqk->je  ?></p>
+			
+			<p><?php echo '缴费方式: '.$sfqk->jsfsmc  ?>	</p>
+			<p><?php echo '收费年度: '.$sfqk->kjnd  ?>	 </p>
+			<p><?php echo '收费月份: '.$sfqk->kjqj  ?>	</p> 
+			<p><?php echo '收费日期: '.$sfqk->sfrq  ?>	</p> 
+			<p><?php echo '收费区间: '.$sfqk->sfqj  ?>	</p> 
+			<p><?php echo '制单人: '.$sfqk->zdr  ?>	</p> 
+			</div>
+
+			<?php
+			}
+			?>
+ <include file="./Application/Home/View/Public/jmobile_black_footer.html" />
+

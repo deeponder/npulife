@@ -1,0 +1,43 @@
+<html>
+<title>更新个人信息</title>
+<head></head>
+<body>
+		<div id="container" class="container body">
+            <div class="top_relative"  >
+            <p style="font-size:20px; text-align:center; font-weight:bold; position:static; padding:50px 15px">修改资料</p>
+			
+            </div>
+			
+		<form id="form" action="__URL__/update" method="post" class="form-horizontal p_10">
+		<!-- <div >
+			  <label for="student_ID">学 号 :<font color="red"> * </font></label></label>
+			<input  type="text" name="student_ID" required="required" placeholder="学 号"   />
+		</div> -->
+		<div >
+			 <label for="name">姓 名 :</label></label>
+			<input type="text" name="name"  placeholder="姓 名"   />
+		</div>
+		<!-- <div >
+			 <label for="phone_number">性别:<font color="red"> * </font></label>
+			<input type="text" name="sex" required="required" placeholder="性别"  />
+		</div> -->
+	<!-- 	<div >
+			 <label for="ID_number">身份证:<font color="red"> * </font></label></label>
+			<input type="text" name="ID_number" required="required"  placeholder="身份证号"  />
+		</div> -->
+
+		<div >
+			 <label for="school">学院:</label></label>
+			<input type="text" name="school" placeholder="学院"  />
+		</div>
+		
+		<div >
+			 <label for="qq_number">QQ 号 :</label></label>
+			<input type="text" name="qq_number"  placeholder="QQ 号"  />
+		</div>
+		<button class="home_btn submit-btn mb_10 mt_10" id="submit" type="submit" target-form="form" onclick="alert('修改成功！')">确定</button>
+		
+		</form>
+        
+</body>
+</html>

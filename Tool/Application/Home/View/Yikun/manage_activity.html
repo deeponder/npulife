@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<meta name="format-detection" content="telephone=no">
+<link href="__PUBLIC__/Yikun/css/jquery.mobile-1.4.5.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery.mobile-1.4.5.js"></script>
+
+<title>活动管理</title>
+</head>
+<body>
+	
+	<div data-role="page" id="page_activity" data-dom-cache="true">
+		
+		<div data-rolo="content" id= "content">
+			<div data-role="collapsibleset" data-theme="a" data-content-theme="b">
+			    <div data-role="collapsible" data-collapsed="false">
+			    <h2>进行中的活动</h2>
+			        <ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="false">
+						<if condition="$activityNow eq NULL">
+							<li data-role="divider">没有活动~</li>
+						<else />
+							<volist name="activityNow" id="activity">
+							<li><a href="__URL__/actmanage?action=show&actid={$activity['actid']}">
+								<if condition="$activity['picture'][0] neq NULL">
+									<img src="__URL__/pictureShow?action=activity&picid={$activity['picture'][0]}">
+								</if>
+								<br>
+								<h3>{$activity.topic}</h3>
+								<p>{$activity.content}</p>
+								<p class="ui-li-aside">已有<strong>{$activity.peoplenumber}</strong>人报名</p>
+								</a>
+								<a href="#actmanage_popupMenu{$activity['actid']}" data-rel="popup" data-transition="pop">管理</a> 
+								<div data-role="popup" id="actmanage_popupMenu{$activity['actid']}" data-theme="b" >
+									<ul data-role="listview" data-inset="true" style="min-width:210px;">
+									<li data-role="list-divider">选择操作</li>
+									<li><a href="__URL__/actmanage?action=createassign&actid={$activity['actid']}">生成学员签到二维码</a></li>
+									<li><a href="__URL__/actmanage?action=createTassign&actid={$activity['actid']}">生成游客签到二维码</a></li>
+									<li><a data-ajax="false" href="__URL__/actmanage?action=edit&actid={$activity['actid']}">编辑活动</a></li>
+									<br>
+									<li><a href="__URL__/actmanage?action=end&actid={$activity['actid']}">结束活动</a></li>
+									</ul>
+								</div>
+							</li>
+							</volist>
+						</if>
+					</ul>
+			    </div>
+				<br>
+				<div data-role="collapsible">
+				    <h2>已经结束的活动</h2>
+					<ul data-role="listview" data-theme="a" data-divider-theme="b">
+						<if condition="$activityEnd eq NULL">
+							<li data-role="list-divider">还没有历史活动~</li>
+						<else />
+							<li data-role="list-divider">共办了{$endNum}场活动</li>
+							<volist name="activityEnd" id="activity">
+							<li><a href="__URL__/actmanage?action=show&actid={$activity['actid']}">
+								<if condition="$activity['picture'][0] neq NULL">
+									<img src="__URL__/pictureShow?action=activity&picid={$activity['picture'][0]}">
+								</if>
+								<br>
+								<h3>{$activity.topic}</h3>
+								<p>{$activity.content}</p>
+								<p class="ui-li-aside">已有<strong>{$activity.peoplenumber}</strong>人报名</p>
+			                	</a>
+							</li>
+							</volist>
+						</if>			
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	
+<script>
+	
+</script>
+</body>
+</html>

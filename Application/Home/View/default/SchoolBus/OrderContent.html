@@ -1,0 +1,24 @@
+<include file="./Application/Home/View/Public/jmobile_black_header.html" />
+<body>
+<script>
+$(document).ready(function(){
+  $("#btnsub").click(function(){
+    var res= confirm('确定取消预定？');
+	if(res == true){
+		$("#fromcancel").submit();
+	}
+  });
+});
+</script>
+<div>
+<h4>发车地点：{$theBus['schoolbus_from']}校区</h4>
+<h4>预定时间：{$theOrder['order_createdate']}</h4>
+<h4>发车时间：{$theBus['schoolbus_date']}</h4>
+<h4>订单状态：{$theOrderStatus}</h4>
+<h4>剩余座位：{$theBusRestNum}</h4>
+<form id="fromcancel" method="post" action="/index.php/Home/SchoolBus/QuitTheBus/order_id/{$theOrder['order_id']}" data-ajax="false">
+    <input type="button" data-inline="true" id="btnsub" value="取消预定">
+</form>
+
+</body>                                      					
+</html>

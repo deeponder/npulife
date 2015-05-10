@@ -1,0 +1,66 @@
+<include file="Public/mobile_head"/>	
+<body>
+	<script >
+		
+		function createXMLHttpRequest() {
+			var xmlHttp;
+			if (window.XMLHttpRequest) {
+				xmlHttp = new XMLHttpRequest();
+				if (xmlHttp.overrideMimeType)
+					xmlHttp.overrideMimeType('text/xml');
+			} else if (window.ActiveXObject) {
+				try {
+					xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+				} catch (e) {
+					try {
+						xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+					} catch (e) {
+					}
+				}
+			}
+			return xmlHttp;
+		}
+		function callback(){
+			if (xmlHttp.readyState==4 && xmlHttp.status==200){
+				alert('解绑成功');
+				location.href="http://wechat.npulife.com/index.php?s=/home/personal";
+			}
+		}
+		function unbindclick(){
+			var res= confirm('确定解除绑定？');
+			if(res == true){
+				var url = "http://wechat.npulife.com/index.php?s=/home/addons/execute/_addons/binding/_controller/binding/_action/unbind.html&str=12qawe23dr45t";
+				xmlHttp = createXMLHttpRequest();
+				
+				xmlHttp.open("GET", url, true);// 异步处理返回 
+				xmlHttp.onreadystatechange = callback; 
+				xmlHttp.setRequestHeader("Content-Type",
+				"application/x-www-form-urlencoded;");
+				xmlHttp.send();
+			}
+		}
+		</script>
+		
+		<div id="container" class="container body">
+            <div class="top_relative">
+            <p style="font-size:20px; text-align:center; font-weight:bold; position:static; padding:50px 15px">个人信息</p>
+			<p><a href="http://wechat.npulife.com/index.php?s=/home/personal">回到首页</a></p>
+        </div>
+		<div class="personInfo" style=" float:left;">
+			<p style="font-size:20px; text-align:left; font-weight:bold; position:static; padding:15px 15px">积 分: {$pInfo['score']}</p>
+			<p style="font-size:20px; text-align:left; font-weight:bold; position:static; padding:15px 15px">学 号: {$pInfo['school_number']}</p>	
+			<p style="font-size:20px; text-align:left; font-weight:bold; position:static; padding:15px 15px">姓 名: {$pInfo['truename']}</p>	
+			<p style="font-size:20px; text-align:left; font-weight:bold; position:static; padding:15px 15px">手机号:{$pInfo['mobile']}</p>	
+			<p style="font-size:20px; text-align:left; font-weight:bold; position:static; padding:15px 15px">QQ号:{$pInfo['qq']}</p>
+		</div>
+		<div class="vcardPic" style=" float:right;">
+			<p style="font-size:20px; text-align:left; font-weight:bold; position:static; padding:15px 15px">名片二维码</p>
+			<p style="  position:relative; background-position:90% 0%">{$vcardPic}</p>
+		</div>
+		<div class="editInfo">
+			<a href="{:U('updateInfo')}"><button class="home_btn submit-btn mb_10 mt_10" >修改信息</button></a>
+			<button class="home_btn submit-btn mb_10 mt_10" id="unbind" type="unbind" onclick="unbindclick()">解除绑定</button>
+		</div>
+        
+</body>
+</html>

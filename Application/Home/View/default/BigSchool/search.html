@@ -1,0 +1,213 @@
+﻿
+<!DOCTYPE html>  
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta id="viewport" name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<link rel="apple-touch-icon-precomposed" href="http://s0.pstatp.com/image/toutiao_mobile/light_icon.png">
+<link rel="shortcut icon" href="http://s0.pstatp.com/image/toutiao_mobile/light_icon.png" type="image/x-icon">
+<meta name="format-detection" content="telephone=no">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta property="qc:admins" content="137036576341176375">
+<meta name="baidu-tc-cerfication" content="f02c83ae32e698b1003fc31a62124a0b">
+<script src="/Public/BigSchool/js/jquery-2.0.0.min.js"></script>
+<script src="/Public/BigSchool/js/common.js"></script>
+<link rel="stylesheet" type="text/css" href="/Public/BigSchool/css/wap.css" />
+
+<title>搜索 - 校园门户</title>
+<link rel="stylesheet" type="text/css" href="/Public/BigSchool/css/wap_flow.css" />
+<link rel="stylesheet" type="text/css" href="/Public/BigSchool/css/wap_search.css" />
+
+</head>
+
+<body class="">
+
+	
+<header id="header" class="relative">
+    <div class="top_bar">
+        <div class="abs_l">
+            <a class="btn back" href="/Home/BigSchool"></a>
+        </div>        
+        <div class="abs_m"> 
+            搜索
+        </div>
+    </div>
+</header>
+
+<div class="backdrop"  onTouchstart="chooseAction(); return false" onTouchmove="return false;"></div>
+<content id="search" class="article">
+    <form action="/Public/BigSchool/search/" method="get" id="search_form" onSubmit="sendSearchEvent(this)">
+    <div id="search_content">
+    <a href="#" class="action_chooser action_toutiao" onClick="chooseAction(); return false"></a>
+    <div class="arrowdown"></div>
+    
+    <input type="search" placeholder="请输入搜索关键词" id="search_input" name="keyword" value="" onChange="changeFrom(this)">
+    <input type="hidden" name="from" id="from" value="search_tab">
+    </div>
+    
+    <div class="action-navigation">
+      <div class="arrowup-shadow"></div>
+      <div class="arrowup"></div>
+      <ul class="navigation-categories">
+        <li><a class="toutiao" href="#" onClick="chooseAction('toutiao'); return false">新闻</a></li>            
+        <li><a class="shenma" href="#" onClick="chooseAction('shenma'); return false">神马</a></li>
+        <li><a class="baidu" href="#" onClick="chooseAction('baidu'); return false">百度</a></li>
+      </ul>
+    </div>
+</form>   
+    
+    <div class="hot_words">
+    <ul class="toutiao">
+    
+      <li><a class="hot_words_link" href='/search/?from=hotword&keyword=经济工作会议 召开&hot_words=1'>经济工作会议 召开</a></li>
+    
+      <li><a class="hot_words_link" href='/search/?from=hotword&keyword=习近平引领新常态&hot_words=1'>习近平引领新常态</a></li>
+    
+      <li><a class="hot_words_link" href='/search/?from=hotword&keyword=李克强 拨浪鼓&hot_words=1'>李克强 拨浪鼓</a></li>
+    
+      <li><a class="hot_words_link" href='/search/?from=hotword&keyword=何超英 病逝&hot_words=1'>何超英 病逝</a></li>
+    
+      <li><a class="hot_words_link" href='/search/?from=hotword&keyword=沪指 ＂跳水＂&hot_words=1'>沪指 ＂跳水＂</a></li>
+    
+      <li><a class="hot_words_link" href='/search/?from=hotword&keyword=养老金 调整&hot_words=1'>养老金 调整</a></li>
+    
+      <li><a class="hot_words_link" href='/search/?from=hotword&keyword=志愿者 红灯&hot_words=1'>志愿者 红灯</a></li>
+    
+      <li><a class="hot_words_link" href='/search/?from=hotword&keyword=沙暴 澳洲&hot_words=1'>沙暴 澳洲</a></li>
+    
+      <li><a class="hot_words_link" href='/search/?from=hotword&keyword=沪深两市 成交破万亿&hot_words=1'>沪深两市 成交破万亿</a></li>
+    
+      <li><a class="hot_words_link" href='/search/?from=hotword&keyword=中国 核电站&hot_words=1'>中国 核电站</a></li>
+    
+    </ul>
+    <script type="text/javascript">
+    $(function(){
+        $(".hot_words_link").each(function(){
+            this.href += location.hash;
+        });
+    })
+    </script>
+    
+    <ul class="baidu"  onClick="baiduHotWordsClick(event); return false">
+        <script type="text/javascript">
+        $(function(){
+            getBaiduHotWords();
+        })
+        </script>
+    </ul>
+    <ul class="shenma">
+    
+        <li><a href='http://m.yz.sm.cn/s?q=经济工作会议 召开&from=100041' onClick="shenmaHotWordsClick(event); return false">经济工作会议 召开</a></li>
+    
+        <li><a href='http://m.yz.sm.cn/s?q=习近平引领新常态&from=100041' onClick="shenmaHotWordsClick(event); return false">习近平引领新常态</a></li>
+    
+        <li><a href='http://m.yz.sm.cn/s?q=李克强 拨浪鼓&from=100041' onClick="shenmaHotWordsClick(event); return false">李克强 拨浪鼓</a></li>
+    
+        <li><a href='http://m.yz.sm.cn/s?q=何超英 病逝&from=100041' onClick="shenmaHotWordsClick(event); return false">何超英 病逝</a></li>
+    
+        <li><a href='http://m.yz.sm.cn/s?q=沪指 ＂跳水＂&from=100041' onClick="shenmaHotWordsClick(event); return false">沪指 ＂跳水＂</a></li>
+    
+        <li><a href='http://m.yz.sm.cn/s?q=养老金 调整&from=100041' onClick="shenmaHotWordsClick(event); return false">养老金 调整</a></li>
+    
+        <li><a href='http://m.yz.sm.cn/s?q=志愿者 红灯&from=100041' onClick="shenmaHotWordsClick(event); return false">志愿者 红灯</a></li>
+    
+        <li><a href='http://m.yz.sm.cn/s?q=沙暴 澳洲&from=100041' onClick="shenmaHotWordsClick(event); return false">沙暴 澳洲</a></li>
+    
+        <li><a href='http://m.yz.sm.cn/s?q=沪深两市 成交破万亿&from=100041' onClick="shenmaHotWordsClick(event); return false">沪深两市 成交破万亿</a></li>
+    
+        <li><a href='http://m.yz.sm.cn/s?q=中国 核电站&from=100041' onClick="shenmaHotWordsClick(event); return false">中国 核电站</a></li>
+    
+    </ul>
+    
+</div>
+    
+    <div class="list_content">
+    
+    </div>
+    
+    <div class="list_bottom">
+        <section class='loadmoretip'>
+            <a href="#"></a>
+        </section>
+    </div>
+</content>
+
+<script type="text/javascript" src="/Public/BigSchool/js/ttdefaultjs.js"></script>
+<script type="text/javascript" src="/Public/BigSchool/js/flow.js"></script>
+<script type="text/javascript" src="/Public/BigSchool/js/search.js"></script>
+<script>
+var user_input = false,
+    default_action = $.cookie("defaultSearchAction") || 'toutiao',
+    search_url = '/search_content/',
+    common_params = $.request(),
+    search_params = {};
+
+delete common_params.keyword;
+delete common_params.from;
+
+search_params = $.extend({
+    'offset'    : 0,
+    'count'     : 10,
+    'from'      : 'search_tab'
+},common_params);
+
+$(function(){
+    initScrollEvents();
+
+    chooseAction(default_action,true,"search_tab");
+    
+    gaevent('event','search',"search_tab");
+})
+</script>
+
+
+<!--  -->
+<script>
+var _gaq = _gaq || [];
+var test_channel = "", test_version = "";
+_gaq.push(['_setAccount', 'UA-28423340-7']);
+_gaq.push(['_addOrganic','baidu','word']);
+_gaq.push(['_setLocalRemoteServerMode']);
+_gaq.push(['_setDomainName', '.toutiao.com']);
+_gaq.push(['_trackPageview','/search/']);
+
+
+function gaqpush(ga_event, ga_label){
+	gaevent('event',ga_event,ga_label);
+};
+
+function gaevent(category, action, label){
+	if(test_channel.indexOf(action) >-1) label = label+test_version;
+	console.log("ga:"+category+","+action+","+label);
+	_gaq.push(['_trackEvent', category, action, label, 1]);
+};
+
+(function() {
+ var ga = document.createElement('script');
+ ga.type = 'text/javascript';
+ ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+ var s = document.getElementsByTagName('script')[0];
+ s.parentNode.insertBefore(ga, s);
+})();
+ 
+
+$("body").on('click', '[ga_event]', function(e){
+	 var $this =  $(this);
+	 var ga_category = $this.attr('ga_category') || 'event';
+	 var ga_event = $this.attr('ga_event');
+	 var ga_label = $this.attr('ga_label');
+	 gaevent(ga_category,ga_event,ga_label);
+	 var href = this.href, target = this.target;
+	 if(href !== "#" && target !== "_blank") {
+	 	setTimeout(function(){ 
+	 		location.href = href 
+	 	},400);
+	 	return false
+	 }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta charset="utf-8" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /> 
+  <title>补全个人信息</title> 
+  
+  <link rel="stylesheet" type="text/css" href="/Tool/Public/Voice/voice.css" media="all" />
+  <script charset="utf-8" src="/Tool/Public/Voice/jquery-2.0.3.min.js"></script>
+  <script>
+	function onBridgeReady(){
+		WeixinJSBridge.call('hideOptionMenu');
+	}
+
+	if (typeof WeixinJSBridge == "undefined"){
+		if( document.addEventListener ){
+			document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+		}else if (document.attachEvent){
+			document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+			document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+		}
+	}else{
+		onBridgeReady();
+	}
+	
+	function onSubmit()
+	{
+		if(1)
+		{
+			submitVoice();
+		}		
+	}
+	
+	function submitVoice()
+	{
+		$.ajax({
+				type: "post",
+				url: "http://wechat.npulife.com/Tool/index.php/Home/MyCenter/ajaxFull", 
+				data: {},  
+				dataType: "json",  
+				beforeSend	: function() { $("#addBtn").html("正在提交..."); $("#addBtn").attr("disabled", true);},
+				complete	: function() { $("#addBtn").html("确认"); },			
+				success: function(result) {     
+					if(result.status==1) {
+						alert("作品提交成功，您是"+result.id+"号选手！作品需要审核，请耐心等待~");
+						location.href = "http://wechat.npulife.com/Tool/index.php/Home/Voice/listVoice?openid="+$("#openid").val();
+					}
+					if(result.status==2)
+					{
+						alert(result.message);
+					}
+				},
+				error: function() {
+					alert("ERROR");
+				}
+			});
+	}
+  </script>
+  <style>
+    .pay_type h3:after {background:none;}
+    .address_list .edit:after {width:30px;}
+    .address_list .edit {right:0;}
+    #noSelectPage:after {background:none;}
+    .address_list ul:before {display: none;}
+    </style> 
+ </head> 
+ <body> 
+  <div id="c_wg.myAddress_edit" style="">
+   <div class="wx_bar"> 
+    <div class="wx_bar_back"> 
+     <a id="back" href="javascript:void(0);"></a> 
+    </div> 
+    <div class="wx_bar_tit">
+     补全个人信息
+    </div>
+   </div>
+   <div class="wx_wrap">
+    <div class="address_new">
+     <input type="hidden" id="openid" value="{$openid}" />
+     <p><label for="phone"><span class="tit">手机号*</span><input type="text" id="phone" name="phone" value="" placeholder="便于联系" /></label></p> 
+     <p><label for="qq"><span class="tit">QQ号*</span><input type="text" id="qq" name="qq" value="" placeholder="便于邮件、线上联系" /></label></p>
+     <p><label for="qq"><span class="tit">宠物昵称</span><input type="text" id="qq" name="qq" value="" placeholder="" /></label></p>
+     <p><label for="qq"><span class="tit">快递地址</span><input type="text" id="qq" name="qq" value="" placeholder="便于寄送礼品" /></label></p>
+     <p><label for="qq"><span class="tit">职业</span><input type="text" id="qq" name="qq" value="" placeholder="" /></label></p>
+     <p><label for="qq"><span class="tit">所在单位</span><input type="text" id="qq" name="qq" value="" placeholder="" /></label></p>
+     <p class="action"><button class="submit" id="addBtn" onclick="onSubmit();">确认</button></p>
+    </div>
+   </div>
+  </div>  
+ </body>
+</html>

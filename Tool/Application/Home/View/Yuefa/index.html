@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="一个约发的微信公众号">
+  <meta name="keywords" content="约发">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>约发</title>
+
+  <!-- Set render engine for 360 browser -->
+  <meta name="renderer" content="webkit">
+
+  <!-- No Baidu Siteapp-->
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+  <link rel="icon" type="image/jpg" href="__PUBLIC__/yuefa/i/hair.jpg">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="__PUBLIC__/yuefa/i/app-icon72x72@2x.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="约发"/>
+  <link rel="apple-touch-icon-precomposed" href="__PUBLIC__/yuefa/i/app-icon72x72@2x.png">
+
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="__PUBLIC__/yuefa/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileColor" content="#0e90d2">
+
+  <link rel="stylesheet" href="__PUBLIC__/yuefa/css/amazeui.min.css">
+  <link rel="stylesheet" href="__PUBLIC__/yuefa/css/app.css">
+  <script type="text/javascript" src="__PUBLIC__/yuefa/js/iscroll.js"></script>
+  <script type="text/javascript">
+  var myScroll,
+    pullUpEl, pullUpOffset,pullDownOffset,
+    generatedCount = 0;
+
+
+  /**
+   * 滚动翻页 （自定义实现此方法）
+   * myScroll.refresh();    // 数据加载完成后，调用界面更新方法
+   * 实现ajax
+   */
+  function pullUpAction () {
+    setTimeout(function () {  // <-- Simulate network congestion, remove setTimeout from production!
+      console.log("上拉加载更多");
+      
+      myScroll.refresh();   // 数据加载完成后，调用界面更新方法 Remember to refresh when contents are loaded (ie: on ajax completion)
+    }, 1000); // <-- Simulate network congestion, remove setTimeout from production!
+  }
+
+  /**
+   * 初始化iScroll控件
+   */
+  function loaded() {
+    pullUpEl = document.getElementById('pullUp'); 
+    pullUpOffset = pullUpEl.offsetHeight;
+    pullDownOffset = pullDownEl.offsetHeight;
+    
+    myScroll = new iScroll('#main-content', {
+      //scrollbarClass: 'myScrollbar', /* 重要样式 */
+      useTransition: false, /* 此属性不知用意，本人从true改为false */
+      topOffset: pullDownOffset,
+      onRefresh: function () {
+       if (pullUpEl.className.match('loading')) {
+          pullUpEl.className = '';
+          pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多...';
+        }
+      },
+      onScrollMove: function () {
+        if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+          pullUpEl.className = 'flip';
+          pullUpEl.querySelector('.pullUpLabel').innerHTML = '松手开始更新...';
+          this.maxScrollY = this.maxScrollY;
+        } else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+          pullUpEl.className = '';
+          pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多...';
+          this.maxScrollY = pullUpOffset;
+        }
+      },
+      onScrollEnd: function () {
+       if (pullUpEl.className.match('flip')) {
+          pullUpEl.className = 'loading';
+          pullUpEl.querySelector('.pullUpLabel').innerHTML = '加载中...';        
+          pullUpAction(); // Execute custom function (ajax call?)
+        }
+      }
+    });
+    
+    // setTimeout(function () { document.getElementById('main-content').style.left = '0'; }, 800);
+  }
+
+  //初始化绑定iScroll控件 
+  document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+  document.addEventListener('DOMContentLoaded', loaded, false); 
+</script>
+</head>
+<body>
+  <!-- 顶部下拉多选框   -->
+  <header class="am-topbar-fixed-top">
+    <div class="am-g"> 
+      <div class="am-u-sm-6 am-u-md-6 am-u-lg-6 mult-select">
+        <form class="am-form">
+          <fieldset>
+            <div class="am-form-group">
+              <select id="hairstyle-select-1">
+                <option value="option1">不限</option>
+                <option value="option2">男生</option>
+                <option value="option3">女生</option>
+              </select>
+              <span class="am-form-caret"></span>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div class="am-u-sm-6 am-u-md-6 am-u-lg-6 mult-select">
+        <form class="am-form">
+          <fieldset>
+            <div class="am-form-group">
+              <select id="hairstyle-select-2">
+                <option value="option1">短发</option>
+                <option value="option2">长发</option>
+                <option value="option3">日韩风格</option>
+                <option value="option3">欧美系列</option>
+              </select>
+              <span class="am-form-caret"></span>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </header>
+  <!-- 中间瀑布流效果 -->
+  <div id="main-content">
+    <div id="js-container">
+     <volist name="hlist" id="vo">
+      <div class="box">
+        <div class="am-thumbnail">
+          <a class="hairstyle-img" href="__URL__/barber?bid={$vo['belong']}">
+            <img src="__PUBLIC__/yuefa/i/hairs/{$vo['belong']}.jpg" alt=""/>
+            <div id="hairstyle-title">{$vo['title']}</div>
+          </a>
+          <div class="hairstyle-img-inf"><!-- class="am-thumbnail-caption" -->
+            <div class="barber-inf"><img src="__PUBLIC__/yuefa/i/barbers/{$vo['belong']}.jpg" alt=""><span>{$vo['bname']}</span></div>
+            <div class="admire-cnt"><img src="__PUBLIC__/yuefa/i/5.png" alt=""><span>{$vo['likes']}</span></div>
+          </div>
+        </div>
+      </div>
+    </volist>
+    </div>
+    <!-- <div id="pullUp">
+      <span class="pullUpIcon"></span><span class="pullUpLabel">上拉加载更多</span>
+    </div> -->
+  </div>
+  <div id="load-more"><button class="am-btn am-btn-primary">载入更多</button></div>
+  
+  <!-- 底部导航栏 -->
+  <div class="toolbar">
+    <a href="#top" data-am-smooth-scroll><img src="__PUBLIC__/yuefa/i/arrow-up.png" alt=""></a>
+  </div>
+  <footer class="am-topbar-fixed-bottom">
+    <nav>
+      <ul class="am-nav am-nav-pills am-nav-justify">
+        <li class="am-active"><a href="index.html">找发型</a></li>
+        <li><a href="#">秀发型</a></li>
+      </ul>
+    </nav>
+  </footer>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="__PUBLIC__/yuefa/js/masonry.pkgd.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/yuefa/js/app.js"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="__PUBLIC__/yuefa/js/jquery.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<![endif]-->
+<script src="http://jq22.qiniudn.com/masonry-docs.min.js"></script>
+<script type="text/javascript">
+  $(function() {
+    var $container = $('#js-container');
+    $container.imagesLoaded(function() {
+      $container.masonry({
+        itemSelector: '.box',
+        gutter: 20,
+        isAnimated: true,
+      });
+    });
+  });  
+</script>
+
+</body>
+</html>

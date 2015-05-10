@@ -1,0 +1,97 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content=" initial-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+
+<title>意见反馈管理系统</title>
+<style>
+		
+		*:focus{
+			outline:none; /* Prevents blue border in Webkit */
+		}
+
+		body {
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /*  */
+		}
+		
+		#top_bit {
+			width:760px;
+			margin: 0 auto;
+		}
+		
+		form {
+			width:300px;
+			margin: 20px auto;
+			
+		}
+
+		p {
+			line-height: 1.6;
+		}
+
+		input, textarea {
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			background-color:#fff;
+			border:1px solid #ccc;
+			font-size:20px;
+			width:300px;
+			min-height:30px;
+			display:block;
+			margin-bottom:16px;
+			margin-top:8px;
+			
+			-webkit-border-radius:5px;
+			-moz-border-radius:5px;
+			border-radius:5px;
+			
+			-webkit-transition: all 0.5s ease-in-out;
+			-moz-transition: all 0.5s ease-in-out;
+			transition: all 0.5s ease-in-out;
+		}
+		
+		textarea {
+				min-height:200px;
+		}
+
+		input:focus, textarea:focus {
+			-webkit-box-shadow:0 0 25px #ccc;
+			-moz-box-shadow:0 0 25px #ccc;
+			box-shadow:0 0 25px #ccc;
+			
+			-webkit-transform: scale(1.05);
+			-moz-transform: scale(1.05);
+			transform: scale(1.05);
+		}
+		
+		/* The interesting bit */
+		
+		input:not(:focus), textarea:not(:focus) {
+			opacity:0.5;
+		}
+		
+
+		input[type=submit] {
+			padding:10px;
+			background:none;
+			opacity:1.0;
+		}
+		
+		</style>
+	</head>
+	<body>
+	<div id="top_bit">
+
+
+	</div>	
+	<form action="{:U('feedback')}" method="post"> 
+		<label for="qq">登录密码:</label> 
+		<input type="text" name="pass" required="required" placeholder="你猜不到的哦~" />
+	
+		<input type="submit" value="登录" />
+			</form>
+</body>
+</html>

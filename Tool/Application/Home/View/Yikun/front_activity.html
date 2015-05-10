@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<meta name="format-detection" content="telephone=no">
+<link href="__PUBLIC__/Yikun/css/jquery.mobile-1.4.5.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery.mobile-1.4.5.js"></script>
+
+<title>活动详情</title>
+</head>
+<body>
+
+	<div data-role="page" id="front_activity" data-dom-cache="false">
+<script>
+(function(){
+    var expire_time = parseInt((new Date()).getTime()/(5*60*1000));
+    var head = document.head || document.getElementsByTagName("head")[0] || document.documentElement;
+    var script_version = document.createElement("script"),script_cyan = document.createElement("script");
+    script_version.type = script_cyan.type = "text/javascript";
+    script_version.charset = script_cyan.charset = "utf-8";
+    script_version.onload = function(){
+        script_cyan.id = 'changyan_mobile_js';
+        script_cyan.src = 'http://changyan.itc.cn/upload/mobile/wap-js/changyan_mobile.js?client_id=cyrFS2Og6&'
+                        + 'conf=prod_bf1363225927521448a2027fbb5ea5b6&version=' + cyan_resource_version;
+        head.insertBefore(script_cyan, head.firstChild);
+    };
+    script_version.src = 'http://changyan.sohu.com/upload/mobile/wap-js/version.js?_='+expire_time;
+    head.insertBefore(script_version, head.firstChild);
+})();
+</script>
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '活动评价'
+        },
+        subtitle: {
+            text: '<p style="color:#6589d1">(数据来源于活动问卷)</p>'
+        },
+        credits: 
+        {
+           enabled: false
+        },
+        xAxis: {
+            type: 'category',
+            labels: {
+                rotation: -45,
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+        yAxis: {
+            min: 0,
+            max:100,
+            title: {
+                text: '分数'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '平均分: <b>{point.y:.1f}分</b>'
+        },
+        series: [{
+            name: 'Population',
+            data: [
+                ['内容', {$content}],
+                ['老师', {$teacher}],
+                ['推荐度', {$recommend}],
+            ],
+            dataLabels: {
+                enabled: true,
+                rotation: -90,
+                color: '#FFFFFF',
+                align: 'right',
+                format: '{point.y}', // one decimal
+                y: 5, // 10 pixels down from the top
+                style: {
+                    fontSize: '15px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        }]
+    });
+});
+</script>
+		<div data-rolo="content" id= "content">
+
+			<h3 style="color:blue">活动主题:</h3>
+			<span><strong>{$activityShow['topic']}</strong></span><br>
+			<h3 style="color:blue">发起人:</h3>
+			<span><strong>{$activityShow['sponsor']}</strong></span><br>
+			<h3 style="color:blue">活动老师:</h3>
+			<span><strong>{$activityShow['teacher']}</strong></span><br>
+			<h3 style="color:blue">活动详情:</h3>
+			<span><strong>{$activityShow['content']}</strong></span><br>
+			<h3 style="color:blue">活动图片:</h3>
+				<if condition="($activityShow['picture'] eq NULL)">
+					<span><strong>暂无图片~</strong></span><br>
+				<else />
+					<for start="0" end="count($activityShow['picture'])">
+						<a href="#popupMeizi{$i}" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="__URL__/pictureShow?action=activity&picid={$activityShow['picture'][$i]['picid']}" alt="妹子" style="width:30%"></a>
+						<div data-role="popup" id="popupMeizi{$i}" data-overlay-theme="b" data-theme="b" data-corners="false" data-tolerance="30,15">
+    					<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img class="popphoto" src="__URL__/pictureShow?action=activity&picid={$activityShow['picture'][$i]['picid']}" style="max-height:512px;" alt="活动图片">
+						</div>
+					</for>
+				</if>
+			<h3 style="color:blue">报名截止时间:</h3>
+			<span><strong>{$activityShow['deadline']}</strong></span><br>
+			<if condition="$activityShow['state'] eq -1">
+				<p style="color:red"><strong>活动已经结束~</strong></p>
+				<h3 style="color:blue">活动评价:</h3>
+				<div id="container" class="ui-body-a" data-inset="false" style="min-width: 330px; height: 250px; margin: 0 auto">
+				</div>
+                <h3 style="color:blue">活动印象:</h3>
+                <fieldset class="ui-grid-d" style="padding:10px 20px">
+                <volist name="impress" id="impressItem" mod="5" >
+                    <div class="ui-block-b">
+                        <span>{$impressItem}</span>
+                    </div>
+                    <eq name="mod" value="4">
+                        <div class="ui-block-a">
+                            <br>
+                        </div>
+                    </eq>
+                </volist>
+                
+                </fieldset>
+			<else />
+				<if condition="$isApply eq 1">
+				<p style="color:red"><strong>您已经报名此活动~</strong></p>
+				<a href="__URL__/questionnaire?action=show&actid={$activityShow['actid']}" class="ui-btn ui-btn-b ui-shadow ">去做问卷</a>
+				<elseif condition="$isApply eq 0" />
+					<a href="__URL__/activityApply?actid={$activityShow['actid']}" class="ui-btn ui-corner-all ui-shadow ui-btn-b">我要报名</a>
+				<else />
+                    <a href="#activity_assign_popup"  data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-b">我要报名</a>                                       
+                    <div data-role="popup"  data-overlay-theme="b" data-theme="b" data-dismissible="false" id="activity_assign_popup">
+                        <p>您目前的身份是游客，如果您是翼鲲班成员请前往<a  href='__URL__/center'>个人中心</a>去绑定，如果您要以游客的身份报名请点确定</p>
+                        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">取消</a>
+                        <a href="__URL__/activityApply?actid={$activityShow['actid']}" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" >确定</a>
+                    </div>
+                </if>
+			</if>
+			<div id="SOHUCS" sid="{$activityShow['actid']}"></div> 
+		</div>
+	</div>
+
+</body>
+</html>

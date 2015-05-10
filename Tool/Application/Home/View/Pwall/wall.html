@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>微信大屏幕</title>   
+<load href="__PUBLIC__/pwall/wxq/jquery.js" />
+<load href="__PUBLIC__/pwall/wxq/wxwall.css" />
+<style type="text/css">
+<!--
+body {
+	background:url("__PUBLIC__/pwall/wxq/images/liuyan.jpg") no-repeat scroll center top #eaeaea;
+}
+.copy { clear:both; font-size:15px; color:#afafaf; text-shadow:1px 0 3px #FFFFFF; margin-left:55px; width:910px;}
+.copy a {color:#afafaf; text-shadow:1px 0 3px #FFFFFF; text-decoration:none;}
+.copy a:hover { color:#cc0000;}
+.copy_txt { float:left;}
+.copy span { float:right;}
+-->
+</style>
+</head>
+<body>
+<!-- <div  style="float:right"><img src="__PUBLIC__/logo.jpg" height="160" width="160"/></div> -->
+<div  style="float:left"><img src="__PUBLIC__/logo.jpg" height="226" width="226"/></div>
+<!-- <imge src="http://wx.qlogo.cn/mmopen/ajNVdqHZLLDo2niaIBHF63L0wwVjT0o0I5fwTz29gMEvhqPw554s6Bfpt2riaV0OLMYeXNVzzo"> -->
+<div class="main">
+
+    <div class="top" onclick="viewExplan();">
+		<!-- <div class="k";>
+		添加微信号：
+		<strong>npulife</strong><br>
+		<span style=" color:#ffff00">回复我要上墙</span>后参与活动
+		</div> -->
+	</div>
+	<div class="wall">
+		<div class="left"></div>
+		<div class="center">
+			<div class="list">
+				<ul id="list"></ul>
+			</div>
+			<div class="footer"></div>
+		</div>
+		<div class="right"></div>
+        <div class="copy">
+       微信墙技术支持：<font color="#ffff00" size="5" ><b>瓜大生活圈技术团队</b></font>
+        </div>
+	</div>
+	<div class="mone" id="mone" onclick="viewOneHide();"></div>
+	<div id="explan"  style="display:none;" onclick="viewExplan();">
+		<p>
+			<b style="font-size:50px;">上墙方法：</b><br>
+			1.关注公众号<span style=" color:#ffff00;">西北工大微生活(npulife)</span><br>
+			2.回复<span style=" color:#ffff00;">我要上墙</span>，经过审核即可上墙哦~~~
+			<!-- 3.发送<span style=" color:#ffff00;">wesing</span>给你喜欢的歌手投票吧！！<br> -->
+			
+				
+		</p>
+	</div>
+</div>
+<script type="text/javascript">
+var len=3;
+var cur=0;//当前位置
+var mtime;
+var data=new Array();
+<!-- data[0]=new Array('0','<if condition="$wall['img'] eq ''">__PUBLIC__/pwall/Images/default.jpg<else/>{pop:$wall['img']}</if>','{pop:$publicnum['pnum']}','{pop:$wall['preface']}'); -->
+//var word_id='96';
+var lastid='0';
+var vep=true;//查看上墙说明
+var vone=false;//查看单条
+
+function viewOneHide(){
+	vone=false;
+	$("#mone").hide();
+}
+function viewOne(cid,t)
+{
+	if(vone==false)
+	{
+		vone=true;
+		var str=t.innerHTML;
+		$("#mone").html(str);
+		$("#mone").fadeIn(700);
+	}else
+	{
+		vone=false;
+		$("#mone").hide();
+	}
+}
+function viewExplan()
+{
+	if(vep==false)
+	{
+		vep=true;
+		$("#explan").fadeIn(700);
+		//clearInterval(mtime);
+	}else
+	{
+		vep=false;
+		$("#explan").hide();
+		//mtime=setInterval(messageAdd,5000);
+	}
+}
+function messageAdd()
+{
+
+	if(cur==len)
+	{
+		messageData();
+		return false;
+	}
+	if(data.length != 0){
+	if(data[cur][1]==""){
+		data[cur][1]="__PUBLIC__/pwall/wxq/images/portrait.jpg";
+	}
+	
+var str='<li id=li'+cur+' onclick="viewOne('+cur+',this);"><div class=m1><div class=m2><div class="pic"><img src="'+data[cur][4]+'" width="100" height="100" /></div><div class="c f2"><span>'+data[cur][2]+'：</span>'+data[cur][3]+'</div></div></div></li>';	
+$("#list").prepend(str);
+	$("#li"+cur).slideDown(800);
+	cur++;
+	}
+	
+	messageData();
+	
+}
+function messageData()
+{
+	//ajax实现从后台获取上墙信息
+	var url='__URL__/wallmessage';
+	$.getJSON(url,{lastid:lastid},function(d) {
+		// alert(d);return;
+		if(d['ret']==1)
+		{
+			$.each(d['data'], function(i,v){
+				data.push(new Array(v['num'],v['id'],v['nickname'],v['content'],v['headimge']));
+				lastid=v['num'];
+				len++;
+			});
+		}else{
+				//	alert('木有新消息..每5秒ajax一次');
+					window.setTimeout('messageData();', 2000);
+		}	
+	});
+}
+window.onload=function()
+{
+	messageAdd();
+	mtime=setInterval(messageAdd,3000);
+	}
+
+</script>
+	
+
+</body></html>

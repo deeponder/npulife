@@ -1,0 +1,40 @@
+<include file="./Addons/Activity/View/Public/jmobile_black_header.html" />
+<script>
+	function terminate()
+	{
+		var tag = confirm('确定终止报名?');
+		if( tag == true )
+			location.href='{:U('terminate?ID='.$activity_ID)};
+		else
+			return false;
+}
+</script>
+	<?php $count=count($signup_detail) ?>
+	<center><p text-align:left; font-weight:bold; position:static; padding:15px 15px"><b>活动主题:</b>
+	{$signup_detail[0]['activity_theme']}</p>
+	<p text-align:left; font-weight:bold; position:static; padding:15px 15px"><b>当前参与人数:</b>
+	<span style="color:red;">{$count}</span></p></center>
+	<div>
+	<span style="text-align:right;"><input width="45%"  value="编辑"  type='button'onClick="location.href='{:U('edit?ID='.$activity_ID)}'"  /></span>
+	<span style="text-align:left;width:50px;"><button onclick="terminate();">立即终止</button></span>
+	</div>
+		<table width="99%" border="1" cellpadding="1" cellspacing="1"  id="form" action="{:U('toTXT')}"  method="post" class="form-horizontal p_10" >
+		<div>
+		<tr>
+		<td nowrap>学号</td>
+		<td nowrap width="51px">姓名</td>
+		<td nowrap>联系方式</td>
+		<td nowrap>报名时间</td>
+		</tr>
+		 <?php for($i=$count-1;$i>=0;$i--){ ?>
+		<tr>
+		<td style="color:blue;">{$signup_detail[$i]['school_number']}</td>
+		<td><b>{$signup_detail[$i]['truename']}</b></td>
+		<td>{$signup_detail[$i]['mobile']}</td>
+		<td style="color:red;">{$signup_detail[$i]['signup_date']}</td>
+		</tr>
+	 <?php } ?>	
+	 </div>
+		</table>
+  
+<include file="./Addons/Activity/View/Public/jmobile_black_footer.html" />

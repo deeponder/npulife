@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<meta name="format-detection" content="telephone=no">
+<link href="__PUBLIC__/Yikun/css/jquery.mobile-1.4.5.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery.mobile-1.4.5.js"></script>
+
+
+<title>个人统计</title>
+</head>
+<body>
+
+<div data-role="page"  id="front_center_statistics">
+<script>
+$(function () {
+    $('#container1').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        credits: 
+        {
+           enabled: false
+        },
+        title: {
+            text:'<p>活动参与情况统计</p><br><p style="color:#6589d1;font-size:small">(点击颜色块查看比例)</p>',
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.y}项',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: '比例',
+            data: [
+                ['未报名',   {$notAssign}],
+                ['报名的活动',   {$actNow}],
+                ['参加',       {$attend}],
+                {
+                    name: '缺席',
+                    y: {$absent},
+                    sliced: true,
+                    selected: true,
+                  //  color: 'red',
+                },
+            ]
+        }]
+    });
+    
+    Highcharts.data({
+        csv: document.getElementById('tsv').innerHTML,
+        itemDelimiter: '\t',
+        parsed: function (columns) {
+
+            var brands = {},
+                brandsData = [],
+                versions = {},
+                drilldownSeries = [];
+
+            // Parse percentage strings
+			//alert(columns[0]);
+			/*
+            columns[1] = $.map(columns[1], function (value) {
+                if (value.indexOf('%') === value.length - 1) {
+                    value = parseFloat(value);
+                }
+                return value;
+            });
+			*/
+			//alert(columns[1]);
+			//alert(columns[2]);
+            $.each(columns[0], function (i, name) {
+                var brand,
+                    version;
+
+                if (i > 0) {
+
+                    // Remove special edition notes
+                    //name = name.split(' -')[0];
+
+                    // Split into brand and version
+                    //version = name.match(/([0-9]+[\.0-9x]*)/);
+					version = columns[1][i];
+                   // if (version) {
+                   //     version = version[0];
+                   // }
+                    //brand = name.replace(version, '');
+					brand = name;
+
+                    // Create the main data
+                    if (!brands[brand]) {
+                        brands[brand] = columns[2][i];
+                    } else {
+                        brands[brand] += columns[2][i];
+                    }
+
+                    // Create the version data
+                    if (version !== null) {
+                        if (!versions[brand]) {
+                            versions[brand] = [];
+                        }
+                        versions[brand].push([version, columns[2][i]]);
+                    }
+                }
+
+            });
+
+            $.each(brands, function (name, y) {
+                brandsData.push({
+                    name: name,
+                    y: y,
+                    drilldown: versions[name] ? name : null
+                });
+            });
+            $.each(versions, function (key, value) {
+                drilldownSeries.push({
+                    name: key,
+                    id: key,
+                    data: value
+                });
+            });
+
+            // Create the chart
+            $('#container2').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: '活动满意度统计'
+                },
+                credits: 
+                {
+                   enabled: false
+                },
+                subtitle: {
+                    text: '<p style="color:#6589d1">(点击查看各个老师的活动分布)</p>'
+                },
+                xAxis: {
+                    type: 'category'
+                },
+                yAxis: {
+                    title: {
+                        text: '活动次数'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    series: {
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.y}'
+                        }
+                    }
+                },
+
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b>次<br/>'
+                },
+
+                series: [{
+                    name: '活动数',
+                    colorByPoint: true,
+                    data: brandsData
+                }],
+                drilldown: {
+                    series: drilldownSeries
+                }
+            });
+        }
+    });
+});
+
+
+</script>
+	<div data-role="content" id="content">
+		<div id="container1" class="ui-body-a" data-inset="false" style="min-width: 330px; height: 200px; margin: 0 auto">
+		</div>
+		<div id="container2" class="ui-body-a" data-inset="false" style="min-width: 330px; height: 200px; margin: 0 auto">
+		</div>
+		<!-- Data from www.netmarketshare.com. Select Browsers => Desktop share by version. Download as tsv. -->
+<pre id="tsv" style="display:none">core	teacher	number
+{$string}
+</pre>
+
+<p style="color:red;margin:10 0 0 5px" >更多统计信息将会发布~敬请期待！</p>
+		
+	</div>		
+</div>
+
+
+</body>
+</html>

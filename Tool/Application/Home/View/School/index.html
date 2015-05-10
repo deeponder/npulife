@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>校园门户</title>
+    <!-- 初始化移动设备的显示 -->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/school/css/schoolweb.css">
+    <script type="text/javascript" src="__PUBLIC__/school/scripts/index.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/school/scripts/jquery-1.11.1.js"></script>
+  </head>
+  <body>
+  	<!-- 头部导航模块 -->
+    <div id="header">
+      <div class="top_menu_bar">
+        <div class="top_menu_more">
+          <a class="more_btn" onclick="showWin()" href="#" mce_href="#"></a>
+        </div>
+        <div id="top_menu" class="top_menu">
+         <div class="top_menu_list">
+         <a href="#" id="top_menu7" class="btn cur" onclick="onclickFunction(7)" scroll_left="0">推荐</a>
+           <volist name='checklist' id='check'>
+             <a href="#" id="top_menu{$check['cateid']}" class="btn" onclick="onclickFunction({$check['cateid']})" scroll_left="0">{$check['cate']}</a>
+           </volist>
+            <!-- <a href="#" id="top_menu7" class="btn cur" onclick="onclickFunction(7)" scroll_left="0">推荐</a>
+            <a href="#" id="top_menu5" class="btn" onclick="onclickFunction(5)" scroll_left="0">学堂</a>
+            <a href="#" id="top_menu9" class="btn" onclick="onclickFunction(9)" scroll_left="0">活动</a>
+            <a href="#" id="top_menu2" class="btn" onclick="onclickFunction(2)" scroll_left="0">竞赛</a>
+            <a href="#" id="top_menu27" class="btn" onclick="onclickFunction(27)" scroll_left="0">国际交流</a> -->
+          </div> 
+        </div>
+      </div>
+    </div>
+    <!-- 更多菜单弹出模块 -->
+    <div id="choose_more_menu">
+      <div class="menu_label"> 
+        <span>我的栏目</span>
+        <a class="close_btn" href="" onclick="hide()"></a> 
+        <div class="clear"></div>
+    	</div>
+    	<ul class="menu-selected">
+    		<!-- <li><a href="#">推荐</a></li> -->
+        <volist name='checklist' id='vo'>
+          <li><a href="#" id="unckeck{$vo['cateid']}" onclick="uncheck({$vo['cateid']},'{$vo['cate']}')">{$vo['cate']}</a></li>
+        </volist>
+    			
+    	</ul>
+    	<div class="menu_label">
+    		点击添加栏目
+    	</div>
+    	<ul class="menu_unselected">
+    		<volist name='unchecklist' id='vo'>
+    		<li><a href="#" id="check{$vo['cateid']}" onclick="check({$vo['cateid']},'{$vo['cate']}')">{$vo['cate']}</a></li>
+    	  </volist>
+    	</ul>
+    </div>
+
+	
+	<!-- 主题内容模块 -->
+    <div id="content0" class ="recommend">
+      <!-- <div class="list_content"> -->
+        <div id="after_wrap">
+        <volist name='list' id='vo'>
+        <section><a href="#" class="article_link"><div class="list_img_holder list_img_right"><img src=""></div><h3 class="article">{$vo['title']}</h3><div class="item_info"><span class="src">更新于</span><span class="time">30分钟之前</span></div></a></section>
+        </volist> 
+        
+         
+        </div>
+      <!-- </div> -->
+    </div>
+
+   
+    
+    <!-- 底部菜单模块 -->
+<!--     <div class="bottom_menu">
+      <ul>
+        <li class="botton_menu_btn"><a href="#">主页</a></li>
+     
+        <li class="botton_menu_btn"><a href="http://mp.weixin.qq.com/mp/getmasssendmsg?__biz=MjM5OTI4NjUxMw==#wechat_webview_type=1&wechat_redirect">往期精彩</a></li>
+        <li class="botton_menu_btn"><a href="#">服务查询</a></li>
+        <li class="botton_menu_btn"><a href="http://wechat.npulife.com/home/person">个人中心</a></li>
+      </ul>
+    </div> -->
+  </body>
+</html>

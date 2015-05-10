@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>[微唱大赛]-歌手电子名片</title>
+
+
+
+<style type="text/css">
+body{
+background-image:url("/Tool/Public/Voice/playVoice_round2/medias/ele_credit/bg2.jpg");
+background-size:cover;
+font-family:"微软雅黑";
+
+}
+
+footer{
+text-align:center;
+color:#d9d9d9;
+background-color:rgba(0,0,0,0.5);
+font-weight:bold;
+text-shadow:#fff;
+}
+</style>
+	<script type="text/javascript">
+
+   var audio = document.createElement('audio');
+
+
+
+ function playmusic(s) {
+
+audio.src ="/Tool/Public/Voice/Voice_round22/medias/"+s+".mp3";
+audio.play();
+} 
+
+</script>
+</head>
+
+<body>
+
+<a href = "http://wechat.npulife.com/Tool/Public/Voice/temp/list.html"><img src="/Tool/Public/Voice/playVoice_round2/medias/ele_credit/return_button.png"/></a>
+<img src="/Tool/Public/Voice/playVoice_round2/medias/ele_credit/{$name}.png" onclick="playmusic('{$name}')" style="margin:auto;display:block;"/>
+
+</body>
+
+<footer>
+2013-2014 瓜大生活圈团队出品
+</footer>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>微唱大赛大屏幕抽奖</title>
+<load href="__PUBLIC__/pwall/wxq/main.css"/>
+
+<style type="text/css">
+  .demo{width:700px; margin: 30px 100px auto; text-align:left; background:url("__PUBLIC__/pwall/wxq/images/board.png") no-repeat; /*background: #1570A6; border: 5px solid #1570A6; border-radius: 10px;*/ height: 110px; padding:10px 10px 0 10px;}
+#roll{height:32px; line-height:32px; margin-bottom:10px; font-size:24px; color:#ffffff;}
+.btn{ background:url("__PUBLIC__/pwall/wxq/images/start_bg.gif") no-repeat; width:125px; height:35px; line-height:35px;/*border: 1px solid lightGrey;*/ cursor: pointer; font-size: 20px;font-family: 'Microsoft Yahei';/*border-radius: 5px;*/ border:none transparent;}
+.top_title a { color:#ffff00; text-decoration:none;}
+.top_title { color:#ffffff!important;}
+#stop{display:none}
+#result{margin-top:20px; line-height:24px; font-size:24px; text-align:center;color:white}
+  #roll p {
+    float: left;
+    margin-left: 10px;
+    width: 563px;
+    overflow: hidden;
+    color: #fff;
+  }
+  #roll img {
+    float: left;
+  }
+</style>
+<load href="__PUBLIC__/pwall/wxq/jquery.js" />
+<script type="text/javascript">
+
+$(function(){
+	var _gogo;
+	var start_btn = $("#start");
+	var stop_btn = $("#stop");
+	var personList;
+	var clickNums = 0;
+	var num;
+
+	//一二三等奖的人数分配，实现自动换行
+	var one =1;
+	var two = 2;
+	var three = 3;
+	start_btn.click(function(){
+		if(clickNums  == 0 ){
+			$.getJSON('__URL__/prizedata',function(json){
+			if(json){
+				
+				personList = json;
+				var len = personList.length;
+				//每隔一毫秒跳一次实现，抽奖直观效果
+				_gogo = setInterval(function(){
+					//参与人员随机跳
+					num = Math.floor(Math.random()*len);
+					//参与人员的头像，昵称等信息
+					var id = personList[num].headimge;
+					var v = personList[num].nickname;           
+                  var content = personList[num].contents;
+                  $("#roll").html("<img src="+id+" width=100 height=100>"+"&nbsp;&nbsp;"+v+"&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+content);
+                  $("#name").html(v);
+                    $("#mid").val(id); 
+				},1);
+				stop_btn.show();
+				start_btn.hide();
+			}else{
+				$("#roll").html('系统找不到数据源，请先导入数据。');
+			}
+		});
+			clickNums++;
+		}else{
+
+			//删除中奖过的人员
+			personList.splice(num,1);
+			var len = personList.length;
+			//如果没有数据了，直接return
+			if(len ==0){
+				return;
+			}
+				_gogo = setInterval(function(){
+					num = Math.floor(Math.random()*len);
+					//var id = obj[num]['id'];
+					var id = personList[num].headimge;
+					var v = personList[num].nickname;
+                    // <!-- var avatar = personList[num].; -->
+                  var content = personList[num].contents;
+     
+                  $("#roll").html("<img src="+id+" width=100 height=100>"+"&nbsp;&nbsp;"+v+"&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+content);
+                  $("#name").html(v);
+                    $("#mid").val(id); 
+				},1);
+				stop_btn.show();
+				start_btn.hide();
+			clickNums++;
+
+		}
+		
+	
+	});
+		
+//停止，显示中奖者名单
+	stop_btn.click(function(){
+		clearInterval(_gogo);
+		var mid = $("#mid").val();
+		$.post("__URL__/prizedata/action/ok",{id:mid},function(msg){
+			if(msg==1){
+				var mobile = $("#name").html();
+
+              // if(clickNums==1){
+              // 	$("#result").append("三等奖："+mobile+"、");
+              // }else if(clickNums<three){
+              // 	 $("#result").append(mobile+"、");
+              // }else if(clickNums==three){
+              // 	 $("#result").append(mobile+"<br><br>二等奖：");
+              // }else if(clickNums<(three+two)){
+              // 	 $("#result").append(mobile+"、");
+              // }else if(clickNums==(three+two)){
+              // 	 $("#result").append(mobile+"<br><br>一等奖：");
+
+              // 	}else if(clickNums<(one+two+three)){
+              // 		              $("#result").append(mobile+"、");
+              // 	}else{
+              // 		             $("#result").append(mobile);
+
+              // 	}
+              $("#result").append(mobile+"、");
+			}
+			stop_btn.hide();
+			start_btn.show();
+		});
+	});
+	// $("xyjx").click(function () { 
+	$('#xyjx').bind('click',function(){
+		 $("#result").html('<P style="color:red;font-weight:blod;">中奖名单</P><br/>');
+	});
+
+});
+
+
+</script>
+</head>
+
+<body>
+
+<div class="wrapper">
+<div  style="float:right"><img src="__PUBLIC__/logo.jpg" height="270" width="270"/></div>
+<div id="main">
+ <center style="color:red"><font size=5>谁是今晚的幸运儿？谁能满载而归? </font></center>
+
+  <h2 class="top_title"><a href="" target="_blank"><if condition="$draw['title'] eq ''">今夜，我想对你说 抽奖<else/>{pop:$draw.title}</if></a></h2>
+  <div class="demo">
+    <div id="roll"></div><div style="display:none;" id="name"></div><input type="hidden" id="mid" value="">
+    <p style="margin-top:100px; text-align:center;"><input type="button" class="btn" id="start" value="开始"> <input type="button" class="btn" id="stop" value="停止"></p>
+    <div id="result"><P style="color:red;font-weight:blod;">中奖名单</P><br/></div><br><br><br>
+    <div class="copy">
+       <center><font size="2">微信墙技术支持：</font><span style="color:#ffff00"><font size="4"><b>瓜大生活圈技术团队</b></font></span></center>
+        </div>
+  </div>
+</div>
+
+</div>
+  
+</body>
+</html>

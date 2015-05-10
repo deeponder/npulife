@@ -1,0 +1,39 @@
+/* CSS Document */
+
+body{
+text-align:center;
+}
+.tabTitlesContainer{
+text-align:center;
+font-size:36px;
+cursor:hand;
+width:100%;
+border-width:thin;}
+.tabTitleUnSelected{
+background-color:Silver;
+width:100px;
+height:50px;}
+.tabTitleUnSelected:hover{
+background-color:#09F;
+}
+.tabTitleSelected{
+background-color:Gray;
+width:100px;
+height:80px;}
+#tabPagesContainer{
+	width:100%;
+	margin-left:2px;
+	margin-right:2px;
+text-align:center;
+font-size:36px;
+}
+.tabPageUnSelected{
+background-color:#FFF;
+display: none;}
+.tabPageSelected{
+background-color:#FFF;
+display:block;}
+.tabPage{
+	width:100%;
+	
+}

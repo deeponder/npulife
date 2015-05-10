@@ -1,0 +1,26 @@
+<html>
+<head>
+</head>
+<body>
+	WHAT THE FUCK!!!!!!!!!
+	<input type="button" value="点击参加电影票活动" onclick="openUrl('{$isClick}')"/>
+</body>
+<script type="text/javascript">
+
+function openUrl(isClick)
+{
+if(isClick=='true')
+{
+var url=encodeURI('http://'+window.location.host+'/tool/home/sharecount/movie?openid1={$openid2}&viewerid={$viewerid}');
+
+window.history.pushState({},0,url);
+window.open(url);
+alert("圈圈已经收到了你的请求，注意分享链接才有效~");
+}
+else
+{
+alert("圈圈已经收过你的请求了，不要重复提交了哦");
+}
+} 
+</script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<meta name="format-detection" content="telephone=no">
+<link href="__PUBLIC__/Yikun/css/jquery.mobile-1.4.5.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery.mobile-1.4.5.js"></script>
+<title>个人中心</title>
+</head>
+<body>
+
+<div data-role="page"  id="front_bind">
+<script>
+$( document ).on( "pagecreate", function() {
+
+	
+});
+</script>
+	<div data-role="content" id="content">
+		<P><strong>您现在是游客的身份，如过您是翼鲲班成员请进行账号绑定：</strong></p>
+		<a href="__URL__"  class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-back ">返回首页</a>										
+		<a href="#bind_pop" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-back ">进行绑定</a>
+		
+
+		<div data-role="popup" id="bind_pop" data-theme="a" class="ui-corner-all">
+			<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>   
+			<form action="__URL__/center?index=1" method="post" >
+		        <div style="padding:10px 20px;">
+					<h3>请输入：</h3>
+					<label for="un" class="ui-hidden-accessible">姓名</label>
+					<input type="text" name="name" id="un" value="" placeholder="姓名" data-theme="a">
+					<label for="xh" class="ui-hidden-accessible">学号</label>
+					<input type="text" name="snumber" id="xh" value="" placeholder="学号" data-theme="a">
+					<input type="hidden" name="action" value="bind"> 
+					<button type="submit" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">确认</button>
+		        </div>
+		    </form>
+		</div>
+	</div>
+					
+</div>
+
+
+</body>
+</html>

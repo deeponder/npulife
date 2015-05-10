@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>夜跑排行</title>
+</head>
+<style type="text/css">
+	body{
+		background: url(__PUBLIC__/back.png) 
+	}
+</style>
+<body>
+	<!-- <center><b>夜跑排行榜</b></center>
+	<volist name="runlist" id='run'>
+	{$run.uid}.&nbsp;<img src="{$run.headurl}" width=20 height=20 alt=""> {$run.nickname} <br>
+	</volist>
+	<center><a href="" id="load">加载更多</a></center>
+	<div id="show"></div> -->
+	
+<div id="content">
+		<include file="ajaxlist" />
+	</div> 
+	
+	<script src="__PUBLIC__/nightrun/js/jquery-1.9.0.min.js" type="text/javascript"></script>
+	
+</body>
+</html>

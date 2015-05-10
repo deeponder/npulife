@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<meta name="format-detection" content="telephone=no">
+<link href="__PUBLIC__/Yikun/css/jquery.mobile-1.4.5.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery.mobile-1.4.5.js"></script>
+<title>个人中心</title>
+</head>
+<body>
+
+<div data-role="page"  id="front_bindcheck">
+<script>
+</script>
+	<div data-role="content" id="content">
+			
+		<ul data-role="listview" data-inset="true">
+			<li>
+				<p><strong>姓名： </strong>{$student['name']}</p> 
+			</li>
+			<li>
+				<p><strong>学号： </strong>{$student['snumber']}</p> 
+			</li>
+			<li>
+				<p><strong>性别： </strong>{$student['gender']}</p> 
+			</li>
+			<li>
+				<p><strong>学院： </strong>{$student['college']}</p> 
+			</li>
+			<li>
+				<p><strong>年级： </strong>{$student['grade']}</p> 
+			</li>
+			<li>
+				<p><strong>特长： </strong>{$student['skill']}</p> 
+			</li>
+		</ul>
+		
+		<a href="#bind_alert_popup2" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-check ui-btn-icon-left">以上是我的信息</a>										
+		<a href="#bind_alert_popup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-alert ui-btn-icon-left">不是我的信息</a>										
+		<div data-role="popup" id="bind_alert_popup">
+			<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a> 
+			<p>如果信息有误请向翼鲲班指导老师查询，<strong>请不要绑定他人的账号</strong></p>
+		</div>
+		<div data-role="popup"  data-overlay-theme="b" data-theme="b" data-dismissible="false" id="bind_alert_popup2">
+			<p>如果显示的是您的信息请点击确定完成绑定，<strong><a href="">请不要绑定他人的账号</a></strong>，由此产生的后果自己负责！</p>
+			<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">取消</a>
+			<a href="__URL__/center?action=bindcheck" data-ajax="false" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" >确定</a>
+		</div>
+	</div>
+					
+</div>
+
+
+</body>
+</html>

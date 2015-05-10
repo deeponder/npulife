@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <title>瓜大地图</title> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+  <style type="text/css">
+html,body{
+    width:100%;
+    height:100%;
+}
+*{
+    margin:0px;
+    padding:0px;
+}
+body, button, input, select, textarea {
+    font: 12px/16px Verdana, Helvetica, Arial, sans-serif;
+}
+p{
+    width:100%;
+    padding-top:3px;
+    overflow:hidden;
+}
+</style> 
+  <link rel="apple-touch-icon-precomposed" href="/Public/NewSchoolHome/sousuo.png" /> 
+  <link rel="stylesheet" type="text/css" href="/Public/Map/Map.css" media="all" /> 
+  <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script> 
+  <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&amp;libraries=convertor"></script> 
+  <script charset="utf-8" src="/Public/static/jquery-2.0.3.min.js"></script> 
+  <script>
+
+var center;
+var map;
+var nowLatitude;
+var nowLongitude;
+var nowHeading;
+var markersArray = [];//覆盖物列表
+var myMarker;//用户位置标记  
+var infoWindow;
+
+var start_point;
+var end_point;
+
+var anchor = new qq.maps.Point(6, 6),
+	size = new qq.maps.Size(24, 24),
+	origin = new qq.maps.Point(0, 0),
+	icon = new qq.maps.MarkerImage('http://api.map.soso.com/javascript_v2/img/center.gif', size, origin, anchor);
+
+var directionsService = new qq.maps.DrivingService({
+            complete : function(response){
+                var start = response.detail.start,
+                    end = response.detail.end;
+                
+                var anchorD = new qq.maps.Point(6, 6),
+                    sizeD = new qq.maps.Size(24, 36),
+                    start_icon = new qq.maps.MarkerImage(
+                        'http://api.map.soso.com/javascript_v2/img/center.gif', 
+                        sizeD, 
+                        new qq.maps.Point(0, 0),
+                        anchorD
+                    ),
+                    end_icon = new qq.maps.MarkerImage(
+                        'http://api.map.soso.com/javascript_v2/img/center.gif', 
+                        sizeD, 
+                        new qq.maps.Point(24, 0),
+                        anchorD
+                    );
+                //start_marker && start_marker.setMap(null); 
+                //end_marker && end_marker.setMap(null);
+                clearOverlay(route_lines);
+                /*
+                start_marker = new qq.maps.Marker({
+                      //icon: start_icon,
+                      position: start.latLng,
+                      map: map,
+                      zIndex:1
+                });
+                end_marker = new qq.maps.Marker({
+                      //icon: end_icon,
+                      position: end.latLng,
+                      map: map,
+                      zIndex:1
+                });
+				*/
+               directions_routes = response.detail.routes;
+               var routes_desc=[];
+               //所有可选路线方案
+               for(var i = 0;i < directions_routes.length; i++){
+                    var route = directions_routes[i],
+                        legs = route; 
+                    //调整地图窗口显示所有路线    
+                    map.fitBounds(response.detail.bounds); 
+                    var steps = legs.steps;
+                    route_steps = steps;
+                    polyline = new qq.maps.Polyline(
+                        {
+                            path: route.path,
+                            strokeColor: '#3893F9',
+                            strokeWeight: 6,
+                            map: map
+                        }
+                    )  
+                    route_lines.push(polyline);
+                } 
+            }
+        }),
+        directions_routes,
+        directions_placemarks = [],
+        directions_labels = [],
+        //start_marker,
+        //end_marker,
+        route_lines = [],
+        step_line,
+        route_steps = [];
+
+function init() {
+	var geol;
+	
+	//通过浏览器获得用户位置
+	try {
+		if (typeof(navigator.geolocation) == 'undefined') {
+			geol = google.gears.factory.create('beta.geolocation');
+		} else {
+		    geol = navigator.geolocation;
+		}
+	} catch (error) {
+		
+	}
+	
+	if (geol) {
+		geol.getCurrentPosition(function(position) {
+
+		nowLatitude = position.coords.latitude;
+		nowLongitude = position.coords.longitude;
+		nowHeading = position.coords.heading;
+		
+		center = new qq.maps.LatLng(nowLatitude, nowLongitude);
+		
+		qq.maps.convertor.translate(center, 2, function(res){		
+			center = res[0];
+				
+			map = new qq.maps.Map(document.getElementById("container"),{
+				center: center,
+				zoom: 18
+			});
+				
+			infoWindow = new qq.maps.InfoWindow({
+				map: map
+			});
+				
+			map.panTo(center);
+			
+			//addMarker(center);
+			myMarker = new qq.maps.Marker({
+				icon: icon,
+				position: center,
+				map: map
+			});
+		});	
+		
+	}, function(error) {
+		
+		center = new qq.maps.LatLng(34, 108);
+		
+		qq.maps.convertor.translate(center, 2, function(res){		
+			center = res[0];
+				
+			map = new qq.maps.Map(document.getElementById("container"),{
+				center: center,
+				zoom: 18
+			});
+				
+			infoWindow = new qq.maps.InfoWindow({
+				map: map
+			});
+				
+			map.panTo(center);
+			
+			//addMarker(center);
+			myMarker = new qq.maps.Marker({
+				icon: icon,
+				position: center,
+				map: map
+			});
+		});
+		
+		switch(error.code){
+		case error.TIMEOUT :
+			break;
+		case error.PERMISSION_DENIED :
+			break;
+		case error.POSITION_UNAVAILABLE : 
+			break;
+		}
+	}, {timeout:10000});	//设置十秒超时
+	}
+}
+//每过两秒定位一次自己的位置。
+setInterval(function() {
+    getCurrentPosition();
+}, 2000);
+function getCurrentPosition(){
+	var geol;
+	
+	//通过浏览器获得用户位置
+	try {
+		if (typeof(navigator.geolocation) == 'undefined') {
+			geol = google.gears.factory.create('beta.geolocation');
+		} else {
+		    geol = navigator.geolocation;
+		}
+	} catch (error) {
+		
+	}
+	
+	if (geol) {
+		geol.getCurrentPosition(function(position) {
+
+		nowLatitude = position.coords.latitude;
+		nowLongitude = position.coords.longitude;
+		nowHeading = position.coords.heading;
+		
+		myPosition = new qq.maps.LatLng(nowLatitude, nowLongitude);
+		
+		qq.maps.convertor.translate(myPosition, 2, function(res){		
+			myPosition = res[0];
+			myMarker.setMap(null);
+			myMarker = new qq.maps.Marker({
+				icon: icon,
+				position: myPosition,
+				map: map
+			}); 
+		});	
+		
+	}, function(error) {
+		try {
+			if (typeof(navigator.geolocation) == 'undefined') {
+				geol = google.gears.factory.create('beta.geolocation');
+			} else {
+				geol = navigator.geolocation;
+			}
+		} catch (error) {
+			
+		}
+		
+	}, {timeout:10000});	//设置十秒超时
+	}
+}
+
+//搜索按钮的处理函数。
+$(function(){
+	$("#searchBtn").click(function() {
+		$.ajax({
+            type: "POST",   
+            url: "/index.php/Home/Map/doSearch", 
+            data: {keyword:$("#keyword").val(),nowLatitude:nowLatitude,nowLongitude:nowLongitude},  
+            dataType: "json",   
+            success: function(result) { 
+			//alert(result.status);
+			    
+				switch(result.type)
+				{
+					case "address":
+						if(result.status==1)
+						{
+							deleteOverlays();
+						
+							for(var i=0;i<result.list.length;i++){
+								var markerPosition = new qq.maps.LatLng(result.list[i].latitude,result.list[i].longitude);
+								markersArray[i] = new qq.maps.Marker({
+												map:map,
+												position:markerPosition
+											});
+								}
+							
+							
+							start_point = new qq.maps.LatLng(nowLatitude, nowLongitude);
+							qq.maps.convertor.translate(start_point, 2, function(res){		
+								start_point = res[0];
+								end_point = new qq.maps.LatLng(result.list[0].latitude,result.list[0].longitude);
+								calcRoute();
+							});
+							
+								var markerPosition0 = new qq.maps.LatLng(result.list[0].latitude,result.list[0].longitude);
+								var description0 = result.list[0].description;
+								var locationName0 = result.list[0].name;
+								qq.maps.event.addListener(markersArray[0], 'click', function() {					
+											infoWindow.open(); 
+											infoWindow.setContent('<div style="text-align:center;white-space:wrap;'+
+												'margin:1px;color:black">'+locationName0+':'+description0+'</div>');
+											infoWindow.setPosition(markerPosition0); 
+											
+									});
+								var markerPosition1 = new qq.maps.LatLng(result.list[1].latitude,result.list[1].longitude);
+								var description1 = result.list[1].description;
+								var locationName1 = result.list[1].name;
+								qq.maps.event.addListener(markersArray[1], 'click', function() {					
+											infoWindow.open(); 
+											infoWindow.setContent('<div style="text-align:center;white-space:wrap;'+
+												'margin:1px;color:black">'+locationName1+':'+description1+'</div>');
+											infoWindow.setPosition(markerPosition1); 
+											
+									});
+								var markerPosition2 = new qq.maps.LatLng(result.list[2].latitude,result.list[2].longitude);
+								var description2 = result.list[2].description;
+								var locationName2 = result.list[2].name;
+								qq.maps.event.addListener(markersArray[2], 'click', function() {					
+											infoWindow.open(); 
+											infoWindow.setContent('<div style="text-align:center;white-space:wrap;'+
+												'margin:1px;color:black">'+locationName2+':'+description2+'</div>');
+											infoWindow.setPosition(markerPosition2); 
+											
+									});
+									var markerPosition3 = new qq.maps.LatLng(result.list[3].latitude,result.list[3].longitude);
+								var description3 = result.list[3].description;
+								var locationName3 = result.list[3].name;
+								qq.maps.event.addListener(markersArray[3], 'click', function() {					
+											infoWindow.open(); 
+											infoWindow.setContent('<div style="text-align:center;white-space:wrap;'+
+												'margin:1px;color:black">'+locationName3+':'+description3+'</div>');
+											infoWindow.setPosition(markerPosition3); 
+											
+									});
+									var markerPosition4 = new qq.maps.LatLng(result.list[4].latitude,result.list[4].longitude);
+								var description4 = result.list[4].description;
+								var locationName4 = result.list[4].name;
+								qq.maps.event.addListener(markersArray[4], 'click', function() {					
+											infoWindow.open(); 
+											infoWindow.setContent('<div style="text-align:center;white-space:wrap;'+
+												'margin:1px;color:black">'+locationName4+':'+description4+'</div>');
+											infoWindow.setPosition(markerPosition4); 
+											
+									});
+								var markerPosition5 = new qq.maps.LatLng(result.list[5].latitude,result.list[5].longitude);
+								var description5 = result.list[5].description;
+								var locationName5 = result.list[5].name;
+								qq.maps.event.addListener(markersArray[5], 'click', function() {					
+											infoWindow.open(); 
+											infoWindow.setContent('<div style="text-align:center;white-space:wrap;'+
+												'margin:1px;color:black">'+locationName5+':'+description5+'</div>');
+											infoWindow.setPosition(markerPosition5); 
+											
+									});
+									var markerPosition6 = new qq.maps.LatLng(result.list[6].latitude,result.list[6].longitude);
+								var description6 = result.list[6].description;
+								var locationName6 = result.list[6].name;
+								qq.maps.event.addListener(markersArray[6], 'click', function() {					
+											infoWindow.open(); 
+											infoWindow.setContent('<div style="text-align:center;white-space:wrap;'+
+												'margin:1px;color:black">'+locationName6+':'+description6+'</div>');
+											infoWindow.setPosition(markerPosition6); 
+											
+									});
+									var markerPosition7 = new qq.maps.LatLng(result.list[7].latitude,result.list[7].longitude);
+								var description7 = result.list[7].description;
+								var locationName7 = result.list[7].name;
+								qq.maps.event.addListener(markersArray[7], 'click', function() {					
+											infoWindow.open(); 
+											infoWindow.setContent('<div style="text-align:center;white-space:wrap;'+
+												'margin:1px;color:black">'+locationName7+':'+description7+'</div>');
+											infoWindow.setPosition(markerPosition7); 
+											
+									});
+									var markerPosition8 = new qq.maps.LatLng(result.list[8].latitude,result.list[8].longitude);
+								var description8 = result.list[8].description;
+								var locationName8 = result.list[8].name;
+								qq.maps.event.addListener(markersArray[8], 'click', function() {					
+											infoWindow.open(); 
+											infoWindow.setContent('<div style="text-align:center;white-space:wrap;'+
+												'margin:1px;color:black">'+locationName8+':'+description8+'</div>');
+											infoWindow.setPosition(markerPosition8); 
+											
+									});
+									var markerPosition9 = new qq.maps.LatLng(result.list[9].latitude,result.list[9].longitude);
+								var description9 = result.list[9].description;
+								var locationName9 = result.list[9].name;
+								qq.maps.event.addListener(markersArray[9], 'click', function() {					
+											infoWindow.open(); 
+											infoWindow.setContent('<div style="text-align:center;white-space:wrap;'+
+												'margin:1px;color:black">'+locationName9+':'+description9+'</div>');
+											infoWindow.setPosition(markerPosition9); 
+											
+									});
+									var markerPosition10 = new qq.maps.LatLng(result.list[10].latitude,result.list[10].longitude);
+								var description10 = result.list[10].description;
+								var locationName10 = result.list[10].name;
+								qq.maps.event.addListener(markersArray[10], 'click', function() {					
+											infoWindow.open(); 
+											infoWindow.setContent('<div style="text-align:center;white-space:wrap;'+
+												'margin:1px;color:black">'+locationName10+':'+description10+'</div>');
+											infoWindow.setPosition(markerPosition10); 
+											
+									});
+							setTimeout(function() {
+								map.panTo(new qq.maps.LatLng(result.list[0].latitude,result.list[0].longitude));
+							}, 1000);
+						}
+						break;
+				}
+            },
+			error : function(){
+				
+			}
+        });
+	});
+});
+
+function calcRoute() {
+
+    var policy = "REAL_TRAFFIC";
+    route_steps = [];
+    
+    directionsService.setLocation("西安");
+    directionsService.setPolicy(qq.maps.DrivingPolicy[policy]);
+    directionsService.search(start_point,end_point);
+}
+
+//清除地图上的marker
+function clearOverlay(overlays){
+    var overlay;
+    while(overlay = overlays.pop()){
+        overlay.setMap(null);
+    }
+}
+function addMarker(location) {
+    var marker = new qq.maps.Marker({
+        position: location,
+        map: map
+    });
+    markersArray.push(marker);
+}
+
+function clearOverlays() {
+    if (markersArray) {
+        for (i in markersArray) {
+            markersArray[i].setMap(null);
+        }
+    }
+}
+
+function showOverlays() {
+    if (markersArray) {
+        for (i in markersArray) {
+            markersArray[i].setMap(map);
+        }
+    }
+} 
+
+function deleteOverlays() {
+    if (markersArray) {
+        for (i in markersArray) {
+            markersArray[i].setMap(null);
+        }
+        markersArray.length = 0;
+    }
+}
+
+</script> 
+
+<script>
+$("#bottomBar").click(function(){
+	
+});
+
+</script>
+
+<style>
+#bottomBar { 
+	background-color:#eef;
+	color:#000;
+	z-index:999; 
+	position:fixed; 
+	bottom:0; 
+	right:0; 
+	width:4.5em; 
+	height:1.5em;
+	font-size:1.5em;
+	_position:absolute;
+	_top: expression_r(documentElement.scrollTop + documentElement.clientHeight-this.offsetHeight); 
+	overflow:visible; 
+}
+</style>
+ </head> 
+ <body onload="init();"> 
+  <div style="width:100%;height:100%;" id="container"></div> 
+  <div class="sch_new sch_new_20140508"> 
+   <div class="schWrap fat"> 
+    <div class="form"> 
+     <i class="i sogou_logo"></i> 
+     <input id="keyword" name="keyword" type="text" class="key" value="" placeholder="地名、招聘会" /> 
+     <button id="searchBtn" class="submit">搜索</button> 
+    </div> 
+   </div> 
+   <a class="cancel_search" href="#">{$openid}</a> 
+  </div>  
+  
+  <div id="bottomBar">
+	<ul>
+		<!--<li>到这里去</li>-->
+	</ul>
+  </div>
+  
+ </body>
+</html>

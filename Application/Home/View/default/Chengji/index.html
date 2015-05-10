@@ -1,0 +1,42 @@
+<include file="./Application/Home/View/Public/jmobile_black_header.html" />
+	 <ul data-role="listview" data-inset="true">
+	   <li> 
+		   <div class="ui-grid-a" >
+				 <div class="ui-block-a">
+				   <span>科目</span> 
+				 </div>
+				 <div class="ui-block-b">
+				   <div class="ui-grid-a" >
+					<div class="ui-block-a">
+						<span>学分</span> 
+					</div>
+					<div class="ui-block-b">
+						<span>成绩</span> 
+					</div>
+				   </div>
+				</div>
+			</div>
+	   </li>
+	   <?php foreach($chengji as $item){ ?>
+	    <li> 
+		 <div class="ui-grid-a" >
+				 <div class="ui-block-a">
+				   <span>{$item["KM"]}</span> 
+				 </div>
+				 <div class="ui-block-b">
+				   <div class="ui-grid-a" >
+					<div class="ui-block-a">
+						<span>{$item["XF"]}</span> 
+					</div>
+					<div class="ui-block-b">
+						<span>{$item["CJ"]}</span> 
+					</div>
+				   </div>
+				</div>
+			</div>
+		   
+	   </li>
+	   <?php } ?>
+	 </ul>
+
+ <include file="./Application/Home/View/Public/jmobile_black_footer.html" />

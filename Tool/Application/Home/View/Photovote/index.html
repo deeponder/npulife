@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<meta name="format-detection" content="telephone=no">
+<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script><style>
+#info{
+	margin: 5px;
+}
+
+#content{
+	margin:0px;
+}
+</style>
+<script>
+var pageIndex = 1;
+function addEvent(){
+	$(".dianzan").click(function(){
+		//alert($(this).html());
+		var id =$(this).data("id"); 
+		var thisObject = $(this);
+		$.ajax({
+			url:'__URL__/dianzan',// 跳转到 action    
+		    data:"id="+id,  
+		    type:'post',    
+		    cache:false,    
+		    dataType:'json',
+		    success:function(data) {    
+		        if(data == 1){
+		        	var oldadd = $("#add"+id).data('add');
+		        	$("#add"+id).text("赞 "+(oldadd+1));
+		        	thisObject.html("<img src='__PUBLIC__/Photovote/img/zan.png'>");
+		        	thisObject.attr("disabled", true); 
+		        }else if(data == 0){    
+		            alert("你已经赞过了！");    
+		        }else{
+		        	alert("更新失败！");
+		        }    
+		     },    
+		     error: function() {    
+		    	 alert("网络异常！");   
+		     }    
+		});
+	});
+}
+	$(document).ready(function(){
+		var type = "{$type}";
+		switch(type){
+		case 'people':
+			$('#people').addClass("active");
+			break;
+		case 'fj':
+			$('#fj').addClass("active");
+			break;
+		case 'hz':
+			$('#hz').addClass("active");
+			break;
+		case 'yx':
+			$('#yx').addClass("active");
+			break;
+		default:return;
+		}
+		
+		
+		addEvent();
+		
+		$('#more_picture').click(function(){
+			//alert("dfs");
+			$('#more_picture').text("加载中~~~");	
+			$.ajax({
+				url:'__URL__/getMore',// 跳转到 action    
+			    data:"action="+type+"&order="+"{$order}"+"&page="+pageIndex,  
+			    type:'post',    
+			    cache:false,    
+			    dataType:'json',    
+			    success:function(data) {    
+			        if(data != null){    
+			        	 for(var i in data){
+			        		 var string = 
+				        			'<li class="span4">'
+									+'<div class="thumbnail">'
+									+'	<a href="__PUBLIC__/Photovote/img/photo/'+data[i]["photoid"]+'.jpg"><img alt="300x200" src="__PUBLIC__/Photovote/img/photo/'+data[i]["photoid"]+'small.jpg" style="width:100%"/></a>'
+									+'<div id="info" class="caption">'
+									+'	<h3>'
+									+		data[i]["title"]
+									+'	</h3>'
+									+'	<p>'
+									+		data[i]["description"]
+									+'	</p>'
+									+'	<p style="">'
+									+'		<span class="badge" id="add'+data[i]["photoid"]+'" data-add="'+data[i]["addnum"]+'" style="margin-right: 50px;">赞 &nbsp; '+data[i]["addnum"]+' </span>'
+									+'		<a class="btn dianzan" id="dianzan" data-id="'+data[i]["photoid"]+'" href="javascript:void(0)"><img src = "__PUBLIC__/Photovote/img/zan1.png" ></a>'
+									+'	</p>'
+									+'</div>'
+									+'</div>'
+									+'</li>';
+								//alert(string);
+							$('#picture_list').append(string);
+			        		//alert (data[i]['topic']);
+			        	 }
+			        	 $(".dianzan").unbind( "click" );
+			        	 addEvent();
+			        	pageIndex++;
+			        	$('#more_picture').text("更多");	
+			        	// alert(data[0]['topic']);
+			        }else{    
+			           	// alert("已经没有了！");  
+			            $('#more_picture').text("已经是全部图片了~");	
+			            $('#more_picture').attr("disabled", true);
+			        }    
+			     },    
+			     error: function() {
+			    	 $('#more_picture').text("更多");	
+			    	 alert("网络异常！");   
+			     }    
+			});
+		});
+	});
+</script>
+</head>
+<body>
+<div class="container-fluid text-right">
+	<div class="row-fluid">
+		<div class="span12" style="height:60px" >
+			<h2 class="text-center text-success">
+				<div>&nbsp;</div>
+				&ldquo;回眸工大&bull;青春映画&rdquo;摄影作品二轮展示开始啦！
+				<div>&nbsp;</div>
+			</h2>
+
+			<div class="text-left">
+			<a href="#myPop" role="button" class="btn btn-primary btn-large" data-toggle="modal">说明</a>
+			</div>
+			<br>
+			<br>
+			 <div id="myPop" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+			
+	            <div class="modal-body text-left" style="background: #fff;">
+
+	               <span>说明：<br>
+						1.最终结果以评审小组打分为主，点赞为辅，请勿盲目刷赞。<br>
+						2.评审小组本着公正公平的原则，从主题内涵、创意构图、视觉效果、拍摄技巧等方面进行打分，选出以下获奖作品并进入二轮评审。<br>
+						3.此外还有一些作品由于某些原因未能入选，如同一作者等，故展示在优秀作品页中。
+					</span>
+	            </div>
+	            <div class="modal-footer">
+	                <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+	            </div>
+		
+			 </div>
+			<ul class="nav nav-tabs" >
+				<li id="people"><a href="__URL__/show?action=people">人物</a></li>
+				<li id="fj"><a href="__URL__/show?action=fj">风景</a></li>
+				<li id="hz"><a href="__URL__/show?action=hz">合照</a></li>
+				<li id="yx"><a href="__URL__/show?action=yx">优秀</a></li>
+				<li class="dropdown pull-right"><a class="dropdown-toggle" data-toggle="dropdown" href="#">排序&nbsp;<b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="__URL__/show?action={$type}">默认排序&nbsp;</a></li>
+					<li><a href="__URL__/show?action={$type}&order=1">票数最多&nbsp;</a></li>
+				</ul>
+				</li>
+			</ul>
+			<div id="content" >
+			<if condition ="$pictures eq NULL">
+			<div class="jumbotron">
+				<h3>暂无图片~</h3>
+			</div>
+				
+			<else />
+			<ul class="list-unstyled" id="picture_list">
+				<volist name="pictures" id="picture">
+				<li class="span4">
+					<div class="thumbnail">
+						<a href="__PUBLIC__/Photovote/img/photo/{$picture.photoid}.jpg"><img alt="300x200" src="__PUBLIC__/Photovote/img/photo/{$picture.photoid}small.jpg" style="width:100%"/></a>
+						<div id="info" class="caption">
+							<h3>
+								{$picture.title}
+							</h3>
+							<p>
+								{$picture.description}
+							</p>
+							<p style="">
+								<span class="badge" id="add{$picture.photoid}" data-add="{$picture.addnum}" style="margin-right: 50px;">赞 &nbsp; {$picture.addnum} </span>
+								<a class="btn dianzan" id="dianzan" data-id="{$picture.photoid}" href="javascript:void(0)"><img src = "__PUBLIC__/Photovote/img/zan1.png" ></a>
+							</p>
+						</div>
+					</div>
+				</li>
+				</volist>
+				</ul>
+			<p><a id="more_picture" class="btn btn-primary btn-lg btn-block" href="javascript:void(0)" role="bottun">更多</a></p>
+			</if>
+			
+			</div>
+		</div>
+	</div>
+</div>

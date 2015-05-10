@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content=" initial-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<title>修改{$itemName}</title>
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/personinfo/style.css">
+</head>
+<body>
+	<div class="edit-info">
+    <form method="post" action="#">
+      <input id="input-info" type="text" >
+      <a id="save-btn" href="#">保存</a>   
+    </form>
+  </div>
+  <script type="text/javascript" src="__PUBLIC__/personinfo/jquery-2.0.0.min.js"></script>
+	<script type="text/javascript">
+		var info
+			item = {$item};
+
+		var url = '__URL__/update';
+		$('#save-btn').click(function(){
+			$.getJSON(url,{info:$('#input-info').val(), item:item},function(result){
+				if(result==1){
+					 window.location.href='__URL__/index'; 
+				}else{
+					alert('更新失败，请稍后重试哦~~');
+				}
+			});
+
+	});
+	</script>
+</body>
+</html>

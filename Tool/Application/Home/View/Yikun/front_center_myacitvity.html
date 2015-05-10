@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<meta name="format-detection" content="telephone=no">
+
+
+<link href="__PUBLIC__/Yikun/css/jquery.mobile-1.4.5.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Yikun/css/index.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Yikun/css/component.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Yikun/css/default.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery.mobile-1.4.5.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/modernizr.custom.js"></script>
+
+<title>YI KUN BNA</title>
+<script>
+
+</script>
+</head>
+<body>
+	 
+	<div data-role="page" data-title="我的活动" id="front_center_myactivity" data-dom-cache="false">
+		<div data-rolo="content" id= "content">
+		
+			<ul data-role="listview" data-split-icon="gear" data-split-theme="b" data-divider-theme='b'>
+				<if condition="$activityNotAssign eq NULL">
+					<p style="color:red;">你已经报名了所有正在举办的活动~</p>	
+				<else />
+					<li data-role="list-divider">未报名的活动</li>
+					<volist name="activityNotAssign" id="activity">
+						<li><a href="__URL__/activityShow?actid={$activity.actid}">
+							<if condition="$activity['picture'] neq NULL">
+                            <img src="__URL__/pictureShow?action=activity&picid={$activity['picture'][0]}">
+                            </if>
+                            <br>
+							<h3>{$activity.topic}</h3>
+							<p>{$activity.content}</p>
+							<p class="ui-li-aside" style="color:#6589d1"><strong>{$activity.mystate}</strong></p>
+							</a>
+						</li>
+					</volist>
+				</if>
+			</ul>
+			
+			 <ul data-role="listview" data-split-icon="gear" data-split-theme="b" data-divider-theme='b'>
+				<if condition="$activityAssign eq NULL">
+				<else />
+					<li data-role="list-divider">已报名的活动</li>
+					<volist name="activityAssign" id="activity">
+						<li><a href="__URL__/activityShow?actid={$activity.actid}">
+							<if condition="$activity['picture'] neq NULL">
+                            <img src="__URL__/pictureShow?action=activity&picid={$activity['picture'][0]}">
+                            </if>
+                            <br>
+							<h3>{$activity.topic}</h3>
+							<p>{$activity.content}</p>
+							<p class="ui-li-aside" style="color:#6589d1"><strong>{$activity.mystate}</strong></p>
+							</a>
+						</li>
+					</volist>			
+				</if>
+			</ul>
+			
+			 <ul data-role="listview" data-split-icon="gear" data-split-theme="b" data-divider-theme='b'>
+				<if condition="$activityNotAssign1 eq NULL AND $activityAbsent eq NULL">
+				<p style="color:blue">你还没有缺席记录~继续加油~！</p>
+				<else />
+					<li data-role="list-divider">缺席的活动</li>
+					<volist name="activityNotAssign1" id="activity">
+						<li><a href="__URL__/activityShow?actid={$activity.actid}">
+							<if condition="$activity['picture'] neq NULL">
+                            <img src="__URL__/pictureShow?action=activity&picid={$activity['picture'][0]}">
+                            </if>
+                            <br>
+							<h3>{$activity.topic}</h3>
+							<p>{$activity.content}</p>
+							<p class="ui-li-aside" style="color:red"><strong>{$activity.mystate}</strong></p>
+							</a>
+						</li>
+					</volist>
+					<volist name="activityAbsent" id="activity">
+						<li><a href="__URL__/activityShow?actid={$activity.actid}">
+							<if condition="$activity['picture'] neq NULL">
+                            <img src="__URL__/pictureShow?action=activity&picid={$activity['picture'][0]}">
+                            </if>
+                            <br>
+							<h3>{$activity.topic}</h3>
+							<p>{$activity.content}</p>
+							<p class="ui-li-aside" style="color:red"><strong>{$activity.mystate}</strong></p>
+							</a>
+						</li>
+					</volist>						
+				</if>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

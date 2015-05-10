@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<link href="__PUBLIC__/Yikun/css/jquery.mobile-1.4.5.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery.mobile-1.4.5.js"></script>
+
+<title>YI KUN BNA</title>
+</head>
+<body>
+
+	<div data-role="page" data-title="活动问卷" id="front_questionnaire" data-dom-cache="true">
+		<div data-rolo="content" id= "content">
+			<form method="post" action="__URL__/questionnaire">
+				<fieldset data-role="controlgroup" >
+					<legend>1.本次活动内容的满意度：</legend>
+					<input class="ui-radio" type="radio" name="choice-1" id="radio-choice-1" value="1" checked="checked">
+					<label for="radio-choice-1">100分</label>
+					<input type="radio" name="choice-1" id="radio-choice-2" value="2">
+					<label for="radio-choice-2">80分</label>
+					<input type="radio" name="choice-1" id="radio-choice-3" value="3">
+					<label for="radio-choice-3">60分</label>
+					<input type="radio" name="choice-1" id="radio-choice-4" value="4">
+					<label for="radio-choice-4">40分</label>
+					<input type="radio" name="choice-1" id="radio-choice-5" value="5">
+					<label for="radio-choice-5">20分</label>
+				</fieldset>
+				<br>
+				<fieldset data-role="controlgroup">
+					<legend>2.本次主讲老师的满意度：</legend>
+					<input class="ui-radio" type="radio" name="choice-2" id="radio-choice2-1" value="1" checked="checked">
+					<label for="radio-choice2-1">100分</label>
+					<input type="radio" name="choice-2" id="radio-choice2-2" value="2">
+					<label for="radio-choice2-2">80分</label>
+					<input type="radio" name="choice-2" id="radio-choice2-3" value="3">
+					<label for="radio-choice2-3">60分</label>
+					<input type="radio" name="choice-2" id="radio-choice2-4" value="4">
+					<label for="radio-choice2-4">40分</label>
+					<input type="radio" name="choice-2" id="radio-choice2-5" value="5">
+					<label for="radio-choice2-5">20分</label>
+				</fieldset>
+				<br>
+				<fieldset data-role="controlgroup">
+					<legend>3.您对本次培训活动的推荐度：</legend>
+					<input class="ui-radio" type="radio" name="choice-3" id="radio-choice3-1" value="1" checked="checked">
+					<label for="radio-choice3-1">100分</label>
+					<input type="radio" name="choice-3" id="radio-choice3-2" value="2">
+					<label for="radio-choice3-2">80分</label>
+					<input type="radio" name="choice-3" id="radio-choice3-3" value="3">
+					<label for="radio-choice3-3">60分</label>
+					<input type="radio" name="choice-3" id="radio-choice3-4" value="4">
+					<label for="radio-choice3-4">40分</label>
+					<input type="radio" name="choice-3" id="radio-choice3-5" value="5">
+					<label for="radio-choice3-5">20分</label>
+				</fieldset>
+				
+				4．你对本次最深的印象：（几个词或一句话，用于形成形象墙）
+				<label for="questionnaire_text"></label>
+				<input type="text" data-clear-btn="true" data-mini="true" name="question_impress" id="questionnaire_text" value="">
+				<input type="hidden" name="actid" value="{$actid}">
+				<input type="hidden" name="action" value="submit">
+				<input type="submit" value="提交">
+			</form>
+		</div>
+	</div>
+
+<script>
+	
+</script>
+</body>
+</html>

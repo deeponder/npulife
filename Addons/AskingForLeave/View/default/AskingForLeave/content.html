@@ -1,0 +1,33 @@
+ <include file="./Application/Home/View/Public/jmobile_black_header.html" />
+	<div>
+		<table class="table" border=1>
+		<tr>
+		    <td>请假人：</td><td>{$qingjiaResult.myName}</td>
+		</tr>
+		<tr>
+		    <td>请假时间：</td><td>{$qingjiaResult.apply_time}</td>
+		</tr>
+		<tr>
+		    <td>起止时间：</td><td>{$qingjiaResult.start_time}至{$qingjiaResult.end_time}</td>
+		</tr>
+		<tr>
+		    <td>请假事由：</td><td>{$qingjiaResult.reason}</td>
+		</tr>
+		<tr>
+		    <td>批准状态：</td><td>{$qingjiaResult.auth}</td>
+		</tr>
+		<tr>
+		    <td>批准时间：</td><td>{$qingjiaResult.auth_time}</td>
+		</tr>
+		<tr>
+		    <td>学院意见：</td><td>{$qingjiaResult.remarks}</td>
+		</tr>
+		<tr>
+		    <td>销假状态：</td><td>{$qingjiaResult.isResume}</td>
+		</tr>
+		<tr>
+		    <td>销假时间：</td><td>{$qingjiaResult.resume_time}</td>
+		</tr>
+	</table>
+    </div>
+ <include file="./Application/Home/View/Public/jmobile_black_footer.html" />

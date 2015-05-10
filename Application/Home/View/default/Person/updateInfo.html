@@ -1,0 +1,118 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content=" initial-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+
+<title>个人资料修改</title>
+<style>
+		
+		*:focus{
+			outline:none; /* Prevents blue border in Webkit */
+		}
+
+		body {
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /*  */
+		}
+		
+		#top_bit {
+			width:760px;
+			margin: 0 auto;
+		}
+		
+		form {
+			width:300px;
+			margin: 20px auto;
+			
+		}
+
+		p {
+			line-height: 1.6;
+		}
+
+		input, textarea {
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			background-color:#fff;
+			border:1px solid #ccc;
+			font-size:20px;
+			width:300px;
+			min-height:30px;
+			display:block;
+			margin-bottom:16px;
+			margin-top:8px;
+			
+			-webkit-border-radius:5px;
+			-moz-border-radius:5px;
+			border-radius:5px;
+			
+			-webkit-transition: all 0.5s ease-in-out;
+			-moz-transition: all 0.5s ease-in-out;
+			transition: all 0.5s ease-in-out;
+		}
+		
+		textarea {
+				min-height:200px;
+		}
+
+		input:focus, textarea:focus {
+			-webkit-box-shadow:0 0 25px #ccc;
+			-moz-box-shadow:0 0 25px #ccc;
+			box-shadow:0 0 25px #ccc;
+			
+			-webkit-transform: scale(1.05);
+			-moz-transform: scale(1.05);
+			transform: scale(1.05);
+		}
+		
+		/* The interesting bit */
+		
+		input:not(:focus), textarea:not(:focus) {
+			opacity:0.5;
+		}
+		
+		input:required, textarea:required {
+			background:url("__PUBLIC__/personal/images/asterisk_orange.png") no-repeat 280px 7px;						
+		}
+
+		input:valid, textarea:valid {
+			background:url("__PUBLIC__/personal/images/tick.png") no-repeat 280px 5px;			
+		}		
+
+		input:focus:invalid, textarea:focus:invalid {
+			background:url("__PUBLIC__/personal/images/cancel.png") no-repeat 280px 7px;						
+		}
+
+		input[type=submit] {
+			padding:10px;
+			background:none;
+			opacity:1.0;
+		}
+		
+		</style>
+	</head>
+	<body>
+	<div id="top_bit">
+
+
+	</div>	
+	<form action="{:U('updatehandle')}" method="post"> 
+		<label for="name">名字:<font color="red"> * </font></label> 
+		<input type="text" name="truename" required="required" placeholder="路路" />
+		<label for="school">学院:<font color="red"> * </font></label> 
+		<input type="text" name="school" required="required" placeholder="软件与微电子学院" />
+		<label for="qq">QQ号码:<font color="red"> * </font></label> 
+		<input type="text" name="qq" required="required" placeholder="577002655" />
+		
+		<label for="name">昵称:<font color="red"> * </font></label> 
+		<input type="text" name="nickname" required="required" placeholder="圈哥" />
+		<label for="qq">手机号码:</label> 
+		<input type="text" name="mobile" required="required" placeholder="18*****" />
+		
+	
+		<input type="submit" value="提交" />
+			</form>
+</body>
+</html>

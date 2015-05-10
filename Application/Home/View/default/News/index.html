@@ -1,0 +1,22 @@
+ <include file="./Application/Home/View/Public/jmobile_black_header.html" />
+   <div data-role="content">
+    <div data-role="collapsible" data-collapsed="false">
+      <h1>新闻</h1>
+      <ul data-role="listview" data-inset="true">
+		<li><a href={:U("newscatogory","cate=0")} data-transition="slide" rel="external">工大要闻</a></li>
+		<li><a href={:U("newscatogory","cate=1")}  data-transition="slide" rel="external">校园新闻</a></li>
+		<li><a href={:U("newscatogory","cate=2")}  data-transition="slide" rel="external">摄影报道</a></li>
+		<li><a href={:U("newscatogory","cate=3")}  data-transition="slide" rel="external">特约评论 </a></li>
+		</ul>
+    </div>
+
+	<div data-role="collapsible" data-collapsed="true">
+      <h1>生活</h1>
+      <ul data-role="listview" data-inset="true">
+		<li><a href={:U("newscatogory","cate=5")} data-transition="slide" rel="external">真情约稿</a></li>
+		<li><a href={:U("newscatogory","cate=6")} data-transition="slide" rel="external">校园风光</a></li>
+		<li><a href={:U("newscatogory","cate=7")}  data-transition="slide" rel="external">我与视窗</a></li>
+		</ul>
+    </div>
+  </div>
+ <include file="./Application/Home/View/Public/jmobile_black_footer.html" />

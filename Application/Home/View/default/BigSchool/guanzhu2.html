@@ -1,0 +1,205 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta id="viewport" name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<meta name="format-detection" content="telephone=no">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="js/jquery-2.0.0.min.js"></script>
+<script src="js/common.js"></script>
+<title>校园门户</title>
+<link rel="stylesheet" type="text/css" href="css/wap.css">
+<link rel="stylesheet" type="text/css" href="css/wap_flow.css">
+</head>
+
+<body class="">
+<header id="header" class="relative">
+  <div class="top_bar">
+    <div class="abs_l"> <a class="btn back" href="/"></a> </div>
+    <div class="abs_m"> 频道订阅 </div>
+  </div>
+</header>
+<content>
+  <div class="list_content" pull-fresh>
+    <div class="guanzhu guanzhu1">
+      <ul>
+        <li>
+          <div class="btngrounp"><a href="#" class="on">订阅</a></div>
+          <div class="name">西北工业大学</div>
+        </li>
+
+ 
+        <li>
+          <div class="btngrounp"><a href="#" class="no">取消订阅</a></div>
+          <div class="name">西北工业大学</div>
+        </li>
+       
+         <li>
+          <div class="btngrounp"><a href="#" class="on">订阅</a></div>
+          <div class="name">西北工业大学</div>
+        </li>
+
+ 
+        <li>
+          <div class="btngrounp"><a href="#" class="on">订阅</a></div>
+          <div class="name">西北工业大学</div>
+        </li> <li>
+          <div class="btngrounp"><a href="#" class="on">订阅</a></div>
+          <div class="name">西北工业大学</div>
+        </li>
+
+ 
+        <li>
+          <div class="btngrounp"><a href="#" class="on">订阅</a></div>
+          <div class="name">西北工业大学</div>
+        </li> <li>
+          <div class="btngrounp"><a href="#" class="on">订阅</a></div>
+          <div class="name">西北工业大学</div>
+        </li>
+
+ 
+        <li>
+          <div class="btngrounp"><a href="#" class="on">订阅</a></div>
+          <div class="name">西北工业大学</div>
+        </li> <li>
+          <div class="btngrounp"><a href="#" class="on">订阅</a></div>
+          <div class="name">西北工业大学</div>
+        </li>
+
+ 
+        <li>
+          <div class="btngrounp"><a href="#" class="on">订阅</a></div>
+          <div class="name">西北工业大学</div>
+        </li> <li>
+          <div class="btngrounp"><a href="#" class="on">订阅</a></div>
+          <div class="name">西北工业大学</div>
+        </li>
+
+ 
+        <li>
+          <div class="btngrounp"><a href="#" class="on">订阅</a></div>
+          <div class="name">西北工业大学</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="list_bottom">
+    <section class="loadmoretip"> <a href="#"></a> </section>
+  </div>
+</content>
+
+<!--登录弹窗-->
+<div id="modal_login" class="jqmWindow" onTouchmove="return false">
+  <div class="sns_login_con">
+    <table>
+      <tr>
+        <td colspan="3"><div class="login_tip"></div></td>
+      </tr>
+      <tr>
+        <td><div class="sns_login"> <a href="#" class="sina_weibo" rel="nofollow" data-toggle="sns_login" name="sina_weibo"></a> </div></td>
+        <td><div class="sns_login"> <a href="#" class="qq_weibo" rel="nofollow" data-toggle="sns_login" name="qq_weibo"></a> </div></td>
+        <td><div class="sns_login"> <a href="#" class="renren_sns" rel="nofollow" data-toggle="sns_login" name="renren_sns"></a> </div></td>
+      </tr>
+      <tr>
+        <td> 新浪微博 </td>
+        <td> 腾讯微博 </td>
+        <td> 人人网 </td>
+      </tr>
+    </table>
+  </div>
+  <div class="jqmClose closeBtn" ga_event="login" ga_label="close"></div>
+</div>
+<div id="connect_window">
+  <iframe src=""  frameborder="0" scrolling="no" width="290" height="400" onTouchmove="return false"></iframe>
+  <div class="jqmClose closeBtn" ga_event="login" ga_label="close"></div>
+</div>
+<div id="left" class="view ">
+  <div class="loginArea" id="login"  ontouchmove='return false'>
+    <div class="sns_login"><a href="#" rel="nofollow" data-toggle="sns_login" name="sina_weibo" class="sina_weibo"></a></div>
+    <div class="sns_login"><a href="#" rel="nofollow" data-toggle="sns_login" name="qq_weibo" class="qzone_sns"></a></div>
+    <div class="sns_login"><a href="#" rel="nofollow" data-toggle="sns_login" name="renren_sns" class="renren_sns"></a></div>
+    <div class="login_tip"><span >登录后，将给你推荐更多感兴趣的文章</span></div>
+  </div>
+  <div class="loginArea" id="logout" style="display:none"  ontouchmove='return false'> <span class="avatar"><img src="" class="large no_bg" data-context="user-pic"></span> <span class="name" data-context="user-name"></span> </div>
+  <div id="left_menu">
+    <ul>
+      <li id="favorite" style="display:none"><a class="btn favorite" href="#">收藏</a></li>
+      <li><a href="#" class="btn search">搜索</a></li>
+      <li><a href="#" target="_blank" class="btn activity">活动</a></li>
+      <li><a href="#"  class="btn app">应用推荐</a></li>
+      <li><a href="#" class="btn feedback">反馈</a></li>
+      <li><a href="#" target="_blank" class="btn about">关于头条</a></li>
+      <li><a href="#" target="_blank" class="btn cooperation">产品合作</a></li>
+      <li id="quit" style="display:none"><a onClick="user.logout(); return false" class="btn quite">退出</a></li>
+    </ul>
+  </div>
+  <div ontouchmove='return false' class="blank"></div>
+</div>
+<input type="hidden" name='page_id' id='page_id' value="/index/">
+<script>
+var _gaq = _gaq || [];
+var test_channel = "", test_version = "";
+_gaq.push(['_setAccount', 'UA-28423340-7']);
+_gaq.push(['_addOrganic','baidu','word']);
+_gaq.push(['_setLocalRemoteServerMode']);
+_gaq.push(['_setDomainName', '.toutiao.com']);
+_gaq.push(['_trackPageview','/index/']);
+
+
+function gaqpush(ga_event, ga_label){
+	gaevent('event',ga_event,ga_label);
+};
+
+function gaevent(category, action, label){
+	if(test_channel.indexOf(action) >-1) label = label+test_version;
+	console.log("ga:"+category+","+action+","+label);
+	_gaq.push(['_trackEvent', category, action, label, 1]);
+};
+
+(function() {
+ var ga = document.createElement('script');
+ ga.type = 'text/javascript';
+ ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+ var s = document.getElementsByTagName('script')[0];
+ s.parentNode.insertBefore(ga, s);
+})();
+ 
+
+$("body").on('click', '[ga_event]', function(e){
+	 var $this =  $(this);
+	 var ga_category = $this.attr('ga_category') || 'event';
+	 var ga_event = $this.attr('ga_event');
+	 var ga_label = $this.attr('ga_label');
+	 gaevent(ga_category,ga_event,ga_label);
+	 var href = this.href, target = this.target;
+	 if(href !== "#" && target !== "_blank") {
+	 	setTimeout(function(){ 
+	 		location.href = href 
+	 	},400);
+	 	return false
+	 }
+});
+</script> 
+<script>
+var indexFlow,indexSwitch,
+    item_type = "4",
+    tag = "__all__",
+    current_user_id = "",
+    utm_source = "None",
+    last_update = 1416634945798;
+
+var channelCategory = ["__all__","news_hot","news_society", "news_entertainment", "news_tech", "news_car", "news_sports", "news_finance", "news_military", "news_world", "news_fashion",  "news_game", "news_travel", "news_history", "news_discovery","news_food","news_baby","news_regimen","news_story","news_essay"],
+    channelCategoryName = ['推荐','热点','社会','娱乐','科技','汽车','体育','财经','军事','国际','时尚','游戏','旅游','历史','探索','美食','育儿','养生','故事','美文'],
+    channelItemTemplate = '<a href="/#channel=#category#" class="btn">#name#</a>',
+    channelDefaultCount = 12;
+</script> 
+<script src="js/ads.js"></script> 
+<script src="js/canvasutils.js"></script> 
+<script src="js/touchpull.js"></script> 
+<script src="js/pull2refresh_v2.js"></script> 
+<script src="js/user.js"></script> 
+<script src="js/flow.js"></script> 
+<script src="js/list_action.js"></script> 
+<script src="js/index.js"></script>
+</body>
+</html>

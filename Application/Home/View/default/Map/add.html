@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>简单地图</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<style type="text/css">
+html,body{
+    width:100%;
+    height:100%;
+}
+*{
+    margin:0px;
+    padding:0px;
+}
+body, button, input, select, textarea {
+    font: 12px/16px Verdana, Helvetica, Arial, sans-serif;
+}
+p{
+    width:603px;
+    padding-top:3px;
+    overflow:hidden;
+}
+.btn{
+    width:142px;
+}
+</style>
+<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
+
+<script>	
+var lat;
+var lng;
+var init = function() {
+    var center = new qq.maps.LatLng(34.24405, 108.91365);
+    var map = new qq.maps.Map(document.getElementById('container'),{
+        center: center,
+        zoom: 13
+    });
+    var marker = new qq.maps.Marker({
+        position: center,
+        map: map,
+    });
+    marker.setDraggable(true);//激活标签拖动
+    //lat = marker.getPosition().getLat();
+    //lng = marker.getPosition().getLng();
+    
+    
+    /*var info = new qq.maps.InfoWindow({//显示气泡
+        map: map
+    });*/
+
+
+
+    qq.maps.event.addListener(marker, 'position_changed', function() {
+        //alert('您点击了地图.');
+		lat = this.getPosition().getLat();
+    	lng = this.getPosition().getLng();
+    }); 
+}
+
+function setHTML(){
+	 var location_name=document.getElementById('Location_name');
+	 var location_key=document.getElementById('Location_key');
+	 var location_dep=document.getElementById('Location_dep');
+	 var location_type=document.getElementById('Location_type');
+	
+	 $.ajax({
+			type: "post",
+			url: "/index.php/Home/Map/addLocationPoint", 
+			dataType: "json",
+			data : {name:location_name.value,keyword:location_key.value,type:location_type.value,description:location_dep.value,latitude:lat,longitude:lng},
+			//beforeSend	: function() { $loadHtml.html("正在加载..."); },
+			//complete	: function() { $loadHtml.html("加载更多"); },
+			success		: function() {
+						alert("Success");
+			},
+			error       : function(){alert("ERROR");}
+		});
+	 /*document.write("传入信息:	");
+	 document.write(location_name.value);
+	 document.write(location_key.value);
+	 document.write(location_dep.value);
+	 document.write(location_type.value);
+	 document.write(lat);
+	 document.write(lng);*/
+}
+
+function loadScript() {
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src = "http://map.qq.com/api/js?v=2.exp&callback=init";
+  document.body.appendChild(script);
+}
+</script>
+
+</head>
+<body onload="loadScript();">
+<div style="width:100%;height:90%;" id="container"></div>
+添加名称
+<textarea id="Location_name">云天苑e</textarea>
+添加关键词（逗号隔开)
+<textarea id="Location_key">云e</textarea>
+添加类型
+<textarea id="Location_type">location</textarea>
+添加描述
+<textarea id="Location_dep">good</textarea>
+	<button onClick="setHTML();">添加</button><br>
+</body>
+</html>

@@ -1,0 +1,47 @@
+ <include file="./Application/Home/View/Public/jmobile_black_header.html" />
+   <div data-role="content">
+ 
+    <div data-role="collapsible" data-collapsed="false">
+      <h1>我的订单</h1>
+      <ul data-role="listview" data-inset="true">
+		<?php   foreach($orderList as $order){ 
+				$ooid = $order['order_id'];
+		?>
+			<li><a href="{:U(\"OrderContent?order_id=$ooid\")}" 
+				data-transition="slide" rel="external" ><?php echo $order['schoolbus_from']."发-".$order['schoolbus_date']; ?>
+			</a></li>
+		<?php }?>
+		</ul>
+    </div>
+	<div data-role="collapsible" data-collapsed="true">
+      <h1>我要预订</h1>
+      <ul data-role="listview" data-inset="true">
+		<?php   foreach($schoolbusList as $schoolbus){ 
+			$busID = $schoolbus['schoolbus_id'];
+		?>
+			<li><a href="{:U(\"SchoolBusContent&schoolbus_id=$busID\")}" 
+				data-transition="slide" rel="external" ><?php echo $schoolbus['schoolbus_from']."发-".date('m-d G:i',strtotime($schoolbus['schoolbus_date'])); ?>
+			</a></li>
+		<?php }?>
+		</ul>
+    </div>
+	
+	<div data-role="collapsible" data-collapsed="true">
+      <h1>历史订单</h1>
+      <ul data-role="listview" data-inset="true">
+		<?php   foreach($histroryOL as $aorder){ 
+				 if($aorder['order_status'] >= 2){
+		?>
+			<li>
+			<p>预订时间:<?php echo $aorder['order_createdate'];?></p>
+			<p>订单状态:
+			<?php if($aorder['order_status']==2) 
+			       echo "<font color=\"green\">已完成</font>"; 
+				   else echo "<font color=\"red\">爽约</font>"; ?></p>
+			</li>
+		<?php }}?>
+		</ul>
+    </div>
+	  
+  </div>
+ <include file="./Application/Home/View/Public/jmobile_black_footer.html" />

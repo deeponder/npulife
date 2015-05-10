@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
+<meta name="format-detection" content="telephone=no">
+<link href="__PUBLIC__/Yikun/css/jquery.mobile-1.4.5.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Yikun/js/jquery.mobile-1.4.5.js"></script>
+
+<title>活动详情</title>
+</head>
+<body>
+
+	<div data-role="page" id="manage_activity_show" data-dom-cache="false">
+		<div data-rolo="content" id= "content">
+			<ul data-role="listview" data-inset="true">
+				<li>
+					<p><font style="color:blue;font-weight:bold;font-size:130%;">活动主题:&nbsp&nbsp</font>{$activityShow['topic']}</p> 
+				</li>
+				<li>
+					<p><font style="color:blue;font-weight:bold;font-size:130%;">发起人:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</font>{$activityShow['sponsor']}</p> 
+				</li>
+				<li>
+					<p><font style="color:blue;font-weight:bold;font-size:130%;">活动老师:&nbsp&nbsp</font>{$activityShow['teacher']}</p> 
+				</li>
+				<li style="white-space:normal;">
+					<div data-role="collapsible" data-inset='false' data-iconpos='right' >
+						<h2><font style="color:blue;font-weight:bold;font-size:100%;">活动详情</font></h2>
+						<div >
+							<P style="white-space:normal;">{$activityShow['content']}</P>	
+						</div>
+						
+					</div>
+				</li>
+			
+				<p><font style="color:blue;font-weight:bold;font-size:100%;">&nbsp&nbsp&nbsp&nbsp活动图片: </font></p> 
+				<if condition="($activityShow['picture'] eq NULL)">
+					<strong>&nbsp&nbsp&nbsp&nbsp暂无图片~</strong><br>
+				<else />
+					<for start="0" end="count($activityShow['picture'])">
+						<a href="#popupMeizi{$i}" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="__URL__/pictureShow?action=activity&picid={$activityShow['picture'][$i]}" alt="妹子" style="width:30%"></a>
+							<div data-role="popup" id="popupMeizi{$i}" data-overlay-theme="b" data-theme="b" data-corners="false" data-tolerance="30,15">
+	    					<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img class="popphoto" src="__URL__/pictureShow?action=activity&picid={$activityShow['picture'][$i]}" style="max-height:512px;" alt="活动图片">
+						</div>
+					</for>
+				</if>
+				
+				<li>
+					<p><font style="color:blue;font-weight:bold;font-size:130%;">报名截止时间:&nbsp</font>{$activityShow['deadline']}</p> 
+				</li>
+				<li>
+					<p><font style="color:blue;font-weight:bold;font-size:130%;">活动进度:&nbsp</font>{$activityShow['state']}</p> 
+				</li>
+			</ul>
+			
+			<div data-role="collapsible" data-inset='true' data-iconpos='right' >
+					<h2><font style="color:blue;font-weight:bold;font-size:100%;">报名学生列表</font></h2>
+					<if condition="$studentsAssign eq NULL">
+						<p><strong>没有报名的学生~</strong></p>
+					<else />
+						<table data-role="table" id="studentsAssign_table" data-column-btn-text="显示更多信息~" data-mode="columntoggle" class="ui-responsive table-stroke">
+							<thead>
+								<tr>
+								<th>学号</th>
+								<th>姓名</th>
+								<th data-priority="2">性别</th>
+								<th data-priority="1">学院</th>
+								<th data-priority="3">年级</th>
+								<th data-priority="4"><abbr title="特长、爱好">特长</abbr></th>
+								</tr>
+							</thead>
+							<tbody>
+								<volist  name="studentsAssign" id="student">
+								<tr>
+								<th><a href="">{$student['snumber']}</a></th>
+								<td>{$student['name']}</td>
+								<td>{$student['gender']}</td>
+								<td>{$student['college']}</td>
+								<td>{$student['grade']}</td>
+								<td>{$student['skill']}</td>
+								</tr>	
+								</volist>
+							</tbody>
+						</table>
+					</if>
+			</div>
+			
+			<div data-role="collapsible" data-inset='true' data-iconpos='right' >
+					<h2><font style="color:blue;font-weight:bold;font-size:100%;">未报名学生列表</font></h2>
+					<if condition="$studentsNotAssign eq NULL">
+						<p><strong>没有未报名的学生~</strong></p>
+					<else />
+						<table data-role="table" id="studentsNotAssign_table" data-column-btn-text="显示更多信息~" data-mode="columntoggle" class="ui-responsive table-stroke">
+							<thead>
+								<tr>
+								<th>学号</th>
+								<th>姓名</th>
+								<th data-priority="2">性别</th>
+								<th data-priority="1">学院</th>
+								<th data-priority="3">年级</th>
+								<th data-priority="4"><abbr title="特长、爱好">特长</abbr></th>
+								</tr>
+							</thead>
+							<tbody>
+								<volist  name="studentsNotAssign" id="student">
+								<tr>
+								<th><a href="">{$student['snumber']}</a></th>
+								<td>{$student['name']}</td>
+								<td>{$student['gender']}</td>
+								<td>{$student['college']}</td>
+								<td>{$student['grade']}</td>
+								<td>{$student['skill']}</td>
+								</tr>	
+								</volist>
+							</tbody>
+						</table>
+					</if>
+			</div>
+			
+			<if condition="$activityShow['state'] neq '报名中...'"> 
+				<div data-role="collapsible" data-inset='true' data-iconpos='right' >
+					<h2><font style="color:blue;font-weight:bold;font-size:100%;">完成活动学生列表</font></h2>
+					<if condition="$studentsComplete eq NULL">
+						<p><strong>没有完成活动的学生~</strong></p>
+					<else />
+						<table data-role="table" id="studentsComplete_table" data-column-btn-text="显示更多信息~" data-mode="columntoggle" class="ui-responsive table-stroke">
+							<thead>
+								<tr>
+								<th>学号</th>
+								<th>姓名</th>
+								<th data-priority="2">性别</th>
+								<th data-priority="1">学院</th>
+								<th data-priority="3">年级</th>
+								<th data-priority="4"><abbr title="特长、爱好">特长</abbr></th>
+								</tr>
+							</thead>
+							<tbody>
+								<volist  name="studentsComplete" id="student">
+								<tr>
+								<th><a href="">{$student['snumber']}</a></th>
+								<td>{$student['name']}</td>
+								<td>{$student['gender']}</td>
+								<td>{$student['college']}</td>
+								<td>{$student['grade']}</td>
+								<td>{$student['skill']}</td>
+								</tr>	
+								</volist>
+							</tbody>
+						</table>
+					</if>
+			</div>
+			<else />
+			</if>
+			
+		</div>
+	</div>
+	
+</body>
+</html>

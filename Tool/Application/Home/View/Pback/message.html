@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>微信后台管理</title>
+</head>
+<body>
+	<table id="table1" cellspacing="0" cellpadding="5" border="0">
+				 
+				  <volist name="message" id="message">
+				  <tr>
+					<td>{$message['nickname']}</td>
+					<td>{$message['contents']}</td>
+					<td align="center">{$message['ctime']}</td>
+					<td align="center">
+						<if condition="$message['examine'] eq '0'">未审核
+						<elseif condition="$message['examine'] eq 1" />已审核
+						<else/>无
+						</if>
+					</td>
+					<td align="center">
+						<a href="__URL__/del?id={$message['id']}">删除</a>
+						<if condition="$message['examine'] eq '0'"><a href="__URL__/examine/id/{$message['id']}/examine/1">通过审核</a>
+						<else/><a href="__URL__/examine/id/{$message['id']}/examine/0">取消审核</a>
+						</if>
+					</td>
+				  </tr>
+				  </volist>
+				
+	</table>
+</body>
+</html>
